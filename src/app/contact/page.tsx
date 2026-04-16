@@ -18,20 +18,34 @@ import {
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-const WhatsAppIcon = () => (
+// FIX 4: WhatsAppIcon accepts and ignores size/strokeWidth so it can be used
+// both as a standalone icon and as a channel icon without prop errors.
+const WhatsAppIcon = ({
+  size = 16,
+  strokeWidth = 1.5,
+  className = "",
+}: {
+  size?: number;
+  strokeWidth?: number;
+  className?: string;
+}) => (
   <svg
-    width="16"
-    height="16"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="1.5"
+    strokeWidth={strokeWidth}
     strokeLinecap="round"
     strokeLinejoin="round"
+    className={className}
   >
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29l3-.01a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
   </svg>
 );
+
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxs5WnpPpEmMilt1e3KERkOyUSTC3tHsiTRhRpdPlHW6IuHDRfBgAf5npIzMPIMneIz/exec";
 
 const services = [
   "ML Engineering",
@@ -67,11 +81,13 @@ export default function Contact() {
   const [selected, setSelected] = useState<string>("");
   const [charCount, setCharCount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const MAX_CHARS = 500;
 
   const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("");
+
   // ── Hero SplitText
   useGSAP(() => {
     if (!h1Ref.current) return;
@@ -186,51 +202,70 @@ export default function Contact() {
   }, []);
 
   const onMagnetLeave = useCallback(() => {
-    gsap.to(magnetRef.current, { x: 0, y: 0, duration: 0.6, ease: "expo.out" });
+    gsap.to(magnetRef.current, {
+      x: 0,
+      y: 0,
+      duration: 0.6,
+      ease: "expo.out",
+    });
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  // FIX 1 + 2: Use FormData with named inputs instead of form[index] indexing.
+  // FIX 3: Added redirect: "follow" so Google's 302 redirect is handled correctly.
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  if (!selected || !budget || !timeline) {
-    alert("Please select all fields");
-    return;
-  }
-
-  const form = e.target as HTMLFormElement;
-
-  const data = {
-    name: (form[0] as HTMLInputElement).value,
-    email: (form[1] as HTMLInputElement).value,
-    service: selected,
-    budget: budget,
-    message: (form[4] as HTMLTextAreaElement).value,
-    timeline: timeline,
-  };
-
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxUVpBoCNIH8SPektlwj4bdwD0G0RNpEJRRNq2C9_GHfEaFc6nKGpJVpfJ6evK0Iq8f/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const text = await res.text();
-    const result = JSON.parse(text);
-
-    if (result.status === "success") {
-      setSubmitted(true);
-    } else {
-      alert("Submission failed");
+    if (!selected || !budget || !timeline) {
+      alert("Please select a service, budget range, and timeline.");
+      return;
     }
 
-  } catch (err) {
-    console.error(err);
-    alert("Network / CORS error");
-  }
-};
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      service: selected,
+      budget,
+      message: formData.get("message") as string,
+      timeline,
+    };
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        redirect: "follow", // FIX 3: follow Google's 302 redirect
+        headers: {
+          // Keep as text/plain to avoid CORS preflight on Apps Script
+          "Content-Type": "text/plain",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const text = await res.text();
+
+      let result: { status: string; message?: string };
+      try {
+        result = JSON.parse(text);
+      } catch {
+        throw new Error("Invalid JSON response from server: " + text);
+      }
+
+      if (result.status === "success") {
+        setSubmitted(true);
+      } else {
+        alert("Submission failed: " + (result.message ?? "Unknown error"));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error. Please try WhatsApp or Instagram instead.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -468,6 +503,7 @@ export default function Contact() {
           border: none; cursor: pointer; transition: opacity var(--t-fast);
         }
         .btn-submit:hover { opacity: 0.82; }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* Success state */
         .form-success {
@@ -649,7 +685,7 @@ export default function Contact() {
         <div className="c-hero-left">
           <div className="c-eyebrow c-hero-sub">Get in touch</div>
           <h1 ref={h1Ref}>
-            Let`s build
+            Let&apos;s build
             <br />
             <em>something</em>
             <br />
@@ -787,7 +823,7 @@ export default function Contact() {
               />
               <h3>Message sent!</h3>
               <p>
-                Thanks for reaching out. I`ll get back to you within 2 hours.
+                Thanks for reaching out. I&apos;ll get back to you within 2 hours.
               </p>
               <Link
                 href="/"
@@ -808,6 +844,7 @@ export default function Contact() {
               </Link>
             </div>
           ) : (
+            // FIX 1: All text inputs have a `name` attribute so FormData works correctly
             <form className="contact-form" onSubmit={handleSubmit}>
               {/* Name */}
               <div className="form-field">
@@ -815,6 +852,7 @@ export default function Contact() {
                 <input
                   className="form-input"
                   type="text"
+                  name="name"
                   placeholder="Ravi Kumar"
                   required
                 />
@@ -826,6 +864,7 @@ export default function Contact() {
                 <input
                   className="form-input"
                   type="email"
+                  name="email"
                   placeholder="ravi@company.com"
                   required
                 />
@@ -835,16 +874,16 @@ export default function Contact() {
               <div className="form-field">
                 <label className="form-label">Service Interested In</label>
                 <div className="service-chips">
-                    {services.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        className={`service-chip ${selected === s ? "sel" : ""}`}
-                        onClick={() => setSelected(s)}
-                      >
-                        {s}
-                      </button>
-                    ))}
+                  {services.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      className={`service-chip ${selected === s ? "sel" : ""}`}
+                      onClick={() => setSelected(s)}
+                    >
+                      {s}
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -852,22 +891,18 @@ export default function Contact() {
               <div className="form-field">
                 <label className="form-label">Budget Range</label>
                 <div className="service-chips">
-                  {[
-                    "Under ₹5K",
-                    "₹5K–₹15K",
-                    "₹15K–₹50K",
-                    "₹50K+",
-                    "Let's Discuss",
-                  ].map((b) => (
-                    <button
-                      key={b}
-                      type="button"
-                      className={`service-chip ${budget === b ? "sel" : ""}`}
-                      onClick={() => setBudget(b)}
-                    >
-                      {b}
-                    </button>
-                  ))}
+                  {["Under ₹5K", "₹5K–₹15K", "₹15K–₹50K", "₹50K+", "Let's Discuss"].map(
+                    (b) => (
+                      <button
+                        key={b}
+                        type="button"
+                        className={`service-chip ${budget === b ? "sel" : ""}`}
+                        onClick={() => setBudget(b)}
+                      >
+                        {b}
+                      </button>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -881,6 +916,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   className="form-textarea"
+                  name="message"
                   rows={5}
                   placeholder="Describe your project, what problem you're trying to solve, and any relevant context..."
                   maxLength={MAX_CHARS}
@@ -908,8 +944,9 @@ export default function Contact() {
 
               <div className="form-submit-row">
                 <span className="form-note">I reply within 2 hours.</span>
-                <button type="submit" className="btn-submit">
-                  Send Message <ArrowRight size={14} strokeWidth={2} />
+                <button type="submit" className="btn-submit" disabled={loading}>
+                  {loading ? "Sending…" : "Send Message"}{" "}
+                  <ArrowRight size={14} strokeWidth={2} />
                 </button>
               </div>
             </form>
@@ -918,6 +955,7 @@ export default function Contact() {
       </section>
 
       {/* ═══════════ CONTACT INFO STRIP ═══════════ */}
+      {/* FIX 4: WhatsAppIcon now accepts size/strokeWidth/className so it renders correctly here */}
       <div className="contact-info">
         <div className="contact-info-inner">
           {[
@@ -931,8 +969,16 @@ export default function Contact() {
               label: "Response Time",
               val: "Within 2 hours, every day",
             },
-            { icon: WhatsAppIcon, label: "WhatsApp", val: "+91 99595 94460" },
-            { icon: Instagram, label: "Instagram", val: "@spacedrift.in" },
+            {
+              icon: WhatsAppIcon,
+              label: "WhatsApp",
+              val: "+91 99595 94460",
+            },
+            {
+              icon: Instagram,
+              label: "Instagram",
+              val: "@spacedrift.in",
+            },
           ].map(({ icon: Icon, label, val }) => (
             <div key={label} className="contact-info-item">
               <Icon size={16} strokeWidth={1.5} className="ci-icon" />
@@ -1021,14 +1067,15 @@ export default function Contact() {
       <section className="c-bottom">
         <div className="c-bottom-inner">
           <h2>
-            Let`s build
+            Let&apos;s build
             <br />
             <em>together.</em>
           </h2>
           <div className="c-bottom-right">
             <p className="c-bottom-note">
               Every great project starts with a conversation. Reach out now —
-              I`ll respond within 2 hours and we can get started within a week.
+              I&apos;ll respond within 2 hours and we can get started within a
+              week.
             </p>
             <div className="c-bottom-btns">
               <Link
