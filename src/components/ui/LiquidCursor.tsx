@@ -85,7 +85,9 @@ export default function MagneticCursor() {
           opacity: 0,
           duration: 0.4,
           ease: "expo.out",
-          onComplete: () => gsap.set(cursor, { scale: 1, opacity: 1 }),
+          onComplete: () => {
+             gsap.set(cursor, { scale: 1, opacity: 1 });
+},
         },
       );
     };

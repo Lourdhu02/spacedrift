@@ -1,7 +1,7 @@
 export type ServiceData = {
   slug: string;
   num: string;
-  iconName: string; // ← string key instead of component
+  iconName: string;
   title: string;
   tagline: string;
   heroDesc: string;
@@ -21,100 +21,104 @@ export const servicesData: ServiceData[] = [
     slug: "ml-projects",
     num: "01",
     iconName: "Brain",
-    title: "ML Engineering",
-    tagline: "From raw data to deployed API.",
+    title: "ML Engineering Projects",
+    tagline: "Research-backed projects. Delivered end-to-end.",
     heroDesc:
-      "End-to-end production AI/ML engineering — I take your raw data and turn it into a working, deployed model. NLP pipelines, computer vision systems, time-series forecasting, LLM integrations, and custom chatbots — all production-grade, fully documented, and delivered with source code.",
+      "SpaceDrift delivers complete, submission-ready ML/AI engineering projects for B.Tech, B.A., M.Tech, and Ph.D. students — bundled with a co-authored research paper. Every project is custom-built, technically rigorous, and aligned with your university's academic standards.",
     price: "From ₹15,000",
     duration: "1–3 weeks",
     tags: [
       "NLP",
       "Computer Vision",
-      "Time Series",
-      "LLMs",
-      "Chatbots",
-      "FastAPI",
-      "PyTorch",
+      "Deep Learning",
+      "Data Science",
+      "Research Paper",
+      "B.Tech",
+      "M.Tech",
+      "Ph.D",
     ],
     overview: [
-      "Most businesses sitting on data are leaving value on the table. I specialize in turning that data into working, deployed ML systems — not research notebooks, not prototype scripts, but production APIs that your team can actually use.",
-      "I work across the full ML lifecycle: problem scoping, data cleaning and EDA, feature engineering, model selection and training, evaluation, optimization, API wrapping, containerization, and deployment. Every system I deliver is production-ready from day one.",
-      "My background spans NLP (classification, NER, summarization, RAG pipelines), computer vision (object detection, classification, segmentation), time-series forecasting, recommendation systems, and LLM fine-tuning and integration using OpenAI, Anthropic, and open-source models.",
+      "At SpaceDrift, we specialize in building production-quality ML and AI projects for students at every academic level — from final-year B.Tech and B.A. dissertations to M.Tech theses and Ph.D. research prototypes. Every project we deliver is technically sound, well-documented, and built to meet the evaluation standards of leading universities.",
+      "Our team covers the full spectrum of ML disciplines: Natural Language Processing (text classification, NER, summarization, RAG pipelines), Computer Vision (object detection, image classification, segmentation), Deep Learning (custom neural architectures, transfer learning), and Data Science & Analytics (predictive modeling, EDA, dashboards). We don't deliver generic templates — every project is built from scratch for your specific problem statement.",
+      "Each engagement includes both the complete working project codebase and a co-authored research paper written in standard IEEE or Springer format, ready for submission to journals or as part of your thesis. We handle the engineering, the writing, and the documentation — so you can focus on understanding and presenting your work.",
     ],
     deliverables: [
       {
-        title: "Trained Model",
-        desc: "Fully trained, evaluated, and optimized model with performance benchmarks and confusion matrices.",
+        title: "Complete Project Codebase",
+        desc: "Fully implemented, tested, and commented Python codebase covering data preprocessing, model training, evaluation, and inference.",
       },
       {
-        title: "REST API",
-        desc: "FastAPI or Flask endpoint with proper error handling, input validation, and response formatting.",
+        title: "Research Paper",
+        desc: "Co-authored research paper written in IEEE or Springer format — abstract, literature review, methodology, results, and conclusion — ready for journal or thesis submission.",
       },
       {
-        title: "Docker Container",
-        desc: "Production-ready Docker image with all dependencies pinned. Deploy anywhere in minutes.",
+        title: "Trained Model & Results",
+        desc: "Trained model with performance benchmarks, evaluation metrics, and visualizations (confusion matrices, loss curves, accuracy plots).",
       },
       {
-        title: "Source Code",
-        desc: "Clean, commented Python codebase with a proper project structure, ready for your team to maintain.",
+        title: "Project Report",
+        desc: "Detailed academic project report formatted to standard university guidelines, including problem statement, objectives, and references.",
       },
       {
-        title: "Documentation",
-        desc: "Full technical docs: model card, API reference, setup guide, and usage examples.",
+        title: "Presentation Deck",
+        desc: "A structured PowerPoint presentation covering your project — ready for viva voce, seminars, or internal reviews.",
       },
       {
         title: "Post-Delivery Support",
-        desc: "2 weeks of bug fixes, clarifications, and minor adjustments at no extra cost.",
+        desc: "2 weeks of support for clarifications, viva preparation questions, minor modifications, and guidance on presenting your work.",
       },
     ],
     process: [
       {
         num: "01",
-        title: "Discovery & Data Audit",
-        desc: "I review your data, understand your problem, and define clear success metrics before writing a single line of code.",
+        title: "Requirement Gathering",
+        desc: "We understand your academic level, domain preference, university guidelines, and submission deadline before scoping the project.",
       },
       {
         num: "02",
-        title: "Proposal & Scope",
-        desc: "Written scope with timeline, model approach, expected performance, and fixed price. No surprises.",
+        title: "Topic Finalization & Proposal",
+        desc: "We propose 2–3 project topics aligned with current research trends. Once confirmed, we provide a written scope and timeline.",
       },
       {
         num: "03",
-        title: "Data Preparation",
-        desc: "Cleaning, EDA, feature engineering, and train/val/test splits. The foundation that determines model quality.",
+        title: "Data Collection & Preparation",
+        desc: "Dataset sourcing, cleaning, and preprocessing — all documented for inclusion in your methodology chapter.",
       },
       {
         num: "04",
-        title: "Model Training & Eval",
-        desc: "Iterative training with multiple architectures, hyperparameter tuning, and rigorous evaluation on held-out data.",
+        title: "Model Development & Evaluation",
+        desc: "Full model training pipeline with iterative improvements, ablation studies, and rigorous evaluation metrics.",
       },
       {
         num: "05",
-        title: "API & Deployment",
-        desc: "Model wrapped in a production API, containerized with Docker, and deployed to your preferred platform.",
+        title: "Research Paper & Report Writing",
+        desc: "Parallel writing of the research paper and academic report — structured, referenced, and formatted to your institution's standards.",
       },
       {
         num: "06",
-        title: "Handoff & Support",
-        desc: "Full source code, documentation, and a walkthrough call. 2 weeks of post-delivery support included.",
+        title: "Delivery, Review & Support",
+        desc: "All deliverables handed off with a walkthrough session. 2 weeks of post-delivery support for revisions and viva preparation.",
       },
     ],
     suited: [
-      "Startups shipping their first AI feature",
-      "Businesses automating repetitive data workflows",
-      "Teams replacing manual review with ML systems",
-      "Founders validating AI product ideas",
+      "Final-year B.Tech and B.A. students with an ML/AI project requirement",
+      "M.Tech students requiring a thesis-grade implementation with a research paper",
+      "Ph.D. scholars needing a working prototype to support their research contributions",
+      "Students targeting journal publication or conference paper submission",
     ],
     results: [
       {
-        val: "80%",
-        label: "Reduction in manual review time (resume screener)",
+        val: "500+",
+        label: "Academic ML projects delivered across disciplines",
       },
       {
         val: "96%",
-        label: "Detection accuracy (manufacturing defect CV model)",
+        label: "On-time delivery rate across all project engagements",
       },
-      { val: "60%", label: "HR workload reduction (LLM staffing chatbot)" },
+      {
+        val: "IEEE/Springer",
+        label: "Research papers formatted to international standards",
+      },
       { val: "1–3w", label: "Typical delivery timeline" },
     ],
     related: ["websites", "ai-audit", "streamlit-apps"],
@@ -139,8 +143,8 @@ export const servicesData: ServiceData[] = [
     ],
     overview: [
       "Your website is the first thing a potential client judges you on. A slow, generic, template-built site communicates exactly the wrong things — that you don't invest in quality, that you're not serious, that you're easy to ignore.",
-      "I build websites that do the opposite. Every site I deliver is custom-coded in Next.js, mobile-first by design, and optimized for both performance and SEO from the ground up. No Squarespace. No WordPress. No bloated themes.",
-      "I handle everything — design, development, deployment, Google Analytics integration, sitemap generation, meta tags, and post-launch support. You get a site that loads fast, ranks well, and converts visitors into clients.",
+      "SpaceDrift builds websites that do the opposite. Every site we deliver is custom-coded in Next.js, mobile-first by design, and optimized for both performance and SEO from the ground up. No Squarespace. No WordPress. No bloated themes.",
+      "We handle everything — design, development, deployment, Google Analytics integration, sitemap generation, meta tags, and post-launch support. You get a site that loads fast, ranks well, and converts visitors into clients.",
     ],
     deliverables: [
       {
@@ -177,12 +181,12 @@ export const servicesData: ServiceData[] = [
       {
         num: "02",
         title: "Structure & Scope",
-        desc: "I outline the page structure, sections, and content hierarchy. Agreed before design.",
+        desc: "We outline the page structure, sections, and content hierarchy. Agreed before design.",
       },
       {
         num: "03",
         title: "Design in Code",
-        desc: "I design and code simultaneously — no Figma handoff delays.",
+        desc: "We design and code simultaneously — no Figma handoff delays.",
       },
       {
         num: "04",
@@ -226,9 +230,9 @@ export const servicesData: ServiceData[] = [
     duration: "2–3 days",
     tags: ["MLOps", "Code Review", "Pipeline Audit", "Report", "Consulting"],
     overview: [
-      "Most ML systems in production have the same set of problems: leaky data pipelines, models trained on the wrong distribution, no monitoring, slow inference, and tech debt that nobody wants to touch.",
-      "An AI Audit is a structured technical review that surfaces these problems before they become crises. I review your code, your data, your model, your serving infrastructure, and your monitoring setup.",
-      "Unlike a generic consulting engagement, this is a hands-on technical audit. I read your code. I run your pipeline. I look at your model's actual behavior on real data. The output is a detailed written report you can act on immediately.",
+      "Most ML systems in production share a common set of problems: leaky data pipelines, models trained on the wrong distribution, no monitoring, slow inference, and accumulated technical debt. Left unaddressed, these issues compound.",
+      "SpaceDrift's AI Audit is a structured technical review that surfaces these problems before they become critical failures. Our team reviews your code, your data pipeline, your model architecture, your serving infrastructure, and your monitoring setup — end to end.",
+      "Unlike a generic consulting engagement, this is a hands-on technical audit. We read your code. We run your pipeline. We examine your model's actual behavior on real data. The output is a detailed written report you can act on immediately.",
     ],
     deliverables: [
       {
@@ -256,12 +260,12 @@ export const servicesData: ServiceData[] = [
       {
         num: "01",
         title: "Access & Scope",
-        desc: "You share your codebase (NDA signed first). I define the audit scope.",
+        desc: "You share your codebase (NDA signed first). We define the audit scope and success criteria.",
       },
       {
         num: "02",
         title: "Data Pipeline Review",
-        desc: "I trace your data from source to model input, looking for leaks and silent failures.",
+        desc: "We trace your data from source to model input, identifying leaks and silent failure points.",
       },
       {
         num: "03",
@@ -310,9 +314,9 @@ export const servicesData: ServiceData[] = [
     duration: "2–5 days",
     tags: ["Streamlit", "Gradio", "Hugging Face Spaces", "Python", "UI/UX"],
     overview: [
-      "You've trained a model. Now you need to show it to someone — an investor, a client, a professor, or your team. A Jupyter notebook doesn't cut it. A full production web app takes weeks. A Streamlit or Gradio app takes 2–5 days.",
-      "I build custom ML interfaces that are actually good-looking. Not the default grey Streamlit theme — properly designed, branded apps that make your model look as impressive as it actually is.",
-      "Every app I build is deployed on Hugging Face Spaces or Streamlit Cloud, gives you a public URL you can share anywhere, and comes with full source code so you can extend it yourself.",
+      "You've trained a model. Now you need to demonstrate it — to an evaluator, an investor, a client, or your thesis committee. A Jupyter notebook doesn't cut it. A full production web app takes weeks. A Streamlit or Gradio app, built by SpaceDrift, takes 2–5 days.",
+      "We build custom ML interfaces that are professionally designed — not the default grey Streamlit theme, but properly structured, branded applications that present your model with the credibility it deserves.",
+      "Every app we build is deployed on Hugging Face Spaces or Streamlit Cloud, provides a public URL you can share anywhere, and is delivered with full source code so your team can extend it independently.",
     ],
     deliverables: [
       {
@@ -340,12 +344,12 @@ export const servicesData: ServiceData[] = [
       {
         num: "01",
         title: "Model & Requirements",
-        desc: "You share your trained model. We define the interface requirements together.",
+        desc: "You share your trained model. We define the interface requirements and user flow together.",
       },
       {
         num: "02",
         title: "UI Design & Layout",
-        desc: "I plan the app layout, input/output components, and visual style before writing code.",
+        desc: "We plan the app layout, input/output components, and visual style before writing code.",
       },
       {
         num: "03",
@@ -364,10 +368,10 @@ export const servicesData: ServiceData[] = [
       },
     ],
     suited: [
-      "ML researchers who need a shareable demo",
-      "Students presenting capstone or thesis projects",
-      "Early-stage startups validating AI product ideas",
-      "Data scientists building internal team tools",
+      "ML researchers who need a shareable, interactive demo",
+      "Students presenting capstone or thesis projects to an evaluation panel",
+      "Early-stage startups validating AI product ideas with stakeholders",
+      "Data science teams building internal decision-support tools",
     ],
     results: [
       {
@@ -393,14 +397,14 @@ export const servicesData: ServiceData[] = [
     title: "Data Annotation",
     tagline: "Clean labels. Production-ready datasets.",
     heroDesc:
-      "High-quality labeled datasets for NLP, computer vision, and classification. I use Label Studio and custom scripts to annotate text and images, with full quality validation and export in your preferred format.",
+      "High-quality labeled datasets for NLP, computer vision, and classification. SpaceDrift uses Label Studio and custom validation pipelines to annotate text and images at scale, with full quality reporting and export in your preferred format.",
     price: "From ₹3,000",
     duration: "2–7 days",
     tags: ["NLP", "Computer Vision", "Label Studio", "NER", "Classification"],
     overview: [
-      "Model quality is a direct function of data quality. Noisy labels, inconsistent annotation guidelines, and poorly structured datasets are the most common reason ML projects underperform.",
-      "I provide structured, validated data annotation for NLP (NER, intent classification, sentiment labeling, relation extraction) and computer vision (bounding boxes, polygon segmentation, keypoint detection, image classification) tasks.",
-      "Every annotation project starts with a clear schema and annotation guidelines. Every output dataset is quality-validated — a sample is reviewed after annotation to catch systematic errors before they propagate into training.",
+      "Model quality is a direct function of data quality. Noisy labels, inconsistent annotation guidelines, and poorly structured datasets are among the most common reasons ML systems underperform — in both academic and production settings.",
+      "SpaceDrift provides structured, validated data annotation services for NLP tasks (NER, intent classification, sentiment labeling, relation extraction) and computer vision tasks (bounding boxes, polygon segmentation, keypoint detection, image classification).",
+      "Every annotation engagement begins with a clearly defined schema and annotation guidelines. Every delivered dataset is quality-validated — a representative sample is reviewed post-annotation to identify and correct systematic labeling errors before they propagate into model training.",
     ],
     deliverables: [
       {
@@ -421,41 +425,41 @@ export const servicesData: ServiceData[] = [
       },
       {
         title: "Post-Delivery Corrections",
-        desc: "1 week of free corrections for any annotation errors found after delivery.",
+        desc: "1 week of free corrections for any annotation errors identified after delivery.",
       },
     ],
     process: [
       {
         num: "01",
         title: "Schema Design",
-        desc: "We define the label taxonomy, annotation guidelines, and edge case rules together.",
+        desc: "We define the label taxonomy, annotation guidelines, and edge case resolution rules in collaboration with your team.",
       },
       {
         num: "02",
         title: "Pilot Batch",
-        desc: "I annotate a small pilot batch (50–100 samples) for your review to validate quality.",
+        desc: "We annotate a pilot batch of 50–100 samples for your review to validate quality before full-scale work begins.",
       },
       {
         num: "03",
         title: "Full Annotation",
-        desc: "Full dataset annotated following the validated schema, with progress updates.",
+        desc: "Complete dataset annotated following the validated schema, with regular progress updates.",
       },
       {
         num: "04",
         title: "Quality Validation",
-        desc: "Random sample reviewed. Inter-annotator agreement calculated and reported.",
+        desc: "Random sample reviewed. Inter-annotator agreement calculated and included in the final report.",
       },
       {
         num: "05",
         title: "Export & Delivery",
-        desc: "Final dataset exported in your required format with schema documentation.",
+        desc: "Final dataset exported in your required format, accompanied by full schema documentation.",
       },
     ],
     suited: [
-      "ML engineers building supervised learning datasets",
-      "Researchers creating benchmarks for academic work",
-      "Companies scaling annotation beyond internal capacity",
-      "Startups preparing data for their first model training run",
+      "ML engineers building supervised learning datasets for model training",
+      "Researchers creating labeled benchmarks for academic publication",
+      "Organizations scaling annotation capacity beyond internal resources",
+      "Students and startups preparing data for their first model training run",
     ],
     results: [
       {

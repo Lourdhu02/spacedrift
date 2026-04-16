@@ -28,8 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LOURDU.AI — ML Engineer & AI Freelancer",
-  description: "ML Engineer and AI Freelancer based in Bengaluru, India.",
+  title: "SPACEDRIFT"
 };
 
 export default function RootLayout({

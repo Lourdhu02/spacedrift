@@ -591,7 +591,7 @@ export default function ServicePage({ data }: { data: ServiceData }) {
             ))}
           </div>
           <Link
-            href={`https://wa.me/919959594460?text=Hi! I'm interested in your ${data.title} service.`}
+            href={`https://wa.me/916360812808?text=Hi! I'm interested in your ${data.title} service.`}
             target="_blank"
             rel="noopener noreferrer"
             className="sp-cta-primary"
@@ -781,10 +781,10 @@ export default function ServicePage({ data }: { data: ServiceData }) {
               </h2>
               <p>
                 This service is designed for a specific type of client. If you
-                see yourself in this list, we're a good fit.
+                see yourself in this list, we`re a good fit.
               </p>
               <Link
-                href={`https://wa.me/919959594460?text=Hi! I want to know more about your ${data.title} service.`}
+                href={`https://wa.me/916360812808?text=Hi! I want to know more about your ${data.title} service.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -864,7 +864,7 @@ export default function ServicePage({ data }: { data: ServiceData }) {
           </h2>
           <div className="sp-cta-right">
             <p className="sp-cta-note">
-              Tell me your project details and I'll respond with a clear scope
+              Tell me your project details and I`ll respond with a clear scope
               and fixed quote within 2 hours. No commitment required.
             </p>
             <div className="sp-cta-btns">
@@ -872,7 +872,7 @@ export default function ServicePage({ data }: { data: ServiceData }) {
                 Start a Project <ArrowRight size={14} strokeWidth={2} />
               </Link>
               <Link
-                href={`https://wa.me/919959594460?text=Hi! I want to discuss your ${data.title} service.`}
+                href={`https://wa.me/916360812808?text=Hi! I want to discuss your ${data.title} service.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ghost-dark"

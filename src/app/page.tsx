@@ -92,32 +92,32 @@ const stack = [
   "NumPy",
 ];
 
-const works = [
-  {
-    title: "Resume Screener AI",
-    tag: "NLP · Python",
-    year: "2025",
-    desc: "Automated screening for 500+ resumes/day for a Bengaluru staffing firm.",
-  },
-  {
-    title: "D2C Analytics Dashboard",
-    tag: "ML · FastAPI",
-    year: "2025",
-    desc: "Real-time sales forecasting and customer segmentation for a D2C brand.",
-  },
-  {
-    title: "Chatbot for Staffing",
-    tag: "LLM · Streamlit",
-    year: "2024",
-    desc: "GPT-powered FAQ and candidate intake bot reducing HR workload by 60%.",
-  },
-  {
-    title: "CV Defect Detector",
-    tag: "Computer Vision",
-    year: "2024",
-    desc: "Manufacturing defect detection model with 96.4% accuracy on edge devices.",
-  },
-];
+// const works = [
+//   {
+//     title: "Resume Screener AI",
+//     tag: "NLP · Python",
+//     year: "2025",
+//     desc: "Automated screening for 500+ resumes/day for a Bengaluru staffing firm.",
+//   },
+//   {
+//     title: "D2C Analytics Dashboard",
+//     tag: "ML · FastAPI",
+//     year: "2025",
+//     desc: "Real-time sales forecasting and customer segmentation for a D2C brand.",
+//   },
+//   {
+//     title: "Chatbot for Staffing",
+//     tag: "LLM · Streamlit",
+//     year: "2024",
+//     desc: "GPT-powered FAQ and candidate intake bot reducing HR workload by 60%.",
+//   },
+//   {
+//     title: "CV Defect Detector",
+//     tag: "Computer Vision",
+//     year: "2024",
+//     desc: "Manufacturing defect detection model with 96.4% accuracy on edge devices.",
+//   },
+// ];
 
 const process = [
   {
@@ -158,179 +158,215 @@ export default function Home() {
 
   // ── Hero
   useGSAP(() => {
-    if (!h1Ref.current) return;
-    const tl = gsap.timeline({ delay: 0.2 });
-    tl.from(tagRef.current, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    });
-    document.fonts.ready.then(() => {
-      SplitText.create(h1Ref.current!, {
-        type: "lines,words",
-        mask: "lines",
-        autoSplit: true,
-        onSplit(self) {
-          tl.from(
-            self.words,
-            {
-              yPercent: 110,
-              opacity: 0,
-              duration: 1.1,
-              ease: "expo.out",
-              stagger: 0.04,
-            },
-            "-=0.3",
-          )
-            .from(
-              subRef.current,
-              { y: 28, opacity: 0, duration: 0.8, ease: "power3.out" },
-              "-=0.6",
-            )
-            .from(
-              metaRef.current?.children ?? [],
-              {
-                y: 16,
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                stagger: 0.08,
-              },
-              "-=0.5",
-            )
-            .from(
-              ctaRef.current?.children ?? [],
-              {
-                y: 16,
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                stagger: 0.1,
-              },
-              "-=0.4",
-            )
-            .from(lineRef.current, { opacity: 0, duration: 0.5 }, "-=0.2");
-        },
+    const ctx = gsap.context(() => {
+      if (!h1Ref.current || !tagRef.current) return;
+
+      const tl = gsap.timeline({ delay: 0.2 });
+
+      tl.from(tagRef.current, {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
       });
-    });
-    gsap.to(heroRef.current, {
-      yPercent: 15,
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+
+      document.fonts.ready.then(() => {
+        if (!h1Ref.current) return;
+
+        const split = SplitText.create(h1Ref.current, {
+          type: "lines,words",
+          mask: "lines",
+        });
+
+        tl.from(split.words, {
+          yPercent: 110,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.04,
+          ease: "expo.out",
+        });
+
+        if (subRef.current) {
+          tl.from(subRef.current, {
+            y: 28,
+            opacity: 0,
+            duration: 0.8,
+          }, "-=0.6");
+        }
+
+        if (metaRef.current) {
+          tl.from([...metaRef.current.children], {
+            y: 16,
+            opacity: 0,
+            stagger: 0.08,
+          }, "-=0.5");
+        }
+
+        if (ctaRef.current) {
+          tl.from([...ctaRef.current.children], {
+            y: 16,
+            opacity: 0,
+            stagger: 0.1,
+          }, "-=0.4");
+        }
+
+        if (lineRef.current) {
+          tl.from(lineRef.current, {
+            opacity: 0,
+            duration: 0.5,
+          }, "-=0.2");
+        }
+      });
+
+      if (heroRef.current) {
+        gsap.to(heroRef.current, {
+          yPercent: 15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
   // ── Stats
   useGSAP(() => {
-    gsap.fromTo(
-      ".stat-item",
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>(".stat-item");
+      if (!items.length) return;
+
+      gsap.from(items, {
+        y: 40,
+        opacity: 0,
         duration: 0.7,
         stagger: 0.1,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".stats-bar", start: "top 88%" },
-      },
-    );
+        scrollTrigger: {
+          trigger: items[0],
+          start: "top 90%",
+        },
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
   // ── Services
   useGSAP(() => {
-    gsap.fromTo(
-      ".svc-card",
-      { y: 48, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
+    const ctx = gsap.context(() => {
+     const cards = gsap.utils.toArray<HTMLElement>(".svc-card");
+      if (!cards.length) return;
+
+      gsap.from(cards, {
+        y: 48,
+        opacity: 0,
         duration: 0.8,
         stagger: 0.08,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".svc-grid", start: "top 82%" },
-      },
-    );
+        scrollTrigger: {
+          trigger: cards[0],
+          start: "top 85%",
+        },
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
-  // ── Work
-  useGSAP(() => {
-    gsap.fromTo(
-      ".work-card",
-      { y: 56, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.85,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".work-grid", start: "top 84%" },
-      },
-    );
-  }, []);
+  // // ── Work
+  // useGSAP(() => {
+  //   gsap.fromTo(
+  //     ".work-card",
+  //     { y: 56, opacity: 0 },
+  //     {
+  //       y: 0,
+  //       opacity: 1,
+  //       duration: 0.85,
+  //       stagger: 0.1,
+  //       ease: "power3.out",
+  //       scrollTrigger: { trigger: ".work-grid", start: "top 84%" },
+  //     },
+  //   );
+  // }, []);
 
   // ── Process — scrub-driven flowchart
   useGSAP(() => {
-    // Draw the vertical line as you scroll
-    gsap.fromTo(
-      progressRef.current,
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: "none",
-        transformOrigin: "top center",
-        scrollTrigger: {
-          trigger: ".process-list",
-          start: "top 70%",
-          end: "bottom 80%",
-          scrub: 0.6,
-        },
-      },
-    );
+    const ctx = gsap.context(() => {
+      if (progressRef.current) {
+        gsap.fromTo(
+          progressRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            transformOrigin: "top center",
+            scrollTrigger: {
+              trigger: progressRef.current.parentElement,
+              start: "top 70%",
+              end: "bottom 80%",
+              scrub: 0.6,
+            },
+          }
+        );
+      }
 
-    // Each step pops in individually triggered
-    gsap.utils.toArray<HTMLElement>(".process-step").forEach((step, i) => {
-      const icon = step.querySelector(".process-icon-wrap");
-      const content = step.querySelector(".process-content");
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: step,
-          start: "top 82%",
-          toggleActions: "play none none none",
-        },
+      const steps = gsap.utils.toArray<HTMLElement>(".process-step");
+
+      steps.forEach((step, i) => {
+        const icon = step.querySelector(".process-icon-wrap");
+        const content = step.querySelector(".process-content");
+
+        if (!icon || !content) return;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: step,
+            start: "top 82%",
+          },
+        });
+
+        tl.fromTo(
+          icon,
+          { scale: 0.4, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
+        ).fromTo(
+          content,
+          { x: i % 2 === 0 ? -32 : 32, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+          "-=0.25"
+        );
       });
-      tl.fromTo(
-        icon,
-        { scale: 0.4, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" },
-      ).fromTo(
-        content,
-        { x: i % 2 === 0 ? -32 : 32, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-        "-=0.25",
-      );
-    });
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
   // ── CTA
   useGSAP(() => {
-    gsap.fromTo(
-      ".cta-inner > *",
-      { y: 36, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>(".cta-inner > *");
+      if (!items.length) return;
+
+      gsap.from(items, {
+        y: 36,
+        opacity: 0,
         duration: 0.9,
         stagger: 0.12,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".cta-section", start: "top 82%" },
-      },
-    );
+        scrollTrigger: {
+          trigger: items[0],
+          start: "top 85%",
+        },
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -919,7 +955,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ═══════════ WORK ═══════════ */}
+      {/* ═══════════ WORK ═══════════
       <section className="work-section">
         <div className="section-wrap">
           <div className="section-header">
@@ -949,7 +985,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ═══════════ PROCESS FLOWCHART ═══════════ */}
       <section className="process-section">

@@ -9,10 +9,6 @@ import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import {
   ArrowRight,
-  MapPin,
-  Clock,
-  Zap,
-  Code2,
   Brain,
   Globe,
   BarChart2,
@@ -52,7 +48,7 @@ const skills = [
 ];
 
 const services = [
-  { icon: Brain, label: "ML Engineering", href: "/services/ml-projects" },
+  { icon: Brain, label: "ML Engineering Projects", href: "/services/ml-projects" },
   { icon: Globe, label: "Websites", href: "/services/websites" },
   { icon: BarChart2, label: "AI Audit", href: "/services/ai-audit" },
   { icon: Layers, label: "Streamlit Apps", href: "/services/streamlit-apps" },
@@ -66,23 +62,23 @@ const services = [
 const values = [
   {
     num: "01",
-    title: "Production-First",
-    desc: "I don't build demos. Every system I deliver is meant for real-world use and scale.",
+    title: "Academic Rigour",
+    desc: "Every project we deliver meets the technical and documentation standards expected by universities and research institutions.",
   },
   {
     num: "02",
-    title: "Direct & Transparent",
-    desc: "You talk to me, not a team. Clear scope, honest pricing, no surprises ever.",
+    title: "End-to-End Delivery",
+    desc: "From problem scoping to research paper — SpaceDrift handles the full project lifecycle so you receive a submission-ready package.",
   },
   {
     num: "03",
-    title: "Speed Without Fluff",
-    desc: "Most projects delivered in days, not weeks. Speed without compromising on quality.",
+    title: "On-Time, Every Time",
+    desc: "Deadlines are non-negotiable in academia. We structure every engagement around your submission date with buffer built in.",
   },
   {
     num: "04",
     title: "Full Ownership",
-    desc: "You get all source files, documentation, and post-delivery support included.",
+    desc: "You receive all source files, the research paper, documentation, and post-delivery support — everything you need to present and defend your work.",
   },
 ];
 
@@ -116,7 +112,7 @@ export default function About() {
       duration: 1.8,
       delay: 0.4,
       scrambleText: {
-        text: "ML Engineer · AI Freelancer · Bengaluru",
+        text: "AI & ML Solutions · Academic Projects · Bengaluru",
         chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         speed: 0.4,
       },
@@ -597,13 +593,13 @@ export default function About() {
         <div className="about-hero-bg-grid" />
 
         <div className="about-hero-left">
-          <div className="about-eyebrow">The person behind the work</div>
+          <div className="about-eyebrow">The team behind the work</div>
           <h1 ref={headlineRef}>
-            ML Engineer.
+            Academic
             <br />
-            <em>Problem</em>
+            <em>ML</em>
             <br />
-            Solver.
+            Projects.
           </h1>
           <span className="about-scramble" ref={scrambleRef}>
             ................................
@@ -612,11 +608,11 @@ export default function About() {
 
         <div className="about-hero-right">
           {[
-            { val: "3+", label: "Years in ML" },
-            { val: "40+", label: "Projects Delivered" },
+            { val: "500+", label: "Projects Delivered" },
+            { val: "5", label: "Team Members" },
             { val: "5", label: "Services Offered" },
-            { val: "≤2h", label: "Response Time" },
-            { val: "100%", label: "Client Satisfaction" },
+            { val: "≤4h", label: "Response Time" },
+            { val: "100%", label: "On-Time Delivery" },
           ].map(({ val, label }) => (
             <div key={label} className="about-stat-row">
               <div className="about-stat-val">{val}</div>
@@ -631,8 +627,8 @@ export default function About() {
         <div className="info-grid">
           {[
             { label: "Location", val: "Bengaluru, Karnataka" },
-            { label: "Focus", val: "AI / ML Engineering" },
-            { label: "Experience", val: "3+ Years" },
+            { label: "Focus", val: "Academic ML & AI Projects" },
+            { label: "Team Size", val: "5 Engineers" },
             {
               label: "Contact",
               val: <Link href="https://wa.me/919959594460">WhatsApp ↗</Link>,
@@ -650,13 +646,13 @@ export default function About() {
       <section className="bio-section">
         <div className="bio-inner">
           <div className="bio-left">
-            <p className="bio-section-label">Who I am</p>
+            <p className="bio-section-label">Who we are</p>
             <h2 className="bio-section-title">
-              Building
+              Delivering
               <br />
-              <em>real</em> AI
+              <em>research</em>
               <br />
-              systems.
+              that works.
             </h2>
             <Link
               href="/contact"
@@ -674,36 +670,41 @@ export default function About() {
                 transition: "opacity var(--t-fast)",
               }}
             >
-              Work With Me <ArrowRight size={13} strokeWidth={2} />
+              Work With Us <ArrowRight size={13} strokeWidth={2} />
             </Link>
           </div>
 
           <div className="bio-block">
             {[
               <>
-                I'm <strong>Lourdu</strong> — a Machine Learning Engineer and AI
-                freelancer based in Bengaluru, Karnataka. I specialize in
-                building <strong>production-grade AI systems</strong> that solve
-                real business problems, not just research demos.
+                <strong>SpaceDrift</strong> is a Bengaluru-based team of five ML
+                engineers and researchers specializing in{" "}
+                <strong>end-to-end academic project delivery</strong> for
+                B.Tech, B.A., M.Tech, and Ph.D. students across India.
               </>,
               <>
-                With <strong>3+ years</strong> in the ML space, I've worked
-                across NLP, computer vision, time-series forecasting, and
-                intelligent web tools — helping staffing agencies automate
-                hiring, startups ship AI features fast, and businesses
-                understand their data.
+                We deliver complete, submission-ready packages — a{" "}
+                <strong>fully implemented ML project</strong> with clean,
+                documented code, and a co-authored{" "}
+                <strong>research paper</strong> formatted to IEEE or Springer
+                standards. Our work spans NLP, Computer Vision, Deep Learning,
+                and Data Science & Analytics.
               </>,
               <>
-                My clients are South India's{" "}
+                Our clients include{" "}
                 <strong>
-                  HR teams, early-stage startups, D2C brands, and founders
+                  final-year engineering students, postgraduate researchers, and
+                  Ph.D. scholars
                 </strong>{" "}
-                who need AI done right — affordable, fast, and without the fluff
-                of big agencies.
+                who need technically rigorous, well-documented work that meets
+                the standards of leading Indian and international universities.
               </>,
               <>
-                I believe the best AI work is the kind you don't have to explain
-                — <strong>it just works, saves time, and earns money.</strong>
+                At SpaceDrift, we believe academic work should be{" "}
+                <strong>
+                  technically honest, clearly presented, and delivered on time
+                </strong>{" "}
+                — without the chaos of last-minute revisions or unclear scope.
               </>,
             ].map((text, i) => (
               <p key={i} className="bio-para">
@@ -729,7 +730,7 @@ export default function About() {
                   marginBottom: "10px",
                 }}
               >
-                Full Stack
+                Our Expertise
               </p>
               <h2
                 style={{
@@ -775,7 +776,7 @@ export default function About() {
               marginBottom: "10px",
             }}
           >
-            How I operate
+            How we operate
           </p>
           <h2
             style={{
@@ -787,7 +788,7 @@ export default function About() {
               lineHeight: 1,
             }}
           >
-            Values
+            Our Values
           </h2>
           <div className="values-grid">
             {values.map(({ num, title, desc }) => (
@@ -814,7 +815,7 @@ export default function About() {
               marginBottom: "10px",
             }}
           >
-            What I offer
+            What we offer
           </p>
           <h2
             style={{
@@ -852,14 +853,14 @@ export default function About() {
       <section className="about-cta-section">
         <div className="about-cta">
           <h2>
-            Let's work
+            Let&apos;s work
             <br />
             <em>together.</em>
           </h2>
           <div className="cta-actions">
             <p className="cta-note">
-              Tell me about your project. I respond within 2 hours and can start
-              most projects within a week.
+              Share your project requirements with us. We respond within 4 hours
+              and can begin most projects within a week.
             </p>
             <div className="cta-btns">
               <Link href="/contact" className="btn-white">

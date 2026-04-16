@@ -70,6 +70,8 @@ export default function Contact() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const MAX_CHARS = 500;
 
+  const [budget, setBudget] = useState("");
+  const [timeline, setTimeline] = useState("");
   // ── Hero SplitText
   useGSAP(() => {
     if (!h1Ref.current) return;
@@ -187,10 +189,48 @@ export default function Contact() {
     gsap.to(magnetRef.current, { x: 0, y: 0, duration: 0.6, ease: "expo.out" });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!selected || !budget || !timeline) {
+    alert("Please select all fields");
+    return;
+  }
+
+  const form = e.target as HTMLFormElement;
+
+  const data = {
+    name: (form[0] as HTMLInputElement).value,
+    email: (form[1] as HTMLInputElement).value,
+    service: selected,
+    budget: budget,
+    message: (form[4] as HTMLTextAreaElement).value,
+    timeline: timeline,
   };
+
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxUVpBoCNIH8SPektlwj4bdwD0G0RNpEJRRNq2C9_GHfEaFc6nKGpJVpfJ6evK0Iq8f/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const text = await res.text();
+    const result = JSON.parse(text);
+
+    if (result.status === "success") {
+      setSubmitted(true);
+    } else {
+      alert("Submission failed");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Network / CORS error");
+  }
+};
 
   return (
     <>
@@ -609,7 +649,7 @@ export default function Contact() {
         <div className="c-hero-left">
           <div className="c-eyebrow c-hero-sub">Get in touch</div>
           <h1 ref={h1Ref}>
-            Let's build
+            Let`s build
             <br />
             <em>something</em>
             <br />
@@ -635,7 +675,7 @@ export default function Contact() {
           {/* Magnetic WhatsApp */}
           <div className="magnet-wrap">
             <Link
-              href="https://wa.me/919959594460?text=Hi! I'd like to discuss a project."
+              href="https://wa.me/916360812808?text=Hi! I'd like to discuss a project."
               target="_blank"
               rel="noopener noreferrer"
               ref={magnetRef}
@@ -662,8 +702,8 @@ export default function Contact() {
             {
               icon: Instagram,
               label: "Instagram",
-              handle: "@lourdu_ai",
-              href: "https://instagram.com/lourdu_ai",
+              handle: "@spacedrift.in",
+              href: "https://instagram.com/spacedrift.in",
             },
             {
               icon: MapPin,
@@ -747,7 +787,7 @@ export default function Contact() {
               />
               <h3>Message sent!</h3>
               <p>
-                Thanks for reaching out. I'll get back to you within 2 hours.
+                Thanks for reaching out. I`ll get back to you within 2 hours.
               </p>
               <Link
                 href="/"
@@ -795,16 +835,16 @@ export default function Contact() {
               <div className="form-field">
                 <label className="form-label">Service Interested In</label>
                 <div className="service-chips">
-                  {services.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      className={`service-chip${selected === s ? " sel" : ""}`}
-                      onClick={() => setSelected(s)}
-                    >
-                      {s}
-                    </button>
-                  ))}
+                    {services.map((s) => (
+                      <button
+                        key={s}
+                        type="button"
+                        className={`service-chip ${selected === s ? "sel" : ""}`}
+                        onClick={() => setSelected(s)}
+                      >
+                        {s}
+                      </button>
+                    ))}
                 </div>
               </div>
 
@@ -819,7 +859,12 @@ export default function Contact() {
                     "₹50K+",
                     "Let's Discuss",
                   ].map((b) => (
-                    <button key={b} type="button" className="service-chip">
+                    <button
+                      key={b}
+                      type="button"
+                      className={`service-chip ${budget === b ? "sel" : ""}`}
+                      onClick={() => setBudget(b)}
+                    >
                       {b}
                     </button>
                   ))}
@@ -849,7 +894,12 @@ export default function Contact() {
                 <label className="form-label">Timeline</label>
                 <div className="service-chips">
                   {["ASAP", "1–2 Weeks", "1 Month", "Flexible"].map((t) => (
-                    <button key={t} type="button" className="service-chip">
+                    <button
+                      key={t}
+                      type="button"
+                      className={`service-chip ${timeline === t ? "sel" : ""}`}
+                      onClick={() => setTimeline(t)}
+                    >
                       {t}
                     </button>
                   ))}
@@ -882,7 +932,7 @@ export default function Contact() {
               val: "Within 2 hours, every day",
             },
             { icon: WhatsAppIcon, label: "WhatsApp", val: "+91 99595 94460" },
-            { icon: Instagram, label: "Instagram", val: "@lourdu_ai" },
+            { icon: Instagram, label: "Instagram", val: "@spacedrift.in" },
           ].map(({ icon: Icon, label, val }) => (
             <div key={label} className="contact-info-item">
               <Icon size={16} strokeWidth={1.5} className="ci-icon" />
@@ -924,7 +974,7 @@ export default function Contact() {
               </h2>
             </div>
             <Link
-              href="https://wa.me/919959594460"
+              href="https://wa.me/916360812808"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -971,18 +1021,18 @@ export default function Contact() {
       <section className="c-bottom">
         <div className="c-bottom-inner">
           <h2>
-            Let's build
+            Let`s build
             <br />
             <em>together.</em>
           </h2>
           <div className="c-bottom-right">
             <p className="c-bottom-note">
               Every great project starts with a conversation. Reach out now —
-              I'll respond within 2 hours and we can get started within a week.
+              I`ll respond within 2 hours and we can get started within a week.
             </p>
             <div className="c-bottom-btns">
               <Link
-                href="https://wa.me/919959594460?text=Hi! I'd like to start a project."
+                href="https://wa.me/916360812808?text=Hi! I'd like to start a project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-white"

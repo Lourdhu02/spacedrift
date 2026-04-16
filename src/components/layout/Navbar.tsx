@@ -12,8 +12,8 @@ gsap.registerPlugin();
 const links = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/work", label: "Work" },
-  { href: "/contact", label: "Contact" },
+  // { href: "/work", label: "Work" },
+  // { href: "/contact", label: "Contact" },
 ];
 
 const serviceLinks = [
@@ -144,6 +144,7 @@ export default function Navbar() {
   }, [open]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
     setDropOpen(false);
   }, [pathname]);
@@ -343,14 +344,14 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            LOURDU
+            SPACE
             <span
               style={{
                 WebkitTextStroke: "1px var(--ink)",
                 color: "transparent",
               }}
             >
-              .AI
+              DRIFT
             </span>
           </Link>
 
@@ -436,7 +437,7 @@ export default function Navbar() {
             </ul>
 
             <Link href="/contact" className="nav-cta-btn">
-              <span>Hire Me ↗</span>
+              <span>CONTACT ↗</span>
             </Link>
           </div>
 

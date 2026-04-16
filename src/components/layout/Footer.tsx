@@ -7,7 +7,7 @@ import React from "react";
 const navLinks = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/work", label: "Work" },
+  // { href: "/work", label: "Work" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -44,14 +44,14 @@ export default function Footer() {
         {/* Col 1 — Brand */}
         <div className="footer-brand">
           <Link href="/" className="footer-logo">
-            LOURDU
+            SPACE
             <span
               style={{
                 WebkitTextStroke: "1.5px var(--ink)",
                 color: "transparent",
               }}
             >
-              .AI
+              DRIFT
             </span>
           </Link>
           <p className="footer-tagline">
@@ -98,24 +98,24 @@ export default function Footer() {
           <ul>
             <li>
               <Link
-                href="https://instagram.com/lourdu_ai"
+                href="https://instagram.com/spacedrift.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link footer-social"
               >
                 <Instagram size={13} strokeWidth={1.5} />
-                @lourdu_ai
+                @spacedrift.in
               </Link>
             </li>
             <li>
               <Link
-                href="https://wa.me/919959594460"
+                href="https://wa.me/916360812808"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link footer-social"
               >
                 <WhatsAppIcon />
-                +91 99595 94460
+                +91 6360812808
               </Link>
             </li>
           </ul>
@@ -124,8 +124,8 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="footer-bottom">
-        <span>{`© ${new Date().getFullYear()} LOURDU.AI — All rights reserved.`}</span>
-        <span>lourduai.com · Bengaluru, Karnataka, India</span>
+        <span>{`© ${new Date().getFullYear()} spacedrift.in — All rights reserved.`}</span>
+        <span>spacedrift.in · Bengaluru, Karnataka, India</span>
       </div>
 
       <style>{`
