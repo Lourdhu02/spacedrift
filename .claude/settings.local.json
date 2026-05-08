@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"D:\\\\ML Engineer\\\\spacedrift\" -Recurse -Filter \"modifications.md\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "PowerShell(npm run build 2>&1)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(gh pr create --repo Lourdhu02/spacedrift --head claude/crazy-wright-6a106f --base main --title 'Complete site redesign: 3 core services, minimalist brand' --body ' *)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); gh --version)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
