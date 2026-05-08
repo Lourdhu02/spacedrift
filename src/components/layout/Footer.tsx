@@ -14,8 +14,8 @@ export default function Footer() {
         }
         .ft-brand { display: flex; flex-direction: column; gap: 20px; }
         .ft-logo {
-          font-family: var(--font-display); font-weight: 800;
-          font-size: 18px; letter-spacing: -0.04em; color: var(--ink);
+          font-family: var(--font-mono); font-weight: 500;
+          font-size: 13px; letter-spacing: 0.06em; color: var(--ink);
         }
         .ft-tagline { font-size: 14px; color: var(--ink-3); line-height: 1.7; max-width: 320px; }
         .ft-col-title {
@@ -49,7 +49,7 @@ export default function Footer() {
 
       <div className="ft-main">
         <div className="ft-brand">
-          <Link href="/" className="ft-logo">SPACEDRIFT</Link>
+          <Link href="/" className="ft-logo">spacedrift.in</Link>
           <p className="ft-tagline">Engineering project guidance, production-grade data annotation, and high-performance web development from Bengaluru.</p>
         </div>
         <div className="ft-col">
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="ft-bottom">
-        <span>&copy; {new Date().getFullYear()} SpaceDrift. All rights reserved.</span>
+        <span>&copy; {new Date().getFullYear()} spacedrift.in. All rights reserved.</span>
         <span>Bengaluru, India</span>
       </div>
     </footer>

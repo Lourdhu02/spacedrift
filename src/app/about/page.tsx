@@ -78,13 +78,13 @@ export default function About() {
           padding: var(--nav-h) 0 100px; background: var(--bg);
           position: relative; overflow: hidden;
         }
-        .ab-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .ab-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; overflow: hidden; }
         .ab-hero h1 {
           font-family: var(--font-display);
-          font-size: clamp(48px, 8vw, 110px);
-          font-weight: 800; letter-spacing: -0.05em;
-          line-height: 0.95; color: var(--ink); margin-bottom: 40px;
-          max-width: 800px;
+          font-size: clamp(40px, 7vw, 90px);
+          font-weight: 800; letter-spacing: -0.04em;
+          line-height: 0.98; color: var(--ink); margin-bottom: 40px;
+          max-width: 100%;
         }
         .ab-hero h1 .accent { color: var(--accent); }
         .ab-hero-desc { font-size: 17px; color: var(--ink-2); max-width: 600px; line-height: 1.8; }
@@ -225,7 +225,7 @@ export default function About() {
         <div className="dot-bg" />
         <div className="ab-inner">
           <h1 ref={h1Ref}>
-            About<br /><span className="accent">SpaceDrift</span>
+            About<br /><span className="accent">spacedrift.in</span>
           </h1>
           <p className="ab-hero-desc ab-reveal">
             We are a Bengaluru-based studio that helps engineers build great projects,
@@ -238,11 +238,11 @@ export default function About() {
       <section className="ab-story">
         <div className="sec-wrap">
           <p className="sec-label">Our Story</p>
-          <h2 className="sec-heading">Why SpaceDrift exists.</h2>
+          <h2 className="sec-heading">Why spacedrift.in exists.</h2>
           <div className="ab-story-grid">
             <div className="ab-story-col">
               <p className="ab-story-p">
-                <strong>SpaceDrift was born from frustration.</strong> We watched engineering students
+                <strong>spacedrift.in was born from frustration.</strong> We watched engineering students
                 struggle with outdated project guidance, businesses settle for mediocre template websites,
                 and ML teams waste months on poorly labeled data. The pattern was always the same:
                 affordable options were terrible, and quality options were inaccessible.

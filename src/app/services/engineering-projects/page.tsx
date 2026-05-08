@@ -69,13 +69,13 @@ export default function EngineeringProjects() {
           padding: var(--nav-h) 0 100px; background: var(--bg);
           position: relative; overflow: hidden;
         }
-        .ep-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .ep-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; overflow: hidden; }
         .ep-hero h1 {
           font-family: var(--font-display);
-          font-size: clamp(48px, 8vw, 110px);
-          font-weight: 800; letter-spacing: -0.05em;
-          line-height: 0.95; color: var(--ink); margin-bottom: 40px;
-          max-width: 800px;
+          font-size: clamp(40px, 7vw, 90px);
+          font-weight: 800; letter-spacing: -0.04em;
+          line-height: 0.98; color: var(--ink); margin-bottom: 40px;
+          max-width: 100%;
         }
         .ep-hero h1 .accent { color: var(--accent); }
         .ep-intro {
@@ -226,7 +226,7 @@ export default function EngineeringProjects() {
               for research paper writing. We exist to fix that.
             </p>
             <p>
-              SpaceDrift provides end-to-end project guidance for B.Tech, M.Tech, and Ph.D. students.
+              spacedrift.in provides end-to-end project guidance for B.Tech, M.Tech, and Ph.D. students.
               From topic selection to IEEE-formatted research papers, we handle the hard parts so you
               can focus on learning and presenting confidently.
             </p>

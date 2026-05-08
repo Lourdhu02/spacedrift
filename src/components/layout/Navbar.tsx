@@ -50,20 +50,21 @@ export default function Navbar() {
         .nav-bar {
           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
           height: var(--nav-h); display: flex; align-items: center;
-          transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .nav-scrolled {
-          background: rgba(6,6,6,0.9);
-          backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid var(--line);
+          background: rgba(6, 6, 6, 0.6);
+          backdrop-filter: blur(40px) saturate(180%);
+          -webkit-backdrop-filter: blur(40px) saturate(180%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
         .nav-inner {
           width: 90%; max-width: 1400px; margin: 0 auto;
           display: flex; align-items: center; justify-content: space-between;
         }
         .nav-logo {
-          font-family: var(--font-display); font-weight: 800;
-          font-size: 18px; letter-spacing: -0.04em; color: var(--ink);
+          font-family: var(--font-mono); font-weight: 500;
+          font-size: 13px; letter-spacing: 0.06em; color: var(--ink);
         }
         .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
         .nav-link {
@@ -80,10 +81,11 @@ export default function Navbar() {
         .nav-cta {
           font-family: var(--font-mono); font-size: 11px;
           letter-spacing: 0.08em; text-transform: uppercase;
-          padding: 10px 20px; border: 1px solid var(--line-light);
+          padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1);
           color: var(--ink-2); transition: all var(--t-fast);
+          background: rgba(255,255,255,0.03);
         }
-        .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+        .nav-cta:hover { border-color: var(--accent); color: var(--accent); background: rgba(37,99,235,0.05); }
         .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--ink); }
         @media (max-width: 768px) {
           .nav-links { display: none; }
@@ -91,12 +93,14 @@ export default function Navbar() {
         }
         .mobile-menu {
           position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0; z-index: 999;
-          background: rgba(6,6,6,0.98); backdrop-filter: blur(20px);
+          background: rgba(6, 6, 6, 0.85);
+          backdrop-filter: blur(40px) saturate(180%);
+          -webkit-backdrop-filter: blur(40px) saturate(180%);
           padding: 40px 0;
         }
         .mobile-menu ul { list-style: none; width: 90%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
         .mobile-menu li a {
-          display: block; font-family: var(--font-display); font-size: 32px; font-weight: 700;
+          display: block; font-family: var(--font-display); font-size: 28px; font-weight: 700;
           letter-spacing: -0.03em; padding: 20px 0; color: var(--ink-2);
           border-bottom: 1px solid var(--line); transition: color var(--t-fast), padding-left var(--t-fast);
         }
@@ -106,7 +110,7 @@ export default function Navbar() {
 
       <header ref={navRef} className={`nav-bar${scrolled ? " nav-scrolled" : ""}`}>
         <div className="nav-inner">
-          <Link href="/" className="nav-logo">SPACEDRIFT</Link>
+          <Link href="/" className="nav-logo">spacedrift.in</Link>
           <ul className="nav-links">
             {links.map(({ href, label }) => (
               <li key={href}>

@@ -70,13 +70,13 @@ export default function WebDevelopment() {
           padding: var(--nav-h) 0 100px; background: var(--bg);
           position: relative; overflow: hidden;
         }
-        .wd-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .wd-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; overflow: hidden; }
         .wd-hero h1 {
           font-family: var(--font-display);
-          font-size: clamp(48px, 8vw, 110px);
-          font-weight: 800; letter-spacing: -0.05em;
-          line-height: 0.95; color: var(--ink); margin-bottom: 40px;
-          max-width: 850px;
+          font-size: clamp(40px, 7vw, 90px);
+          font-weight: 800; letter-spacing: -0.04em;
+          line-height: 0.98; color: var(--ink); margin-bottom: 40px;
+          max-width: 100%;
         }
         .wd-hero h1 .accent { color: var(--accent); }
         .wd-intro {

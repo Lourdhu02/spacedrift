@@ -27,9 +27,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SPACEDRIFT — Engineering Projects · Data Annotation · Web Development",
+  title: "spacedrift.in — Engineering Projects · Data Annotation · Web Development",
   description:
-    "SpaceDrift delivers expert engineering project guidance, production-grade data annotation, and high-performance business websites built with Next.js.",
+    "spacedrift.in delivers expert engineering project guidance, production-grade data annotation, and high-performance business websites built with Next.js from Bengaluru, India.",
   keywords: [
     "engineering projects",
     "data annotation",
@@ -37,7 +37,26 @@ export const metadata: Metadata = {
     "Next.js",
     "research paper assistance",
     "spacedrift",
+    "Bengaluru",
   ],
+  metadataBase: new URL("https://spacedrift.in"),
+  openGraph: {
+    title: "spacedrift.in — Engineering Projects · Data Annotation · Web Development",
+    description: "Engineering project guidance, production-grade data annotation, and high-performance web development from Bengaluru.",
+    url: "https://spacedrift.in",
+    siteName: "spacedrift.in",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "spacedrift.in",
+    description: "Engineering project guidance, data annotation, and web development from Bengaluru.",
+  },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -50,10 +69,13 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <meta name="theme-color" content="#060606" />
+      </head>
       <body>
         <SmoothScroll />
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

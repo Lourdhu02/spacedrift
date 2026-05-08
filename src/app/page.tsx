@@ -72,13 +72,13 @@ export default function Home() {
           padding: var(--nav-h) 0 100px; background: var(--bg);
           position: relative; overflow: hidden;
         }
-        .hero-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; overflow: hidden; }
         .hero h1 {
           font-family: var(--font-display);
-          font-size: clamp(52px, 9vw, 120px);
-          font-weight: 800; letter-spacing: -0.05em;
-          line-height: 0.95; color: var(--ink); margin-bottom: 40px;
-          max-width: 900px;
+          font-size: clamp(42px, 8vw, 100px);
+          font-weight: 800; letter-spacing: -0.04em;
+          line-height: 0.98; color: var(--ink); margin-bottom: 40px;
+          max-width: 100%;
         }
         .hero h1 .accent { color: var(--accent); }
         .hero-sub {
@@ -234,7 +234,7 @@ export default function Home() {
             We help you build,<br />ship, and <span className="accent">scale</span>.
           </h1>
           <p className="hero-sub">
-            SpaceDrift is a Bengaluru-based studio delivering engineering project guidance,
+            spacedrift.in is a Bengaluru-based studio delivering engineering project guidance,
             production-grade data annotation, and high-performance web development for
             teams that refuse to settle.
           </p>
