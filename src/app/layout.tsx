@@ -55,11 +55,6 @@ export const metadata: Metadata = {
     title: "spacedrift.in",
     description: "spacedrift — ML and AI services studio from Bengaluru, India.",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "spacedrift.in",
-    description: "Fixed-scope ML, AI, OCR, RAG, data annotation, and web development services from Bengaluru.",
-  },
   icons: {
     icon: "/favicon-512.png",
     apple: "/favicon-512.png",
