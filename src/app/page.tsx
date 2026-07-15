@@ -383,10 +383,18 @@ export default function Home() {
           <form
             className="cta-form cta-reveal"
             name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            action="/?success=true"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const params = new URLSearchParams();
+              formData.forEach((value, key) => params.append(key, value.toString()));
+              await fetch("/__forms.html", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: params.toString(),
+              });
+              window.location.href = "/?success=true";
+            }}
           >
             <input type="hidden" name="form-name" value="contact" />
             <div className="form-row">
