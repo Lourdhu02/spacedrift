@@ -380,9 +380,29 @@ export default function Home() {
             Tell us what you need. We respond within 24 hours with a clear scope, timeline,
             and fixed price if the project is a fit. No sales pitch.
           </p>
-          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill cta-reveal">
-            <span>spacedrift.contact@gmail.com <ArrowUpRight size={14} strokeWidth={2} /></span>
-          </a>
+          <form
+            className="cta-form cta-reveal"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="/?success=true"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <div className="form-row">
+              <input type="text" name="name" placeholder="Your name" required className="form-input" />
+              <input type="email" name="email" placeholder="Email address" required className="form-input" />
+            </div>
+            <textarea name="message" placeholder="Tell us about your project" rows={4} required className="form-input form-textarea" />
+            <div className="form-row">
+              <button type="submit" className="btn-fill">
+                <span>Send Message <ArrowUpRight size={14} strokeWidth={2} /></span>
+              </button>
+              <a href="mailto:spacedrift.contact@gmail.com" className="btn-outline">
+                Or email us directly <ArrowUpRight size={14} strokeWidth={2} />
+              </a>
+            </div>
+          </form>
         </div>
       </section>
     </>
