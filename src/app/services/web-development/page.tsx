@@ -220,17 +220,17 @@ export default function WebDevelopment() {
           </h1>
           <div className="wd-intro wd-reveal">
             <p>
-              <strong>Your website is your best salesperson.</strong> It works 24/7, never takes a break,
-              and forms the first impression of your business. A slow, generic template site costs you
-              clients every single day. We build websites that actually convert.
+              <strong>Your website should be fast, clear, and easy to maintain.</strong> We build
+              business websites, landing pages, and lightweight web apps for founders, consultants,
+              and service teams that need a reliable launch without a long agency cycle.
             </p>
             <p>
-              Built with Next.js, animated with GSAP, and deployed on Vercel — every site we deliver
-              scores 100% on Lighthouse, loads in under 2 seconds, and looks stunning on every device
-              from mobile to 4K. Delivered in 5-10 days with zero lock-in.
+              Builds use Next.js, React, TypeScript, and Vercel where appropriate. Most website
+              projects are delivered in 5-10 days with fixed scope, fixed price, source code
+              handoff, and zero lock-in.
             </p>
           </div>
-          <a href="mailto:contact@spacedrift.in" className="btn-fill wd-reveal">
+          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill wd-reveal">
             <span>Start Your Project <ArrowRight size={14} strokeWidth={2} /></span>
           </a>
         </div>
@@ -239,44 +239,43 @@ export default function WebDevelopment() {
       <section className="wd-features">
         <div className="sec-wrap">
           <p className="sec-label">Deliverables</p>
-          <h2 className="sec-heading">Everything included. Nothing extra.</h2>
+          <h2 className="sec-heading">Website deliverables included upfront.</h2>
           <p className="sec-desc">
-            Every website we build includes all of these by default.
-            No upsells, no feature gates, no surprise invoices.
+            Every website build includes the essentials needed to launch properly.
+            We define pages, integrations, content responsibilities, and exclusions before work starts.
           </p>
           <div className="wd-features-grid">
             <div className="wd-feature half">
               <span className="wd-feature-label">Performance</span>
               <h4>100% Lighthouse Scores</h4>
               <p>
-                Every page optimized for perfect scores across performance, accessibility, best practices,
-                and SEO. Image optimization, code splitting, lazy loading, and font subsetting are
-                standard — not optional add-ons.
+                Pages are optimized for Lighthouse performance, accessibility, technical standards,
+                and SEO targets. Image optimization, code splitting, lazy loading, and font
+                handling are part of the build.
               </p>
             </div>
             <div className="wd-feature half">
               <span className="wd-feature-label">Design</span>
               <h4>Motion & Scroll Animations</h4>
               <p>
-                GSAP-powered animations that guide users through your content. Smooth scroll transitions,
-                text reveals, parallax effects, and micro-interactions that make your site feel alive
-                without hurting performance.
+                GSAP-powered motion is used only where it helps the page feel clearer and more polished.
+                Smooth scroll, text reveals, and small interactions are implemented with performance in mind.
               </p>
             </div>
             <div className="wd-feature third">
               <span className="wd-feature-label">Responsive</span>
               <h4>Mobile-First Design</h4>
-              <p>Pixel-perfect on every device. Tested on real devices from 320px to ultrawide. Touch-optimized interactions and responsive typography.</p>
+              <p>Responsive layouts tested across mobile, tablet, laptop, and wide desktop sizes. Touch targets, spacing, and typography are checked before launch.</p>
             </div>
             <div className="wd-feature third">
               <span className="wd-feature-label">SEO</span>
               <h4>Search Optimized</h4>
-              <p>Semantic HTML, structured data, Open Graph tags, XML sitemaps, and Core Web Vitals optimization. Your site ranks from day one.</p>
+              <p>Semantic HTML, metadata, Open Graph tags, sitemap support, and Core Web Vitals work are included so the site is ready for search indexing.</p>
             </div>
             <div className="wd-feature third">
               <span className="wd-feature-label">Ownership</span>
               <h4>Full Source Access</h4>
-              <p>You own everything. Source code on GitHub, deployed to your Vercel account. No proprietary CMS, no monthly platform fees, zero lock-in.</p>
+              <p>You own the source code, assets, and deployment setup. We deploy to your GitHub and hosting accounts wherever possible.</p>
             </div>
           </div>
         </div>
@@ -285,8 +284,8 @@ export default function WebDevelopment() {
       <section className="wd-stack">
         <div className="sec-wrap">
           <p className="sec-label">Technology</p>
-          <h2 className="sec-heading">Modern stack. Zero compromise.</h2>
-          <p className="sec-desc">We use the same tools that power the best products in the world. No WordPress, no page builders, no shortcuts.</p>
+          <h2 className="sec-heading">Modern stack. Clear ownership.</h2>
+          <p className="sec-desc">We use tools that make the site fast, inspectable, and portable. No proprietary page-builder dependency unless you explicitly ask for it.</p>
           <div className="wd-stack-grid">
             {["Next.js", "React", "TypeScript", "Tailwind CSS", "GSAP", "Lenis", "Vercel", "Figma", "GitHub", "Analytics"].map(t => (
               <span key={t} className="wd-chip">{t}</span>
@@ -300,18 +299,18 @@ export default function WebDevelopment() {
           <div className="wd-process-grid">
             <div className="wd-sticky">
               <p className="sec-label">Process</p>
-              <h2 className="sec-heading">From brief to launch in days.</h2>
+              <h2 className="sec-heading">From brief to launch with fewer handoffs.</h2>
               <p style={{ fontSize: "15px", color: "var(--ink-2)", lineHeight: 1.8, marginTop: "20px" }}>
-                Most business websites are delivered in 5-10 working days.
-                No meetings that should have been emails. No endless revision loops.
+                Most business websites are delivered in 5-10 working days when content and
+                approvals are ready. Revision rounds are included in the fixed scope.
               </p>
             </div>
             <div className="wd-steps">
               {[
-                { num: "01", title: "Brief & Discovery", desc: "You share your brand, goals, and references. We ask the right questions and align on scope within a single conversation. No multi-week discovery phase." },
-                { num: "02", title: "Design & Build", desc: "We design directly in code — no static mockups that never match the final product. You see a live preview within 3 days and give feedback on the real thing." },
-                { num: "03", title: "Refine & Polish", desc: "Animations, responsive testing, content refinement, and performance optimization. We iterate until every detail is right. Most sites need 1-2 revision rounds." },
-                { num: "04", title: "Launch & Handoff", desc: "Deployed to Vercel with custom domain, analytics, and SEO configured. Source code pushed to your GitHub. A handoff doc covers everything you need to maintain it." },
+                { num: "01", title: "Brief & Discovery", desc: "You share your brand, goals, pages, content status, and references. We align on fixed scope, timeline, and responsibilities in one conversation." },
+                { num: "02", title: "Design & Build", desc: "We design directly in code for compact builds. You see a live preview early and give feedback on the working site." },
+                { num: "03", title: "Refine & Polish", desc: "We handle responsive testing, content adjustments, motion, and performance work. Most sites include 1-2 scoped revision rounds." },
+                { num: "04", title: "Launch & Handoff", desc: "We deploy to your hosting account, configure the domain and metadata, push source code to GitHub, and provide a handoff document." },
               ].map(({ num, title, desc }) => (
                 <div key={num} className="wd-step">
                   <span className="wd-step-num">{num}</span>
@@ -332,12 +331,12 @@ export default function WebDevelopment() {
           <h2 className="sec-heading">Standard with every build.</h2>
           <div className="wd-inc-grid">
             {[
-              { title: "Custom Domain Setup", desc: "We configure your domain, SSL certificates, and DNS records. Your site runs on your domain from day one." },
-              { title: "Analytics Integration", desc: "Google Analytics, Vercel Analytics, or your preferred tool — configured and verified during launch." },
-              { title: "Content Management", desc: "For sites that need CMS, we integrate headless solutions like Sanity or Notion. Edit content without touching code." },
-              { title: "30 Days Post-Launch Support", desc: "Bug fixes, content updates, and minor tweaks included for 30 days after launch. No additional charges." },
-              { title: "Performance Monitoring", desc: "Core Web Vitals monitoring setup so you know your site stays fast as content changes over time." },
-              { title: "Source Code Documentation", desc: "Clean, commented code with a README covering the project structure, deployment, and how to make changes." },
+              { title: "Custom Domain Setup", desc: "We configure your domain, SSL certificate, and DNS records so the site launches on your domain." },
+              { title: "Analytics Integration", desc: "Google Analytics, Vercel Analytics, or your preferred tool is configured and checked during launch." },
+              { title: "Content Management", desc: "For sites that need CMS editing, we can integrate a headless option such as Sanity or Notion within the agreed scope." },
+              { title: "30 Days Post-Launch Support", desc: "Bug fixes, small content updates, and minor adjustments are included for 30 days after launch." },
+              { title: "Performance Monitoring", desc: "Core Web Vitals or hosting analytics can be configured so you can track performance after launch." },
+              { title: "Source Code Documentation", desc: "A README covers project structure, local setup, deployment, and common content or configuration changes." },
             ].map(({ title, desc }) => (
               <div key={title} className="wd-inc-item">
                 <h4>{title}</h4>
@@ -350,13 +349,13 @@ export default function WebDevelopment() {
 
       <section className="wd-cta">
         <div className="sec-wrap">
-          <h2 className="wd-cta-r">Need a website that<br />actually performs?</h2>
+          <h2 className="wd-cta-r">Need a fast website<br />with clear ownership?</h2>
           <p className="wd-cta-r">
             Tell us about your business. We respond within 24 hours with a
-            scope, timeline, and fixed price. No sales call required.
+            scope, timeline, and fixed price if the project is a fit.
           </p>
-          <a href="mailto:contact@spacedrift.in" className="btn-fill wd-cta-r">
-            <span>contact@spacedrift.in <ArrowUpRight size={14} strokeWidth={2} /></span>
+          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill wd-cta-r">
+            <span>spacedrift.contact@gmail.com <ArrowUpRight size={14} strokeWidth={2} /></span>
           </a>
         </div>
       </section>

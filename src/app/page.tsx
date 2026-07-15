@@ -231,20 +231,20 @@ export default function Home() {
         <div className="dot-bg" />
         <div className="hero-inner">
           <h1 ref={h1Ref}>
-            We help you build,<br />ship, and <span className="accent">scale</span>.
+            Build useful ML,<br />AI, and web <span className="accent">systems</span>.
           </h1>
           <p className="hero-sub">
-            spacedrift.in is a Bengaluru-based studio delivering engineering project guidance,
-            production-grade data annotation, and high-performance web development for
-            teams that refuse to settle.
+            spacedrift.in is a boutique ML and AI services studio in Bengaluru.
+            We deliver research ops, document AI, OCR automation, RAG MVPs,
+            data annotation, and web development as fixed-scope projects.
           </p>
           <div className="hero-meta">
             <span><span className="dot" />Based in Bengaluru</span>
-            <span><span className="dot" />3 Core Services</span>
+            <span><span className="dot" />5 Core Services</span>
             <span><span className="dot" />24hr Response</span>
           </div>
           <div className="hero-cta">
-            <a href="mailto:contact@spacedrift.in" className="btn-fill">
+            <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill">
               <span>Start a Project <ArrowRight size={14} strokeWidth={2} /></span>
             </a>
             <Link href="/about" className="btn-outline">
@@ -257,46 +257,48 @@ export default function Home() {
       <section className="services-section">
         <div className="sec-wrap">
           <p className="sec-label">Services</p>
-          <h2 className="sec-heading">Three services. Zero compromise.</h2>
+          <h2 className="sec-heading">Five focused services. Clear deliverables.</h2>
           <p className="sec-desc">
-            We deliberately focus on three areas so we can deliver exceptional quality in each.
-            No generalist agency bloat — just deep expertise where it matters.
+            We take on work where the output can be defined, built, tested, and handed over.
+            No open-ended retainers, no vague transformation work, and no generalist agency layers.
           </p>
 
           <div className="bento-grid">
-            <Link href="/services/engineering-projects" className="bento-card wide">
+            <Link href="/services/research-ops" className="bento-card wide">
               <div>
                 <span className="bento-num">01</span>
-                <h3>Engineering Project Assistance</h3>
+                <h3>Research Ops for Academia</h3>
                 <p>
-                  End-to-end guidance for B.Tech, M.Tech, and Ph.D. projects. We help with topic selection,
-                  literature review, implementation in Python/ML frameworks, and publication-ready research papers.
-                  Your project meets academic standards and deadlines — guaranteed.
+                  Reproducible experiment pipelines, dataset curation, baseline replication, and
+                  publication support for PhD scholars, academic labs, and ed-tech teams. We help
+                  turn research ideas into results that can be reviewed and defended.
                 </p>
               </div>
               <span className="bento-link">Explore <ArrowRight size={13} /></span>
-              <span className="bento-tag">Academic</span>
+              <span className="bento-tag">Research</span>
             </Link>
 
-            <Link href="/services/data-annotation" className="bento-card narrow">
+            <Link href="/services/document-ai" className="bento-card narrow">
               <div>
                 <span className="bento-num">02</span>
-                <h3>Data Annotation</h3>
+                <h3>Document AI & OCR</h3>
                 <p>
-                  Labeled datasets for NLP, computer vision, audio, and video. Bounding boxes, NER,
-                  classification, segmentation — delivered in COCO, YOLO, spaCy, or your custom schema.
+                  Custom OCR and document AI pipelines for invoices, receipts, ID documents,
+                  forms, and Indian-language scripts. We deliver validated extraction workflows
+                  with 97%+ accuracy targets on agreed fields.
                 </p>
               </div>
               <span className="bento-link">Explore <ArrowRight size={13} /></span>
             </Link>
 
-            <Link href="/services/web-development" className="bento-card narrow">
+            <Link href="/services/rag-mvp" className="bento-card narrow">
               <div>
                 <span className="bento-num">03</span>
-                <h3>Web Development</h3>
+                <h3>RAG & AI MVPs</h3>
                 <p>
-                  Next.js websites with scroll animations, 100% Lighthouse scores, and mobile-first
-                  responsive design. Delivered in 5-10 days with full source ownership.
+                  Internal knowledge-base chatbots, retrieval-augmented generation systems,
+                  and AI MVPs for startups and internal teams. Fixed scope, working product
+                  in 3 weeks, and no open-ended retainers.
                 </p>
               </div>
               <span className="bento-link">Explore <ArrowRight size={13} /></span>
@@ -307,9 +309,9 @@ export default function Home() {
                 <span className="bento-num" style={{ color: "var(--warm)" }}>Why us?</span>
                 <h3>Direct access. No middlemen.</h3>
                 <p>
-                  Every project is handled directly by our senior engineers. No account managers,
-                  no outsourcing chain, no telephone game. You talk to the people building your product.
-                  That means faster iterations, fewer misunderstandings, and better outcomes.
+                  You work directly with the engineer building your project. There are no account
+                  managers, outsourcing chains, or handoff gaps. That keeps decisions faster,
+                  requirements clearer, and delivery easier to verify.
                 </p>
               </div>
             </div>
@@ -347,16 +349,16 @@ export default function Home() {
               <p className="sec-label">Approach</p>
               <h2 className="sec-heading">How we work with you.</h2>
               <p style={{ fontSize: "15px", color: "var(--ink-2)", lineHeight: 1.8, marginTop: "20px" }}>
-                Every engagement follows the same proven framework.
-                Clarity at every stage. No surprises at the end.
+                Every engagement starts with a written scope and ends with a usable handoff.
+                You know what is included, what is not, and when each milestone is due.
               </p>
             </div>
             <div className="approach-list">
               {[
-                { num: "01", title: "Discovery Call", desc: "You tell us what you need — project requirements, deadlines, constraints. We listen, ask questions, and identify the fastest path to delivery." },
-                { num: "02", title: "Scope & Proposal", desc: "Within 24 hours you receive a fixed-price proposal with clear deliverables, timeline, and milestones. No hidden costs, no scope creep." },
-                { num: "03", title: "Build & Iterate", desc: "We start building immediately. You get regular progress updates and preview links. Feedback is incorporated in real-time, not at the end." },
-                { num: "04", title: "Deliver & Support", desc: "Final delivery includes complete source code, documentation, and a handoff session. Post-delivery support is included for 30 days." },
+                { num: "01", title: "Discovery Call", desc: "You explain the requirement, deadline, data, and constraints. We ask practical questions and decide whether the work fits a fixed-scope delivery." },
+                { num: "02", title: "Scope & Proposal", desc: "Within 24 hours, you receive a fixed-price proposal with deliverables, milestones, assumptions, and exclusions. The quoted price is the working boundary." },
+                { num: "03", title: "Build & Review", desc: "We build against the agreed scope and share regular progress updates, preview links, or sample outputs. Feedback is handled during milestones, not saved for the end." },
+                { num: "04", title: "Deliver & Support", desc: "Final delivery includes source code or output files, documentation, and a handoff session where relevant. Post-delivery support is included for 30 days." },
               ].map(({ num, title, desc }) => (
                 <div key={num} className="approach-item">
                   <span className="approach-num">{num}</span>
@@ -375,11 +377,11 @@ export default function Home() {
         <div className="cta-inner">
           <h2 className="cta-reveal">Have a project?<br />Let&apos;s talk.</h2>
           <p className="cta-reveal">
-            Tell us what you need. We respond within 24 hours with a clear scope, timeline, and fixed price.
-            No obligations, no sales pitch.
+            Tell us what you need. We respond within 24 hours with a clear scope, timeline,
+            and fixed price if the project is a fit. No sales pitch.
           </p>
-          <a href="mailto:contact@spacedrift.in" className="btn-fill cta-reveal">
-            <span>contact@spacedrift.in <ArrowUpRight size={14} strokeWidth={2} /></span>
+          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill cta-reveal">
+            <span>spacedrift.contact@gmail.com <ArrowUpRight size={14} strokeWidth={2} /></span>
           </a>
         </div>
       </section>

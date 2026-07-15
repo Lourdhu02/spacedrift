@@ -50,12 +50,14 @@ export default function Footer() {
       <div className="ft-main">
         <div className="ft-brand">
           <Link href="/" className="ft-logo">spacedrift.in</Link>
-          <p className="ft-tagline">Engineering project guidance, production-grade data annotation, and high-performance web development from Bengaluru.</p>
+          <p className="ft-tagline">Fixed-scope ML, AI, data annotation, and web development services from Bengaluru, India.</p>
         </div>
         <div className="ft-col">
           <p className="ft-col-title">Services</p>
           <ul>
-            <li><Link href="/services/engineering-projects">Engineering Projects</Link></li>
+            <li><Link href="/services/research-ops">Research Ops</Link></li>
+            <li><Link href="/services/document-ai">Document AI</Link></li>
+            <li><Link href="/services/rag-mvp">RAG & AI MVPs</Link></li>
             <li><Link href="/services/data-annotation">Data Annotation</Link></li>
             <li><Link href="/services/web-development">Web Development</Link></li>
           </ul>
@@ -64,14 +66,13 @@ export default function Footer() {
           <p className="ft-col-title">Company</p>
           <ul>
             <li><Link href="/about">About</Link></li>
-            <li><a href="mailto:contact@spacedrift.in">Contact</a></li>
+            <li><a href="mailto:spacedrift.contact@gmail.com">Contact</a></li>
           </ul>
         </div>
         <div className="ft-col">
           <p className="ft-col-title">Connect</p>
           <ul>
-            <li><a href="mailto:contact@spacedrift.in">contact@spacedrift.in <ArrowUpRight size={11} /></a></li>
-            <li><a href="https://instagram.com/spacedrift.in" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={11} /></a></li>
+            <li><a href="mailto:spacedrift.contact@gmail.com">spacedrift.contact@gmail.com <ArrowUpRight size={11} /></a></li>
           </ul>
         </div>
       </div>

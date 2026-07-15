@@ -222,19 +222,18 @@ export default function DataAnnotation() {
           </h1>
           <div className="da-intro da-reveal">
             <p>
-              <strong>Your ML model is only as good as its training data.</strong> We provide
-              human-labeled datasets with rigorous quality control for NLP, computer vision,
-              audio, and video tasks. No crowdsourcing lottery — trained annotators following
-              your guidelines.
+              <strong>Your model quality depends on label quality.</strong> We deliver human-labeled
+              datasets for NLP, computer vision, document, audio, and video tasks using written
+              guidelines, pilot batches, and quality checks.
             </p>
             <p>
-              From startups training their first classifier to research labs preparing benchmark datasets,
-              spacedrift.in delivers annotation that is accurate, consistent, and fast. We scale from
-              hundreds to millions of labels without compromising quality.
+              This service is for ML teams, research labs, and startups that need dependable data
+              annotation without managing a crowd workforce. Each batch has a fixed scope, output
+              format, review process, and delivery timeline.
             </p>
           </div>
-          <a href="mailto:contact@spacedrift.in" className="btn-fill da-reveal">
-            <span>Get a Quote <ArrowRight size={14} strokeWidth={2} /></span>
+          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill da-reveal">
+            <span>Request a Quote <ArrowRight size={14} strokeWidth={2} /></span>
           </a>
         </div>
       </section>
@@ -242,10 +241,10 @@ export default function DataAnnotation() {
       <section className="da-types">
         <div className="sec-wrap">
           <p className="sec-label">Capabilities</p>
-          <h2 className="sec-heading">Every modality. One team.</h2>
+          <h2 className="sec-heading">Annotation for common ML data types.</h2>
           <p className="sec-desc">
-            We handle text, image, document, audio, and video annotation with specialized
-            pipelines built for each data type. Complex multi-modal? We do that too.
+            We handle text, image, document, audio, and video annotation with workflows matched
+            to each data type. Complex multi-modal work is scoped separately before production starts.
           </p>
           <div className="da-types-grid">
             <div className="da-type-card half">
@@ -253,32 +252,33 @@ export default function DataAnnotation() {
               <h4>Text Annotation</h4>
               <p>
                 Named entity recognition, sentiment analysis, intent classification, text categorization,
-                relation extraction, and coreference resolution. Supports 12+ languages with native annotators.
+                relation extraction, and coreference resolution. Supports 12+ languages when suitable
+                reviewers are available for the scope.
               </p>
             </div>
             <div className="da-type-card half">
               <span className="da-type-label">Vision</span>
               <h4>Image Annotation</h4>
               <p>
-                Bounding boxes, polygon segmentation, keypoint detection, semantic labeling, instance
-                segmentation, and panoptic annotation. Pixel-level precision for autonomous driving,
-                medical imaging, and retail.
+                Bounding boxes, polygon segmentation, keypoint detection, semantic labeling, and
+                instance segmentation. We define annotation rules and acceptance checks before
+                production labeling begins.
               </p>
             </div>
             <div className="da-type-card third">
               <span className="da-type-label">Documents</span>
               <h4>Document Annotation</h4>
-              <p>Table extraction, form field mapping, OCR correction, and structured data extraction from invoices, receipts, and contracts.</p>
+              <p>Table extraction, form field mapping, OCR correction, and structured labeling for invoices, receipts, forms, and contracts.</p>
             </div>
             <div className="da-type-card third">
               <span className="da-type-label">Audio</span>
               <h4>Audio Annotation</h4>
-              <p>Speech transcription, speaker diarization, emotion detection, audio event classification, and music tagging.</p>
+              <p>Speech transcription, speaker diarization, emotion labels, audio event classification, and review-ready segment metadata.</p>
             </div>
             <div className="da-type-card third">
               <span className="da-type-label">Video</span>
               <h4>Video Annotation</h4>
-              <p>Object tracking, action recognition, temporal segmentation, frame-by-frame labeling, and activity detection.</p>
+              <p>Object tracking, action recognition, temporal segmentation, frame-by-frame labeling, and activity detection with clear frame rules.</p>
             </div>
           </div>
         </div>
@@ -311,7 +311,7 @@ export default function DataAnnotation() {
         <div className="sec-wrap">
           <p className="sec-label">Output</p>
           <h2 className="sec-heading">Your format. Our delivery.</h2>
-          <p className="sec-desc">We deliver in whatever schema your pipeline expects. Standard formats ship by default; custom schemas are configured in the pilot phase.</p>
+          <p className="sec-desc">We deliver in the schema your training pipeline expects. Standard formats ship by default; custom schemas are configured during the pilot phase.</p>
           <div className="da-format-grid">
             {[
               { name: "JSON / JSONL", desc: "Universal" },
@@ -340,15 +340,15 @@ export default function DataAnnotation() {
               <h2 className="sec-heading">How annotation works.</h2>
               <p style={{ fontSize: "15px", color: "var(--ink-2)", lineHeight: 1.8, marginTop: "20px" }}>
                 Every project follows a structured pipeline with built-in quality gates.
-                You see progress and quality metrics at every stage.
+                You see sample outputs, issue categories, and quality notes before full production.
               </p>
             </div>
             <div className="da-pipeline-steps">
               {[
-                { num: "01", title: "Requirements & Sample", desc: "Send us your data samples, annotation guidelines, and target format. We review feasibility and create a pilot plan within 24 hours." },
-                { num: "02", title: "Pilot Batch", desc: "We annotate a small batch (50-100 samples) for your review. This calibrates our understanding of your guidelines and sets quality benchmarks." },
-                { num: "03", title: "Production Run", desc: "After pilot approval, we scale to full production with trained annotators. Every batch passes triple quality control before delivery." },
-                { num: "04", title: "Delivery & Iteration", desc: "Annotated data delivered in your format with quality reports. Feedback from your model training informs subsequent batches for continuous improvement." },
+                { num: "01", title: "Requirements & Sample", desc: "Send data samples, annotation guidelines, and target format. We review feasibility and return a fixed-scope pilot plan within 24 hours." },
+                { num: "02", title: "Pilot Batch", desc: "We annotate a small batch (50-100 samples) for your review. This calibrates edge cases, label definitions, and quality expectations." },
+                { num: "03", title: "Production Run", desc: "After pilot approval, we scale production with trained annotators and quality checks. Every batch is reviewed before delivery." },
+                { num: "04", title: "Delivery & Iteration", desc: "Annotated data is delivered in your format with quality notes. Additional batches or guideline changes are scoped separately." },
               ].map(({ num, title, desc }) => (
                 <div key={num} className="da-p-step">
                   <span className="da-p-step-num">{num}</span>
@@ -365,13 +365,13 @@ export default function DataAnnotation() {
 
       <section className="da-cta">
         <div className="sec-wrap">
-          <h2 className="da-cta-r">Need labeled data<br />for your model?</h2>
+          <h2 className="da-cta-r">Need labeled data<br />with clear QA?</h2>
           <p className="da-cta-r">
             Send us a sample dataset and your annotation guidelines.
-            We respond with a pilot plan and quote within 24 hours.
+            We respond with a pilot plan, timeline, and fixed quote within 24 hours.
           </p>
-          <a href="mailto:contact@spacedrift.in" className="btn-fill da-cta-r">
-            <span>contact@spacedrift.in <ArrowUpRight size={14} strokeWidth={2} /></span>
+          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill da-cta-r">
+            <span>spacedrift.contact@gmail.com <ArrowUpRight size={14} strokeWidth={2} /></span>
           </a>
         </div>
       </section>

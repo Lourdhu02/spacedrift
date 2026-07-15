@@ -8,7 +8,9 @@ import { useGSAP } from "@gsap/react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "/services/engineering-projects", label: "Engineering Projects" },
+  { href: "/services/research-ops", label: "Research Ops" },
+  { href: "/services/document-ai", label: "Document AI" },
+  { href: "/services/rag-mvp", label: "RAG & AI MVPs" },
   { href: "/services/data-annotation", label: "Data Annotation" },
   { href: "/services/web-development", label: "Web Development" },
   { href: "/about", label: "About" },
@@ -41,8 +43,6 @@ export default function Navbar() {
       gsap.to(menu, { clipPath: "inset(0% 0% 100% 0%)", opacity: 0, duration: 0.3, ease: "expo.in", onComplete: () => { menu.style.pointerEvents = "none"; } });
     }
   }, [open]);
-
-  useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
     <>
@@ -110,14 +110,14 @@ export default function Navbar() {
 
       <header ref={navRef} className={`nav-bar${scrolled ? " nav-scrolled" : ""}`}>
         <div className="nav-inner">
-          <Link href="/" className="nav-logo">spacedrift.in</Link>
+          <Link href="/" className="nav-logo" onClick={() => setOpen(false)}>spacedrift.in</Link>
           <ul className="nav-links">
             {links.map(({ href, label }) => (
               <li key={href}>
                 <Link href={href} className={`nav-link${pathname === href || pathname.startsWith(href) ? " active" : ""}`}>{label}</Link>
               </li>
             ))}
-            <li><a href="mailto:contact@spacedrift.in" className="nav-cta">Get in Touch</a></li>
+            <li><a href="mailto:spacedrift.contact@gmail.com" className="nav-cta">Start a Project</a></li>
           </ul>
           <button onClick={() => setOpen(p => !p)} aria-label="Menu" className="nav-hamburger">
             {open ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
@@ -127,8 +127,8 @@ export default function Navbar() {
 
       <div ref={mobileRef} className="mobile-menu" style={{ opacity: 0, pointerEvents: "none", clipPath: "inset(0% 0% 100% 0%)" }}>
         <ul>
-          {links.map(({ href, label }) => (<li key={href}><Link href={href}>{label}</Link></li>))}
-          <li><a href="mailto:contact@spacedrift.in">contact@spacedrift.in</a></li>
+          {links.map(({ href, label }) => (<li key={href}><Link href={href} onClick={() => setOpen(false)}>{label}</Link></li>))}
+          <li><a href="mailto:spacedrift.contact@gmail.com" onClick={() => setOpen(false)}>spacedrift.contact@gmail.com</a></li>
         </ul>
       </div>
     </>

@@ -228,9 +228,10 @@ export default function About() {
             About<br /><span className="accent">spacedrift.in</span>
           </h1>
           <p className="ab-hero-desc ab-reveal">
-            We are a Bengaluru-based studio that helps engineers build great projects,
-            delivers production-quality data annotation for ML teams, and builds websites
-            that perform at the highest level. Three things, done exceptionally well.
+            spacedrift.in is a Bengaluru-based ML and AI services studio run by Lourdu Raju,
+            a Machine Learning Engineer. We deliver fixed-scope research ops, document AI,
+            RAG MVPs, data annotation, and web development for teams that need practical output,
+            not a long agency engagement.
           </p>
         </div>
       </section>
@@ -242,26 +243,27 @@ export default function About() {
           <div className="ab-story-grid">
             <div className="ab-story-col">
               <p className="ab-story-p">
-                <strong>spacedrift.in was born from frustration.</strong> We watched engineering students
-                struggle with outdated project guidance, businesses settle for mediocre template websites,
-                and ML teams waste months on poorly labeled data. The pattern was always the same:
-                affordable options were terrible, and quality options were inaccessible.
+                <strong>spacedrift.in exists because many small AI projects need engineering discipline,
+                not agency ceremony.</strong> Academic researchers need reproducible experiments,
+                startups need working AI MVPs, and ML teams need labeled data they can audit.
+                These projects fail when the scope is loose and ownership is unclear.
               </p>
               <p className="ab-story-p">
-                So we built a company that delivers top-tier work at prices that make sense.
-                The secret? We stay focused. Three services, done perfectly. No agency bloat,
-                no account managers, no layers between you and the people doing the work.
+                We keep the model intentionally small. spacedrift.in is an established MSME
+                operated alongside a full-time engineering role, so we accept fewer projects
+                and define each one before work starts. Fixed scope and fixed price are how
+                we protect both quality and availability.
               </p>
             </div>
             <div className="ab-story-col">
               <p className="ab-story-p">
-                Every client works directly with our senior engineers. That means faster
-                turnaround, fewer misunderstandings, and results that match what was promised.
-                We take on fewer projects than we could — because quality requires focus, and
-                focus requires saying no.
+                Clients work directly with the person building the work. That means requirements,
+                tradeoffs, and delivery questions stay close to the implementation. If a request
+                needs an open-ended retainer or a large team, we say so instead of pretending
+                otherwise.
               </p>
               <div className="ab-story-highlight">
-                <p>Fewer projects. Better results. Full ownership of everything we build.</p>
+                <p>Fixed scope. Fixed price. Direct engineering ownership.</p>
               </div>
             </div>
           </div>
@@ -277,34 +279,34 @@ export default function About() {
               <span className="ab-value-label">Principle 01</span>
               <h4>Quality Over Volume</h4>
               <p>
-                We deliberately limit the number of projects we take on. Every engagement gets our
-                full attention and senior-level expertise. We would rather lose a deal than deliver
-                mediocre work.
+                We limit active projects because this is a boutique studio, not a delivery factory.
+                Every accepted engagement gets direct engineering attention. We decline work when
+                the timeline, data, or scope is not realistic.
               </p>
             </div>
             <div className="ab-value half">
               <span className="ab-value-label">Principle 02</span>
-              <h4>Radical Transparency</h4>
+              <h4>Clear Scope</h4>
               <p>
-                Fixed pricing quoted upfront. Clear timelines with milestone visibility. Regular progress
-                updates without you having to ask. If something goes wrong, you hear about it immediately
-                — not at delivery.
+                We quote fixed pricing upfront with deliverables, milestones, assumptions, and exclusions.
+                You see progress without chasing for updates. If something changes the delivery risk,
+                you hear about it early.
               </p>
             </div>
             <div className="ab-value third">
               <span className="ab-value-label">Principle 03</span>
               <h4>Full Ownership</h4>
-              <p>Everything we build belongs to you. Source code, assets, documentation. No platform lock-in, no recurring fees, no dependencies on us.</p>
+              <p>Everything we build for you belongs to you. Source code, datasets, assets, and documentation are handed over. We avoid platform lock-in and unnecessary recurring dependencies.</p>
             </div>
             <div className="ab-value third">
               <span className="ab-value-label">Principle 04</span>
               <h4>Speed Without Shortcuts</h4>
-              <p>Fast delivery is not about cutting corners. It is about eliminating waste — unnecessary meetings, approval chains, and busywork that slow everyone down.</p>
+              <p>Fast delivery comes from tight scope, prepared inputs, and fewer handoffs. We do not compress review, testing, or documentation just to make a deadline look good.</p>
             </div>
             <div className="ab-value third">
               <span className="ab-value-label">Principle 05</span>
               <h4>Direct Communication</h4>
-              <p>You talk to the people doing the work. No project managers relaying messages, no telephone game. Faster decisions, better outcomes.</p>
+              <p>You talk to the person doing the work. That makes technical decisions faster and keeps context from getting diluted between meetings.</p>
             </div>
           </div>
         </div>
@@ -327,7 +329,7 @@ export default function About() {
             </div>
             <div className="ab-info-cell">
               <p className="ab-info-label">Contact</p>
-              <p className="ab-info-val"><a href="mailto:contact@spacedrift.in">contact@spacedrift.in</a></p>
+              <p className="ab-info-val"><a href="mailto:spacedrift.contact@gmail.com">spacedrift.contact@gmail.com</a></p>
             </div>
           </div>
         </div>
@@ -340,17 +342,17 @@ export default function About() {
               <p className="sec-label">Difference</p>
               <h2 className="sec-heading">How we are different.</h2>
               <p style={{ fontSize: "15px", color: "var(--ink-2)", lineHeight: 1.8, marginTop: "20px" }}>
-                Most agencies optimize for volume. We optimize for outcomes.
-                Here is what that looks like in practice.
+                Most agencies are built for volume and retainers. spacedrift.in is built for
+                small, well-defined ML, AI, and web deliverables.
               </p>
             </div>
             <div className="ab-diff-list">
               {[
-                { title: "No Account Managers", desc: "You work directly with the engineers building your project. Questions get answered in hours, not days. Context is never lost in translation." },
-                { title: "Fixed Pricing, Always", desc: "We quote a fixed price before work begins. No hourly billing surprises, no scope creep invoices. The price we quote is the price you pay." },
-                { title: "Fewer Projects, More Focus", desc: "We cap the number of active projects. Your work is never deprioritized because a bigger client came along. Every project gets full attention." },
-                { title: "Zero Lock-In", desc: "Every deliverable is fully yours — source code, documentation, assets. We deploy to your accounts. If you want to leave, you walk away with everything." },
-                { title: "30-Day Support Included", desc: "Post-delivery support is standard, not an upsell. Bug fixes, content tweaks, and minor adjustments for 30 days after launch. No extra charges." },
+                { title: "Direct Engineer Access", desc: "You work with the engineer responsible for the build. Questions are answered with implementation context, not passed through a coordination layer." },
+                { title: "Fixed Pricing, Always", desc: "We quote a fixed price before work begins. No hourly billing surprises and no scope creep invoices. Changes are scoped separately before they start." },
+                { title: "Fewer Projects, More Focus", desc: "We cap active work because the studio runs alongside a full-time engineering role. Your project is accepted only when we can give it proper attention." },
+                { title: "Zero Lock-In", desc: "Every deliverable is fully yours: source code, documentation, assets, and agreed data outputs. We deploy to your accounts wherever possible." },
+                { title: "30-Day Support Included", desc: "Post-delivery support is included for bug fixes, small adjustments, and handoff questions for 30 days. It is part of the fixed scope, not an upsell." },
               ].map(({ title, desc }, i) => (
                 <div key={title} className="ab-diff-item">
                   <span className="ab-diff-num">{String(i + 1).padStart(2, "0")}</span>
@@ -369,11 +371,11 @@ export default function About() {
         <div className="sec-wrap">
           <h2 className="ab-cta-r">Let&apos;s work<br />together.</h2>
           <p className="ab-cta-r">
-            Have a project in mind? Reach out and we will get back to you within 24 hours
-            with a clear scope and timeline. No sales pitch, no obligation.
+            Have a project in mind? Reach out and we will respond within 24 hours
+            with a clear scope, timeline, and fixed price if it fits. No sales pitch.
           </p>
-          <a href="mailto:contact@spacedrift.in" className="btn-fill ab-cta-r">
-            <span>contact@spacedrift.in <ArrowUpRight size={14} strokeWidth={2} /></span>
+          <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill ab-cta-r">
+            <span>spacedrift.contact@gmail.com <ArrowUpRight size={14} strokeWidth={2} /></span>
           </a>
         </div>
       </section>

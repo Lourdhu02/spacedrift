@@ -1,14 +1,33 @@
 "use client";
 
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+// ──────────────────────────────────────────────────────────────
+// Engineering Projects — COMMENTED OUT (replaced by Research Ops,
+// Document AI, and RAG MVP services as of v2.1)
+//
+// Original file preserved below for reference.
+// To restore, uncomment everything and remove the placeholder export.
+// ──────────────────────────────────────────────────────────────
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+// import { useRef } from "react";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { SplitText } from "gsap/SplitText";
+// import { useGSAP } from "@gsap/react";
+// import { ArrowRight, ArrowUpRight } from "lucide-react";
+//
+// gsap.registerPlugin(ScrollTrigger, SplitText);
 
+export default function EngineeringProjects() {
+  return (
+    <section style={{ minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--bg)" }}>
+      <p style={{ fontFamily: "var(--font-mono)", fontSize: "13px", color: "var(--ink-3)", letterSpacing: "0.06em" }}>
+        This service has moved into Research Ops, Document AI, and RAG MVPs. Use the current services in the navigation above.
+      </p>
+    </section>
+  );
+}
+
+/*
 export default function EngineeringProjects() {
   const h1Ref = useRef<HTMLHeadingElement>(null);
 
@@ -56,6 +75,7 @@ export default function EngineeringProjects() {
     });
   }, []);
 
+/*
   return (
     <>
       <style>{`
@@ -371,3 +391,4 @@ export default function EngineeringProjects() {
     </>
   );
 }
+*/

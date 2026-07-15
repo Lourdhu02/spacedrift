@@ -27,22 +27,24 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "spacedrift.in — Engineering Projects · Data Annotation · Web Development",
+  title: "spacedrift.in",
   description:
-    "spacedrift.in delivers expert engineering project guidance, production-grade data annotation, and high-performance business websites built with Next.js from Bengaluru, India.",
+    "spacedrift — ML and AI services studio from Bengaluru, India.",
   keywords: [
-    "engineering projects",
+    "spacedrift",
+    "machine learning",
+    "artificial intelligence",
+    "document AI",
+    "OCR",
+    "RAG",
     "data annotation",
     "web development",
-    "Next.js",
-    "research paper assistance",
-    "spacedrift",
     "Bengaluru",
   ],
   metadataBase: new URL("https://spacedrift.in"),
   openGraph: {
-    title: "spacedrift.in — Engineering Projects · Data Annotation · Web Development",
-    description: "Engineering project guidance, production-grade data annotation, and high-performance web development from Bengaluru.",
+    title: "spacedrift.in",
+    description: "spacedrift — ML and AI services studio from Bengaluru, India.",
     url: "https://spacedrift.in",
     siteName: "spacedrift.in",
     locale: "en_IN",
@@ -51,11 +53,16 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "spacedrift.in",
-    description: "Engineering project guidance, data annotation, and web development from Bengaluru.",
+    description: "spacedrift — ML and AI services studio from Bengaluru, India.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "spacedrift.in",
+    description: "Fixed-scope ML, AI, OCR, RAG, data annotation, and web development services from Bengaluru.",
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon-512.png",
+    apple: "/favicon-512.png",
   },
 };
 
