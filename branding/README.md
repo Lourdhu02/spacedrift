@@ -107,6 +107,10 @@ There are three posts, each in three ratios:
 - `logo-sting-3840x2160.mp4`: a 4.2s H.264 sting. An ASCII noise field clears, the ink square slides in, the red square drifts into its corner and the wordmark wipes on. `logo-sting-poster-3840x2160.png` is the last frame.
 - `story-how-we-work-1080x1920.mp4`: a 7.6s story. Four stations play with live ASCII scenes (noise, JSON parse, torus, rocket), a four-segment progress bar tracks them, and a signature end card closes it.
 
+## video/ — launch film
+
+The 60s launch film plus 15s and 6s cutdowns, each in 9:16, 4:5 and 16:9 at 60 fps, with procedural sound design, SRT captions and cover images. See `video/README.md` for the storyboard, posting notes and how to regenerate.
+
 ---
 
 ## Regenerate
