@@ -1,417 +1,315 @@
-"use client";
-
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import StationHeader from "@/components/ui/StationHeader";
+import DecodeText from "@/components/ui/DecodeText";
+import AsciiBar from "@/components/ui/AsciiBar";
+import AsciiRule from "@/components/ui/AsciiRule";
+import StoryBeat from "@/components/ui/StoryBeat";
+import StampCta from "@/components/ui/StampCta";
+import ServiceCard from "@/components/services/ServiceCard";
+import ContactForm from "@/components/ui/ContactForm";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+const SERVICES = [
+  {
+    num: "01",
+    station: "PARSE",
+    title: "Research Ops for Academia",
+    href: "/services/research-ops",
+    desc: "Reproducible experiment pipelines, dataset curation, baseline replication, and publication support for PhD scholars and academic labs.",
+  },
+  {
+    num: "02",
+    station: "PARSE",
+    title: "Document AI & OCR",
+    href: "/services/document-ai",
+    desc: "Custom OCR and extraction pipelines for invoices, receipts, IDs, forms, and Indian-language scripts. Validated to agreed accuracy targets.",
+  },
+  {
+    num: "03",
+    station: "MODEL",
+    title: "RAG & Agentic AI MVPs",
+    href: "/services/rag-mvp",
+    desc: "Internal knowledge-base chatbots, retrieval-augmented generation systems, and small agentic workflows. Fixed scope, three weeks, working product.",
+  },
+  {
+    num: "04",
+    station: "PARSE",
+    title: "Data Annotation",
+    href: "/services/data-annotation",
+    desc: "Labeled datasets for vision, NLP, and audio — with QA protocols, inter-annotator agreement, and an audit trail on every span.",
+  },
+  {
+    num: "05",
+    station: "SHIP",
+    title: "Web Development",
+    href: "/services/web-development",
+    desc: "Production websites and marketing sites built for performance and clarity. Next.js, real accessibility, real Lighthouse scores.",
+  },
+];
 
-export default function Home() {
-  const h1Ref = useRef<HTMLHeadingElement>(null);
+const APPROACH = [
+  { num: "01", station: "NOISE", title: "Discovery call",  desc: "You explain the requirement, deadline, data, constraints. We ask practical questions and decide whether the work fits fixed-scope delivery." },
+  { num: "02", station: "PARSE", title: "Scope & proposal", desc: "Within 24 hours, you receive a fixed-price proposal with deliverables, milestones, assumptions, exclusions. The quoted price is the working boundary." },
+  { num: "03", station: "MODEL", title: "Build & review",   desc: "We build against the agreed scope and share regular preview links or sample outputs. Feedback is handled inside milestones, not saved for the end." },
+  { num: "04", station: "SHIP",  title: "Deliver & support", desc: "Final delivery: source code, documentation, and a handoff session where relevant. Post-delivery support included for 30 days." },
+];
 
-  useGSAP(() => {
-    if (!h1Ref.current) return;
-    document.fonts.ready.then(() => {
-      if (!h1Ref.current) return;
-      const split = SplitText.create(h1Ref.current, { type: "lines,words", mask: "lines" });
-      gsap.from(split.words, { yPercent: 120, duration: 1.2, stagger: 0.04, ease: "expo.out", delay: 0.3 });
-    });
-    gsap.fromTo(".hero-sub", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: 1 });
-    gsap.fromTo(".hero-meta", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 1.2 });
-    gsap.fromTo(".hero-cta", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", delay: 1.4 });
-  }, []);
-
-  useGSAP(() => {
-    gsap.utils.toArray<HTMLElement>(".bento-card").forEach((card, i) => {
-      gsap.fromTo(card, { y: 60, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.9, ease: "power3.out", delay: i * 0.08,
-        scrollTrigger: { trigger: card, start: "top 90%" },
-      });
-    });
-  }, []);
-
-  useGSAP(() => {
-    gsap.utils.toArray<HTMLElement>(".stat-item").forEach((el, i) => {
-      gsap.fromTo(el, { y: 40, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: i * 0.1,
-        scrollTrigger: { trigger: ".stats-row", start: "top 85%" },
-      });
-    });
-  }, []);
-
-  useGSAP(() => {
-    gsap.utils.toArray<HTMLElement>(".approach-item").forEach((el, i) => {
-      gsap.fromTo(el, { x: -30, opacity: 0 }, {
-        x: 0, opacity: 1, duration: 0.8, ease: "power3.out", delay: i * 0.1,
-        scrollTrigger: { trigger: ".approach-list", start: "top 82%" },
-      });
-    });
-  }, []);
-
-  useGSAP(() => {
-    gsap.fromTo(".cta-reveal", { y: 40, opacity: 0 }, {
-      y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
-      scrollTrigger: { trigger: ".cta-block", start: "top 80%" },
-    });
-  }, []);
-
+export default function HomePage() {
   return (
     <>
-      <style>{`
-        .dot-bg {
-          position: absolute; inset: 0;
-          background-image: radial-gradient(circle, var(--line-light) 1px, transparent 1px);
-          background-size: 32px 32px; opacity: 0.5;
-        }
-        .hero {
-          min-height: 100svh; display: flex; align-items: flex-end;
-          padding: var(--nav-h) 0 100px; background: var(--bg);
-          position: relative; overflow: hidden;
-        }
-        .hero-inner { width: 90%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; overflow: hidden; }
-        .hero h1 {
-          font-family: var(--font-display);
-          font-size: clamp(42px, 8vw, 100px);
-          font-weight: 800; letter-spacing: -0.04em;
-          line-height: 0.98; color: var(--ink); margin-bottom: 40px;
-          max-width: 100%;
-        }
-        .hero h1 .accent { color: var(--accent); }
-        .hero-sub {
-          font-size: clamp(16px, 1.4vw, 20px); color: var(--ink-2);
-          max-width: 560px; line-height: 1.8; margin-bottom: 40px;
-        }
-        .hero-meta {
-          display: flex; gap: 40px; margin-bottom: 48px;
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.06em; color: var(--ink-3); text-transform: uppercase;
-        }
-        .hero-meta span { display: flex; align-items: center; gap: 8px; }
-        .hero-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-        .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
-        .btn-fill {
-          display: inline-flex; align-items: center; gap: 10px;
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.08em; text-transform: uppercase;
-          padding: 14px 28px; background: var(--accent); color: #fff;
-          position: relative; overflow: hidden; transition: transform var(--t-fast);
-        }
-        .btn-fill:hover { transform: translateY(-2px); }
-        .btn-fill::after {
-          content: ''; position: absolute; inset: 0;
-          background: var(--accent-2); transform: translateY(100%);
-          transition: transform var(--t-fast);
-        }
-        .btn-fill:hover::after { transform: translateY(0); }
-        .btn-fill span { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 10px; }
-        .btn-outline {
-          display: inline-flex; align-items: center; gap: 10px;
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.08em; text-transform: uppercase;
-          padding: 14px 28px; border: 1px solid var(--line-light);
-          color: var(--ink-2); transition: all var(--t-fast);
-        }
-        .btn-outline:hover { border-color: var(--ink-3); color: var(--ink); }
+      <StationHeader station="NOISE" path="/ home ~ transmission-open" />
 
-        .services-section { padding: 160px 0; background: var(--bg); position: relative; }
-        .services-section::before {
-          content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-          background: linear-gradient(90deg, transparent, var(--line-light) 20%, var(--line-light) 80%, transparent);
-        }
-        .sec-wrap { width: 90%; max-width: 1400px; margin: 0 auto; }
-        .sec-label {
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.14em; text-transform: uppercase;
-          color: var(--accent); margin-bottom: 20px;
-        }
-        .sec-heading {
-          font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px);
-          font-weight: 800; letter-spacing: -0.04em; color: var(--ink);
-          margin-bottom: 16px; max-width: 700px;
-        }
-        .sec-desc { font-size: 16px; color: var(--ink-2); max-width: 520px; line-height: 1.8; margin-bottom: 64px; }
-
-        .bento-grid {
-          display: grid; grid-template-columns: repeat(12, 1fr);
-          gap: 16px;
-        }
-        .bento-card {
-          background: var(--bg-2); border: 1px solid var(--line);
-          padding: 40px 32px; position: relative; overflow: hidden;
-          display: flex; flex-direction: column; justify-content: space-between;
-          transition: border-color var(--t-fast), transform var(--t-fast);
-        }
-        .bento-card:hover { border-color: var(--line-light); transform: translateY(-3px); }
-        .bento-card.wide { grid-column: span 7; min-height: 320px; }
-        .bento-card.narrow { grid-column: span 5; min-height: 320px; }
-        .bento-card.third { grid-column: span 4; min-height: 280px; }
-        .bento-num {
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 24px;
-        }
-        .bento-card h3 {
-          font-family: var(--font-display); font-size: 24px;
-          font-weight: 700; letter-spacing: -0.03em; color: var(--ink);
-          margin-bottom: 12px;
-        }
-        .bento-card p { font-size: 14px; color: var(--ink-2); line-height: 1.8; margin-bottom: 24px; }
-        .bento-link {
-          display: inline-flex; align-items: center; gap: 6px;
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.06em; text-transform: uppercase;
-          color: var(--accent); transition: gap var(--t-fast);
-          margin-top: auto;
-        }
-        .bento-card:hover .bento-link { gap: 12px; }
-        .bento-tag {
-          position: absolute; top: 32px; right: 32px;
-          font-family: var(--font-mono); font-size: 10px;
-          letter-spacing: 0.1em; text-transform: uppercase;
-          color: var(--warm); padding: 4px 10px;
-          border: 1px solid rgba(249,115,22,0.3); background: rgba(249,115,22,0.05);
-        }
-
-        .stats-section { padding: 100px 0; background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); }
-        .stat-item { background: var(--bg-2); padding: 48px 32px; }
-        .stat-num {
-          font-family: var(--font-display); font-size: clamp(36px, 4vw, 56px);
-          font-weight: 800; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 8px;
-        }
-        .stat-num .warm { color: var(--warm); }
-        .stat-label { font-size: 13px; color: var(--ink-3); line-height: 1.6; }
-
-        .approach-section { padding: 160px 0; background: var(--bg); position: relative; }
-        .approach-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-        .approach-sticky { position: sticky; top: 120px; }
-        .approach-list { display: flex; flex-direction: column; gap: 0; }
-        .approach-item {
-          display: grid; grid-template-columns: 64px 1fr; gap: 24px;
-          padding: 36px 0; border-bottom: 1px solid var(--line);
-        }
-        .approach-item:first-child { border-top: 1px solid var(--line); }
-        .approach-num {
-          font-family: var(--font-display); font-size: 28px;
-          font-weight: 800; color: var(--accent);
-        }
-        .approach-item h4 {
-          font-family: var(--font-display); font-size: 20px;
-          font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.02em;
-        }
-        .approach-item p { font-size: 14px; color: var(--ink-2); line-height: 1.8; }
-
-        .cta-block {
-          padding: 160px 0; background: var(--bg-2);
-          border-top: 1px solid var(--line); position: relative;
-        }
-        .cta-inner { width: 90%; max-width: 1400px; margin: 0 auto; }
-        .cta-inner h2 {
-          font-family: var(--font-display); font-size: clamp(36px, 5vw, 72px);
-          font-weight: 800; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 24px;
-          max-width: 700px;
-        }
-        .cta-inner p { font-size: 17px; color: var(--ink-2); margin-bottom: 40px; max-width: 500px; line-height: 1.8; }
-
-        @media (max-width: 768px) {
-          .bento-grid { grid-template-columns: 1fr; }
-          .bento-card.wide, .bento-card.narrow, .bento-card.third { grid-column: span 1; min-height: auto; }
-          .stats-row { grid-template-columns: 1fr 1fr; }
-          .approach-grid { grid-template-columns: 1fr; gap: 48px; }
-          .approach-sticky { position: static; }
-          .hero-meta { flex-direction: column; gap: 12px; }
-          .hero-cta { flex-direction: column; }
-        }
-      `}</style>
-
-      <section className="hero">
-        <div className="dot-bg" />
-        <div className="hero-inner">
-          <h1 ref={h1Ref}>
-            Build useful ML,<br />AI, and web <span className="accent">systems</span>.
+      {/* ── HERO · NOISE ────────────────────────────────────────── */}
+      <section className="hero section-pad">
+        <div className="wrap hero-inner">
+          <StoryBeat current="NOISE" suffix="acquiring signal" />
+          <h1 className="hero-h1" data-reveal>
+            <span className="hero-line">We build useful ML,</span>
+            <br />
+            <span className="hero-line">AI &amp; web <span className="signal-ink">systems</span></span>
+            <br />
+            <span className="hero-line hero-line-mute">out of the noise.</span>
           </h1>
-          <p className="hero-sub">
-            spacedrift.in is a boutique ML and AI services studio in Bengaluru.
-            We deliver research ops, document AI, OCR automation, RAG MVPs,
-            data annotation, and web development as fixed-scope projects.
-          </p>
-          <div className="hero-meta">
-            <span><span className="dot" />Based in Bengaluru</span>
-            <span><span className="dot" />5 Core Services</span>
-            <span><span className="dot" />24hr Response</span>
+
+          <div className="hero-body">
+            <p data-reveal>
+              spacedrift.in is a boutique ML &amp; AI services studio in Bengaluru.
+              We ship fixed-scope research ops, document AI, RAG MVPs, data annotation,
+              and web development — moving your project through four stations:
+              <span className="mono signal-ink"> noise → parse → model → ship</span>.
+            </p>
+
+            <ul className="hero-meta mono" data-reveal>
+              <li><span className="mk">◐</span> Bengaluru, IN</li>
+              <li><span className="mk">◐</span> 5 core services</li>
+              <li><span className="mk">◐</span> 24h response</li>
+              <li><span className="mk">◐</span> MSME · reg. 2024</li>
+            </ul>
+
+            <div className="hero-cta" data-reveal>
+              <StampCta href="mailto:spacedrift.contact@gmail.com" variant="signal">
+                START A PROJECT <ArrowUpRight size={14} strokeWidth={2} />
+              </StampCta>
+              <StampCta href="/about" ghost>
+                READ THE MANIFEST <ArrowUpRight size={14} strokeWidth={2} />
+              </StampCta>
+            </div>
           </div>
-          <div className="hero-cta">
-            <a href="mailto:spacedrift.contact@gmail.com" className="btn-fill">
-              <span>Start a Project <ArrowRight size={14} strokeWidth={2} /></span>
-            </a>
-            <Link href="/about" className="btn-outline">
-              Learn About Us <ArrowRight size={14} strokeWidth={2} />
-            </Link>
-          </div>
+
+          <AsciiRule label="STATION 01 OPEN" />
         </div>
+
+        <style>{`
+          .hero { min-height: calc(100dvh - var(--nav-h)); display: flex; align-items: flex-end; padding-top: calc(var(--nav-h) + 64px); }
+          .hero-inner { display: flex; flex-direction: column; gap: 48px; }
+          .hero-h1 { color: var(--ink); }
+          .hero-line { display: inline; }
+          .hero-line-mute { color: var(--ink-3); }
+          .signal-ink { color: var(--signal); }
+          .hero-body { display: flex; flex-direction: column; gap: 28px; max-width: 720px; }
+          .hero-body p { font-size: 17px; line-height: 1.7; color: var(--ink-2); }
+          .hero-meta {
+            display: flex; flex-wrap: wrap; gap: 22px;
+            font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--ink-3);
+          }
+          .hero-meta li { list-style: none; display: inline-flex; align-items: center; gap: 6px; }
+          .hero-meta .mk { color: var(--signal); }
+          .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+        `}</style>
       </section>
 
-      <section className="services-section">
-        <div className="sec-wrap">
-          <p className="sec-label">Services</p>
-          <h2 className="sec-heading">Five focused services. Clear deliverables.</h2>
-          <p className="sec-desc">
-            We take on work where the output can be defined, built, tested, and handed over.
-            No open-ended retainers, no vague transformation work, and no generalist agency layers.
-          </p>
+      {/* ── PARSE · services ───────────────────────────────────── */}
+      <section className="section-pad hair" id="parse">
+        <div className="wrap">
+          <div className="sec-head" data-reveal>
+            <StoryBeat current="PARSE" suffix="resolving structure" />
+            <h2>
+              <DecodeText>Five stations.</DecodeText>
+              <br />
+              <span className="ink-mute">Clear deliverables.</span>
+            </h2>
+            <p>
+              We take on work where the output can be defined, built, tested, and handed over.
+              No open-ended retainers, no vague transformation work, no generalist agency layers.
+            </p>
+          </div>
 
-          <div className="bento-grid">
-            <Link href="/services/research-ops" className="bento-card wide">
-              <div>
-                <span className="bento-num">01</span>
-                <h3>Research Ops for Academia</h3>
-                <p>
-                  Reproducible experiment pipelines, dataset curation, baseline replication, and
-                  publication support for PhD scholars, academic labs, and ed-tech teams. We help
-                  turn research ideas into results that can be reviewed and defended.
-                </p>
-              </div>
-              <span className="bento-link">Explore <ArrowRight size={13} /></span>
-              <span className="bento-tag">Research</span>
-            </Link>
+          <div className="grid-svc">
+            {SERVICES.map((s) => (
+              <ServiceCard key={s.num} {...s} />
+            ))}
 
-            <Link href="/services/document-ai" className="bento-card narrow">
+            <div className="card recessed brackets svc-why" data-reveal>
               <div>
-                <span className="bento-num">02</span>
-                <h3>Document AI & OCR</h3>
-                <p>
-                  Custom OCR and document AI pipelines for invoices, receipts, ID documents,
-                  forms, and Indian-language scripts. We deliver validated extraction workflows
-                  with 97%+ accuracy targets on agreed fields.
-                </p>
-              </div>
-              <span className="bento-link">Explore <ArrowRight size={13} /></span>
-            </Link>
-
-            <Link href="/services/rag-mvp" className="bento-card narrow">
-              <div>
-                <span className="bento-num">03</span>
-                <h3>RAG & AI MVPs</h3>
-                <p>
-                  Internal knowledge-base chatbots, retrieval-augmented generation systems,
-                  and AI MVPs for startups and internal teams. Fixed scope, working product
-                  in 3 weeks, and no open-ended retainers.
-                </p>
-              </div>
-              <span className="bento-link">Explore <ArrowRight size={13} /></span>
-            </Link>
-
-            <div className="bento-card wide" style={{ background: "var(--bg-3)", borderColor: "var(--line-light)" }}>
-              <div>
-                <span className="bento-num" style={{ color: "var(--warm)" }}>Why us?</span>
+                <span className="mono eyebrow signal">WHY US</span>
                 <h3>Direct access. No middlemen.</h3>
                 <p>
-                  You work directly with the engineer building your project. There are no account
-                  managers, outsourcing chains, or handoff gaps. That keeps decisions faster,
-                  requirements clearer, and delivery easier to verify.
+                  You work directly with the engineer building your project. No account managers,
+                  outsourcing chains, or handoff gaps. Decisions land faster, requirements stay
+                  clearer, and delivery is easier to verify.
                 </p>
               </div>
+              <p className="mono svc-why-quote">▚ &nbsp;fixed scope · fixed price · direct engineering ownership</p>
             </div>
           </div>
         </div>
+
+        <style>{`
+          .ink-mute { color: var(--ink-3); }
+          .grid-svc {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+            margin-top: 12px;
+          }
+          .svc-why {
+            grid-column: span 3;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            gap: 40px;
+          }
+          .svc-why h3 { margin: 12px 0 10px; }
+          .svc-why p { max-width: 560px; }
+          .svc-why-quote {
+            font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--signal); align-self: flex-end; text-align: right;
+            max-width: 260px; line-height: 1.6;
+          }
+          @media (max-width: 980px) {
+            .grid-svc { grid-template-columns: repeat(2, 1fr); }
+            .svc-why { grid-column: span 2; flex-direction: column; align-items: flex-start; }
+            .svc-why-quote { text-align: left; max-width: none; }
+          }
+          @media (max-width: 620px) {
+            .grid-svc { grid-template-columns: 1fr; }
+            .svc-why { grid-column: span 1; }
+          }
+        `}</style>
       </section>
 
-      <section className="stats-section">
-        <div className="sec-wrap">
-          <div className="stats-row">
-            <div className="stat-item">
-              <p className="stat-num">24<span className="warm">hr</span></p>
-              <p className="stat-label">Response time for every inquiry</p>
-            </div>
-            <div className="stat-item">
-              <p className="stat-num">5-10<span className="warm">d</span></p>
-              <p className="stat-label">Average website delivery time</p>
-            </div>
-            <div className="stat-item">
-              <p className="stat-num">100<span className="warm">%</span></p>
-              <p className="stat-label">Lighthouse scores on web builds</p>
-            </div>
-            <div className="stat-item">
-              <p className="stat-num">0<span className="warm">%</span></p>
-              <p className="stat-label">Lock-in. You own everything we build</p>
-            </div>
+      {/* ── MODEL · approach + stats ───────────────────────────── */}
+      <section className="section-pad hair" id="model">
+        <div className="wrap">
+          <div className="sec-head" data-reveal>
+            <StoryBeat current="MODEL" suffix="fitting your problem" />
+            <h2>How we work.</h2>
+            <p>
+              Every engagement starts with a written scope and ends with a usable handoff.
+              You know what is included, what is not, and when each milestone is due.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section className="approach-section">
-        <div className="sec-wrap">
           <div className="approach-grid">
-            <div className="approach-sticky">
-              <p className="sec-label">Approach</p>
-              <h2 className="sec-heading">How we work with you.</h2>
-              <p style={{ fontSize: "15px", color: "var(--ink-2)", lineHeight: 1.8, marginTop: "20px" }}>
-                Every engagement starts with a written scope and ends with a usable handoff.
-                You know what is included, what is not, and when each milestone is due.
-              </p>
-            </div>
             <div className="approach-list">
-              {[
-                { num: "01", title: "Discovery Call", desc: "You explain the requirement, deadline, data, and constraints. We ask practical questions and decide whether the work fits a fixed-scope delivery." },
-                { num: "02", title: "Scope & Proposal", desc: "Within 24 hours, you receive a fixed-price proposal with deliverables, milestones, assumptions, and exclusions. The quoted price is the working boundary." },
-                { num: "03", title: "Build & Review", desc: "We build against the agreed scope and share regular progress updates, preview links, or sample outputs. Feedback is handled during milestones, not saved for the end." },
-                { num: "04", title: "Deliver & Support", desc: "Final delivery includes source code or output files, documentation, and a handoff session where relevant. Post-delivery support is included for 30 days." },
-              ].map(({ num, title, desc }) => (
-                <div key={num} className="approach-item">
-                  <span className="approach-num">{num}</span>
+              {APPROACH.map((a) => (
+                <div className="approach-item" key={a.num} data-reveal>
+                  <div className="approach-num">{a.num}</div>
                   <div>
-                    <h4>{title}</h4>
-                    <p>{desc}</p>
+                    <p className="mono approach-station">→ {a.station}</p>
+                    <h4>{a.title}</h4>
+                    <p>{a.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
+
+            <aside className="stats card well brackets" data-reveal>
+              <p className="mono eyebrow">SYSTEM READOUT · LIVE</p>
+              <AsciiBar value={100} label="24h Response window" suffix="%" />
+              <AsciiBar value={90}  label="5–10d Median web delivery" suffix="%" />
+              <AsciiBar value={97}  label="97% Document-AI accuracy floor" suffix="%" />
+              <AsciiBar value={0}   label="0% Vendor lock-in on delivered work" suffix="%" />
+              <p className="mono stats-note">
+                ↳ metrics track internal targets; not marketing gloss.
+              </p>
+            </aside>
           </div>
         </div>
+
+        <style>{`
+          .approach-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }
+          .approach-list { display: flex; flex-direction: column; }
+          .approach-item {
+            display: grid; grid-template-columns: 60px 1fr; gap: 20px;
+            padding: 28px 0; border-top: 1px solid var(--rule);
+          }
+          .approach-item:last-child { border-bottom: 1px solid var(--rule); }
+          .approach-num {
+            font-family: var(--font-mono); font-weight: 700; font-size: 26px;
+            color: var(--signal);
+          }
+          .approach-station {
+            font-size: 10.5px; letter-spacing: 0.18em;
+            color: var(--ink-4); margin-bottom: 4px;
+          }
+          .approach-item h4 { margin-bottom: 6px; }
+          .approach-item p { font-size: 14px; }
+          .stats { position: sticky; top: calc(var(--nav-h) + 20px); }
+          .stats-note {
+            margin-top: 20px; font-size: 10.5px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--ink-4);
+          }
+          @media (max-width: 920px) {
+            .approach-grid { grid-template-columns: 1fr; }
+            .stats { position: static; }
+          }
+        `}</style>
       </section>
 
-      <section className="cta-block">
-        <div className="cta-inner">
-          <h2 className="cta-reveal">Have a project?<br />Let&apos;s talk.</h2>
-          <p className="cta-reveal">
-            Tell us what you need. We respond within 24 hours with a clear scope, timeline,
-            and fixed price if the project is a fit. No sales pitch.
-          </p>
-          <form
-            className="cta-form cta-reveal"
-            name="contact"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const params = new URLSearchParams();
-              formData.forEach((value, key) => params.append(key, value.toString()));
-              await fetch("/__forms.html", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: params.toString(),
-              });
-              window.location.href = "/?success=true";
-            }}
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <div className="form-row">
-              <input type="text" name="name" placeholder="Your name" required className="form-input" />
-              <input type="email" name="email" placeholder="Email address" required className="form-input" />
-            </div>
-            <textarea name="message" placeholder="Tell us about your project" rows={4} required className="form-input form-textarea" />
-            <div className="form-row">
-              <button type="submit" className="btn-fill">
-                <span>Send Message <ArrowUpRight size={14} strokeWidth={2} /></span>
-              </button>
-              <a href="mailto:spacedrift.contact@gmail.com" className="btn-outline">
-                Or email us directly <ArrowUpRight size={14} strokeWidth={2} />
-              </a>
-            </div>
-          </form>
+      {/* ── SHIP · CTA + form ──────────────────────────────────── */}
+      <section className="section-pad hair" id="ship">
+        <div className="wrap">
+          <div className="sec-head" data-reveal>
+            <StoryBeat current="SHIP" suffix="payload committed" />
+            <h2>
+              <DecodeText>Have a project?</DecodeText>
+              <br />
+              <span className="ink-mute">Transmit the details.</span>
+            </h2>
+            <p>
+              Tell us what you need. We respond within 24 hours with a clear scope,
+              timeline, and fixed price if the project is a fit. No sales pitch.
+            </p>
+          </div>
+
+          <div className="ship-grid">
+            <ContactForm />
+
+            <aside className="ship-side card recessed brackets" data-reveal>
+              <p className="mono eyebrow signal">TRANSMISSION FIELD</p>
+              <h4 className="ship-side-h">What to include</h4>
+              <ul className="ship-checklist">
+                <li><span className="mono">[✓]</span> the problem in one paragraph</li>
+                <li><span className="mono">[✓]</span> data — what exists, where it lives</li>
+                <li><span className="mono">[✓]</span> a rough deadline or milestone</li>
+                <li><span className="mono">[✓]</span> constraints (budget range, hosting, compliance)</li>
+                <li><span className="mono">[·]</span> optional: links, screenshots, sample docs</li>
+              </ul>
+              <AsciiRule label="END OF FORM" glyph="─" />
+              <Link href="/log" className="mono ship-side-log">
+                → open studio log
+              </Link>
+            </aside>
+          </div>
         </div>
+
+        <style>{`
+          .ship-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+          .ship-side { display: flex; flex-direction: column; gap: 14px; }
+          .ship-side-h { margin-top: 4px; }
+          .ship-checklist {
+            list-style: none; display: flex; flex-direction: column; gap: 10px;
+            font-size: 14px; color: var(--ink-2);
+          }
+          .ship-checklist .mono { color: var(--signal); margin-right: 8px; }
+          .ship-side-log {
+            font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--ink); border-bottom: 1px solid var(--ink);
+            padding-bottom: 4px; align-self: flex-start;
+          }
+          .ship-side-log:hover { color: var(--signal); border-color: var(--signal); }
+          @media (max-width: 920px) {
+            .ship-grid { grid-template-columns: 1fr; }
+          }
+        `}</style>
       </section>
     </>
   );
