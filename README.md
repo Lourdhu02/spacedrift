@@ -10,10 +10,11 @@ background rendered on canvas.
 ## Stack
 
 - Next.js 16 (App Router, React 19), TypeScript, Tailwind v4
-- `next/font` — Geist (UI), Geist Mono (labels, ASCII), Bricolage Grotesque (display)
+- `next/font` — Geist + Geist Mono, one family
+- Palette: white `#ffffff`, ink `#0a0a0a`, red `#e10600`. No border radius anywhere.
 - Lenis smooth scroll driven by the GSAP ticker; GSAP + ScrollTrigger + SplitText for motion
-- Liquid-glass surfaces (`.glass`): backdrop blur, refracted rim, pointer-tracked specular
-- Canvas ASCII field behind the glass; per-station ASCII scenes (noise, parse, torus, lift-off)
+- Frosted white panels (`.glass`) and ink terminal panels (`.term`) for the ASCII scenes
+- Canvas ASCII field in ink that turns red around the pointer; per-station scenes (noise, parse, torus, lift-off)
 - Everything respects `prefers-reduced-motion` and renders without JavaScript
 
 ## Local development
@@ -37,11 +38,11 @@ src/
     about/, log/, services/*/
   components/
     ascii/            AsciiScene (live ASCII animations)
-    background/       Backdrop (aurora + ASCII field + grain)
+    background/       Backdrop (Swiss column grid + ASCII field)
     layout/           Nav, Footer
-    motion/           SmoothScroll, PageMotion, PointerFX, Marquee
+    motion/           SmoothScroll, PageMotion, PointerFX, Marquee, ScrollProgress
     services/         ServicePage template
-    ui/               Button, ContactForm
+    ui/               Button, ContactForm, LocalTime
   lib/services.ts     all service content in one place
 ```
 

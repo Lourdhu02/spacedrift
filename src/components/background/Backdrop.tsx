@@ -3,22 +3,23 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Fixed layer behind everything. This is what the glass refracts:
- *   1. aurora — three soft colour fields drifting slowly (CSS only)
- *   2. ASCII field — a character flow-field that brightens around the
- *      pointer like a flashlight; its charset shifts as you scroll
- *      through the four stations
- *   3. grain + vignette for depth
+ * Fixed layer behind everything:
+ *   1. a faint six-column Swiss grid aligned to the content container
+ *   2. an ASCII flow-field in ink that turns red around the pointer;
+ *      its charset shifts as you scroll through the four stations
+ * The frosted panels blur this, which is what gives them texture on white.
  */
 
 const CHARSETS = [
-  " ..:·∙",          // noise
-  " .:-=+░",         // parse
-  " ./\\|<>╱╲",      // model
-  " .·:*+#▒▓",       // ship
+  " ..:·∙",        // noise
+  " .:-=+░",       // parse
+  " ./\\|<>╱╲",    // model
+  " .·:*+#▒▓",     // ship
 ];
 const CW = 11;
 const CH = 18;
+const INK = [0.035, 0.055, 0.08, 0.12];
+const RED = [0.55, 0.9];
 
 export default function Backdrop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -63,19 +64,20 @@ export default function Backdrop() {
       if (visible) raf = requestAnimationFrame(loop);
     };
 
-    const buckets: number[][] = Array.from({ length: 6 }, () => []);
+    const ink: number[][] = INK.map(() => []);
+    const red: number[][] = RED.map(() => []);
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, w, h);
       px += (tx - px) * 0.12;
       py += (ty - py) * 0.12;
 
-      const pos = scroll * (CHARSETS.length - 1);
-      const set = CHARSETS[Math.round(pos)];
+      const set = CHARSETS[Math.round(scroll * (CHARSETS.length - 1))];
       const time = t * 0.00018;
-      const r2 = 240 * 240;
+      const r2 = 200 * 200;
 
-      for (const b of buckets) b.length = 0;
+      for (const b of ink) b.length = 0;
+      for (const b of red) b.length = 0;
 
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
@@ -84,30 +86,30 @@ export default function Backdrop() {
             Math.cos(y * 0.13 - time * 2) +
             Math.sin((x + y) * 0.05 + time * 4) * 0.8;
           const n = (v + 2.8) / 5.6;
-          if (n < 0.42) continue;
+          if (n < 0.44) continue;
 
-          const cx = x * CW, cy = y * CH;
-          const dx = cx - px, dy = cy - py;
+          const dx = x * CW - px, dy = y * CH - py;
           const d2 = dx * dx + dy * dy;
           const light = d2 < r2 ? 1 - d2 / r2 : 0;
+          const ch = Math.min(set.length - 1, Math.floor(n * set.length));
 
-          const level = Math.min(5, Math.floor((n - 0.42) * 6) + Math.floor(light * light * 5));
-          buckets[level].push(x, y, Math.min(set.length - 1, Math.floor(n * set.length)));
+          if (light > 0.35) red[light > 0.7 ? 1 : 0].push(x, y, ch);
+          else ink[Math.min(INK.length - 1, Math.floor((n - 0.44) * 7))].push(x, y, ch);
         }
       }
 
       ctx.font = `12px ${font}, ui-monospace, monospace`;
       ctx.textBaseline = "top";
-      const alphas = [0.05, 0.075, 0.1, 0.2, 0.34, 0.5];
-      for (let b = 0; b < buckets.length; b++) {
-        const list = buckets[b];
-        if (!list.length) continue;
-        ctx.fillStyle = `rgba(200, 210, 255, ${alphas[b]})`;
+      const paint = (list: number[], style: string) => {
+        if (!list.length) return;
+        ctx.fillStyle = style;
         for (let i = 0; i < list.length; i += 3) {
-          const ch = set[list[i + 2]];
-          if (ch !== " ") ctx.fillText(ch, list[i] * CW, list[i + 1] * CH);
+          const c = set[list[i + 2]];
+          if (c !== " ") ctx.fillText(c, list[i] * CW, list[i + 1] * CH);
         }
-      }
+      };
+      ink.forEach((l, i) => paint(l, `rgba(10, 10, 10, ${INK[i]})`));
+      red.forEach((l, i) => paint(l, `rgba(225, 6, 0, ${RED[i]})`));
     };
 
     const loop = (t: number) => {
@@ -138,45 +140,20 @@ export default function Backdrop() {
 
   return (
     <div className="bd" aria-hidden>
-      <div className="bd-aurora bd-a1" />
-      <div className="bd-aurora bd-a2" />
-      <div className="bd-aurora bd-a3" />
+      <div className="bd-grid container">
+        <div className="bd-cols" />
+      </div>
       <canvas ref={canvasRef} className="bd-ascii" />
-      <div className="bd-grain" />
-      <div className="bd-vignette" />
       <style>{`
-        .bd { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: var(--bg); }
-        .bd-aurora { position: absolute; width: 75vmax; height: 75vmax; border-radius: 50%; will-change: transform; }
-        .bd-a1 {
-          left: -18vmax; top: -24vmax;
-          background: radial-gradient(closest-side, rgba(92, 120, 255, 0.34), rgba(92, 120, 255, 0) 72%);
-          animation: bd-drift-1 34s var(--ease-io) infinite alternate;
+        .bd { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: #fff; }
+        .bd-grid { position: absolute; inset: 0; height: 100%; }
+        .bd-cols {
+          height: 100%;
+          background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px);
+          background-size: calc(100% / 6) 100%;
+          box-shadow: 1px 0 0 rgba(10,10,10,.055);
         }
-        .bd-a2 {
-          right: -26vmax; top: 8vmax;
-          background: radial-gradient(closest-side, rgba(170, 120, 255, 0.28), rgba(170, 120, 255, 0) 72%);
-          animation: bd-drift-2 42s var(--ease-io) infinite alternate;
-        }
-        .bd-a3 {
-          left: 12vmax; bottom: -42vmax;
-          background: radial-gradient(closest-side, rgba(255, 150, 115, 0.2), rgba(255, 150, 115, 0) 72%);
-          animation: bd-drift-3 38s var(--ease-io) infinite alternate;
-        }
-        @keyframes bd-drift-1 { to { transform: translate3d(22vmax, 16vmax, 0) scale(1.15); } }
-        @keyframes bd-drift-2 { to { transform: translate3d(-24vmax, 20vmax, 0) scale(0.9); } }
-        @keyframes bd-drift-3 { to { transform: translate3d(18vmax, -22vmax, 0) scale(1.2); } }
         .bd-ascii { position: absolute; inset: 0; }
-        .bd-grain {
-          position: absolute; inset: -50%;
-          opacity: 0.07; mix-blend-mode: overlay;
-          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-        }
-        .bd-vignette {
-          position: absolute; inset: 0;
-          background:
-            radial-gradient(120% 90% at 50% 0%, transparent 40%, rgba(6, 6, 10, 0.75) 100%),
-            linear-gradient(180deg, transparent 60%, rgba(6, 6, 10, 0.6));
-        }
       `}</style>
     </div>
   );

@@ -76,7 +76,7 @@ export default function ContactForm() {
         .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         .cf-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 6px; }
         .cf-actions a { color: var(--text); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
-        .cf-err { color: #ffb4a8; }
+        .cf-err { color: var(--red); }
         .cf .btn:disabled { cursor: default; }
         @media (max-width: 560px) { .cf-row { grid-template-columns: 1fr; } }
       `}</style>

@@ -27,7 +27,7 @@ export default function ServicePage({ s }: { s: Service }) {
               <Button href="#deliverables" variant="glass">What you get</Button>
             </div>
           </div>
-          <div className="sp-hero-card glass" data-glow data-reveal="glass">
+          <div className="sp-hero-card term" data-reveal="glass">
             <AsciiScene kind={s.scene} label={s.title} />
           </div>
         </div>
@@ -132,9 +132,9 @@ export default function ServicePage({ s }: { s: Service }) {
         .sp-offer .h3 { margin-top: auto; }
 
         .sp-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-        .sp-stat { display: flex; flex-direction: column; gap: 10px; padding: 24px clamp(16px, 2vw, 28px); border-left: 1px solid var(--line); }
+        .sp-stat { display: flex; flex-direction: column; gap: 10px; padding: 24px clamp(16px, 2vw, 28px); border-left: 1px solid var(--line-2); border-top: 1px solid var(--ink); }
         .sp-stat:first-child { border-left: 0; padding-left: 0; }
-        .sp-stat-num { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 7vw, 104px); line-height: .9; letter-spacing: -.035em; display: flex; align-items: baseline; gap: 4px; }
+        .sp-stat-num { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 7vw, 104px); line-height: .9; letter-spacing: -.055em; display: flex; align-items: baseline; gap: 4px; }
         .sp-stat-unit { font-size: .42em; letter-spacing: -.02em; }
 
         .sp-stack .container { margin-bottom: 20px; }
@@ -142,17 +142,18 @@ export default function ServicePage({ s }: { s: Service }) {
         .sp-proc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
         .sp-proc-head { display: flex; flex-direction: column; gap: 22px; position: sticky; top: calc(var(--nav-space) + 40px); }
         .sp-steps { display: flex; flex-direction: column; }
-        .sp-step { display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 32px 0; border-top: 1px solid var(--line); }
-        .sp-step:last-child { border-bottom: 1px solid var(--line); }
-        .sp-step-n { font-family: var(--font-display); font-weight: 600; font-size: 40px; line-height: 1; letter-spacing: -.02em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .sp-step { display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 32px 0; border-top: 1px solid var(--line-2); }
+        .sp-step:first-child { border-top-color: var(--ink); }
+        .sp-step:last-child { border-bottom: 1px solid var(--line-2); }
+        .sp-step-n { font-family: var(--font-mono); font-weight: 500; font-size: 14px; line-height: 1.9; letter-spacing: .04em; color: var(--red); }
         .sp-step .h3 { margin-bottom: 8px; }
 
-        .sp-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); border-radius: 36px; }
+        .sp-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); }
         .sp-cta > div { display: flex; flex-direction: column; gap: 12px; max-width: 640px; }
-        .sp-next { display: flex; flex-direction: column; gap: 12px; margin-top: clamp(56px, 8vw, 110px); padding-top: 32px; border-top: 1px solid var(--line); }
-        .sp-next-title { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-weight: 600; font-size: clamp(40px, 6vw, 88px); letter-spacing: -.03em; line-height: 1; transition: color .4s var(--ease); }
+        .sp-next { display: flex; flex-direction: column; gap: 12px; margin-top: clamp(56px, 8vw, 110px); padding-top: 32px; border-top: 1px solid var(--ink); }
+        .sp-next-title { display: inline-flex; align-items: center; gap: 16px; font-family: var(--font-display); font-weight: 600; font-size: clamp(40px, 6vw, 88px); letter-spacing: -.05em; line-height: 1; transition: color .4s var(--ease); }
         .sp-next-ico { transition: transform .6s var(--ease); }
-        .sp-next:hover .sp-next-title { color: var(--accent); }
+        .sp-next:hover .sp-next-title { color: var(--red); }
         .sp-next:hover .sp-next-ico { transform: rotate(45deg); }
 
         @media (max-width: 1080px) {
@@ -169,7 +170,6 @@ export default function ServicePage({ s }: { s: Service }) {
           .sp-stats { grid-template-columns: 1fr; }
           .sp-stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
           .sp-step { grid-template-columns: 52px 1fr; }
-          .sp-step-n { font-size: 30px; }
         }
       `}</style>
     </>

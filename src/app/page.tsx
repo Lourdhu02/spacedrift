@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import AsciiScene from "@/components/ascii/AsciiScene";
 import Marquee from "@/components/motion/Marquee";
 import ContactForm from "@/components/ui/ContactForm";
+import LocalTime from "@/components/ui/LocalTime";
 import { CONTACT_EMAIL, SERVICES, type SceneKind } from "@/lib/services";
 
 const STATIONS: { n: string; name: string; kind: SceneKind; title: string; body: string; out: string; when: string }[] = [
@@ -63,7 +64,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-card glass" data-glow data-reveal="glass">
+          <div className="hero-card term" data-reveal="glass">
             <AsciiScene kind="cycle" />
           </div>
         </div>
@@ -72,6 +73,7 @@ export default function Home() {
           <span className="label">Scroll</span>
           <span className="hero-line" aria-hidden />
           <span className="label">Five services · fixed price · you own everything</span>
+          <span className="hero-clock"><LocalTime /></span>
         </div>
       </section>
 
@@ -131,7 +133,7 @@ export default function Home() {
                     <span>{s.out}</span>
                   </div>
                 </div>
-                <div className="stack-visual">
+                <div className="stack-visual term">
                   <AsciiScene kind={s.kind} chrome={false} />
                 </div>
               </article>
@@ -232,7 +234,8 @@ export default function Home() {
         .hero-h1 { font-size: clamp(46px, 6.4vw, 104px); }
         .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
         .hero-card { padding: 20px 22px; }
-        .hero-foot { display: flex; align-items: center; gap: 16px; margin-top: clamp(40px, 6vw, 72px); }
+        .hero-foot { display: flex; align-items: center; gap: 16px; margin-top: clamp(40px, 6vw, 72px); padding-top: 18px; border-top: 1px solid var(--line-2); }
+        .hero-clock { margin-left: auto; }
         .hero-line { position: relative; flex: 0 0 64px; height: 1px; background: var(--line-2); overflow: hidden; }
         .hero-line::after { content: ""; position: absolute; inset: 0; background: var(--grad); transform: translateX(-100%); animation: hero-line 2.4s var(--ease-io) infinite; }
         @keyframes hero-line { 60%, 100% { transform: translateX(100%); } }
@@ -243,7 +246,7 @@ export default function Home() {
         .manifesto-inner { display: flex; flex-direction: column; gap: 32px; max-width: 1160px; }
         .manifesto-text { font-weight: 500; line-height: 1.12; }
         .manifesto-sign { display: flex; align-items: center; gap: 14px; font-size: 15.5px; }
-        .sign-avatar { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 99px; font-family: var(--font-mono); font-size: 13px; color: #0a0a10; background: var(--grad); }
+        .sign-avatar { display: grid; place-items: center; width: 44px; height: 44px; font-family: var(--font-mono); font-size: 13px; color: #fff; background: var(--ink); box-shadow: 4px 4px 0 var(--red); }
 
         /* section heads */
         .sec-head { display: flex; flex-direction: column; gap: 20px; margin-bottom: clamp(40px, 6vw, 72px); max-width: 900px; }
@@ -256,22 +259,24 @@ export default function Home() {
           position: sticky; top: calc(var(--nav-space) + 24px + var(--i) * 16px);
           display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center;
           min-height: min(600px, 74vh); padding: clamp(24px, 3.4vw, 48px);
-          border-radius: 36px; transform-origin: 50% 0;
+          transform-origin: 50% 0;
         }
-        .stack-shade { position: absolute; inset: 0; border-radius: inherit; background: #06060a; opacity: 0; pointer-events: none; z-index: 2; }
+        .stack-shade { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 2; }
         .stack-copy { display: flex; flex-direction: column; gap: 18px; }
         .stack-top { display: flex; justify-content: space-between; gap: 16px; }
-        .stack-name { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 8vw, 120px); line-height: .92; letter-spacing: -.035em; }
+        .stack-name { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 8vw, 120px); line-height: .92; letter-spacing: -.055em; }
         .stack-out { display: flex; flex-direction: column; gap: 6px; padding-top: 18px; margin-top: 6px; border-top: 1px solid var(--line); font-size: 16px; }
-        .stack-visual { padding: 18px; border-radius: 24px; background: rgba(0,0,0,.28); box-shadow: inset 0 0 0 1px var(--line); }
+        .stack-visual { padding: 18px 20px; }
 
         /* services bento */
         .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
         .svc { grid-column: span 2; display: flex; flex-direction: column; gap: 28px; min-height: 340px; padding: 28px; }
         .svc-wide { grid-column: span 3; }
         .svc-top { display: flex; justify-content: space-between; align-items: center; }
-        .svc-arrow { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 99px; background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px var(--line); transition: background-color .4s var(--ease), color .4s var(--ease), transform .6s var(--ease); }
-        .svc:hover .svc-arrow { background: #fff; color: #0a0a10; transform: rotate(45deg); }
+        .svc-arrow { display: grid; place-items: center; width: 44px; height: 44px; box-shadow: inset 0 0 0 1px var(--line-2); transition: background-color .4s var(--ease), color .4s var(--ease), box-shadow .4s var(--ease); }
+        .svc-arrow svg { transition: transform .6s var(--ease); }
+        .svc:hover .svc-arrow { background: var(--red); color: #fff; box-shadow: none; }
+        .svc:hover .svc-arrow svg { transform: rotate(45deg); }
         .svc-body { display: flex; flex-direction: column; gap: 12px; margin-top: auto; }
         .svc-title { transition: transform .6s var(--ease); }
         .svc:hover .svc-title { transform: translateX(4px); }
@@ -279,9 +284,9 @@ export default function Home() {
 
         /* stats */
         .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-        .stat { display: flex; flex-direction: column; gap: 10px; padding: 28px clamp(16px, 2vw, 28px); border-left: 1px solid var(--line); }
+        .stat { display: flex; flex-direction: column; gap: 10px; padding: 28px clamp(16px, 2vw, 28px); border-left: 1px solid var(--line-2); border-top: 1px solid var(--ink); }
         .stat:first-child { border-left: 0; padding-left: 0; }
-        .stat-num { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 7vw, 104px); line-height: .9; letter-spacing: -.035em; display: flex; align-items: baseline; gap: 4px; }
+        .stat-num { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 7vw, 104px); line-height: .9; letter-spacing: -.055em; display: flex; align-items: baseline; gap: 4px; }
         .stat-unit { font-size: .42em; letter-spacing: -.02em; }
 
         /* contact */
@@ -307,7 +312,6 @@ export default function Home() {
           .svc, .svc-wide { grid-column: span 1; min-height: 280px; }
           .stats { grid-template-columns: 1fr 1fr; row-gap: 12px; }
           .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
-          .stack-card { border-radius: 28px; }
           .stack { gap: 16px; }
           .stack-name { font-size: 56px; }
           .hero-foot { display: none; }

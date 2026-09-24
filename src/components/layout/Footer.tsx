@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, SERVICES } from "@/lib/services";
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="ft">
+    <footer className="ft term">
       <div className="container">
         <HideOnHome>
           <div className="ft-top">
@@ -17,7 +17,7 @@ export default function Footer() {
               </h2>
             </div>
             <div className="ft-cta-actions">
-              <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
+              <Button href={`mailto:${CONTACT_EMAIL}`} variant="light">Start a project</Button>
               <p className="small">Reply within 24 hours. Fixed scope and price if it fits.</p>
             </div>
           </div>
@@ -55,6 +55,7 @@ export default function Footer() {
 
       <div className="ft-mark" aria-hidden>
         <span>spacedrift</span>
+        <i />
       </div>
 
       <div className="container ft-base">
@@ -63,31 +64,24 @@ export default function Footer() {
       </div>
 
       <style>{`
-        .ft { position: relative; z-index: 1; padding-top: clamp(80px, 11vw, 150px); overflow: hidden; }
-        .ft::before {
-          content: ""; position: absolute; left: var(--pad); right: var(--pad); top: 0; height: 1px;
-          background: linear-gradient(90deg, transparent, var(--line-2), transparent);
-        }
+        .ft { position: relative; z-index: 1; padding-top: clamp(72px, 9vw, 128px); overflow: hidden; }
         .ft-top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: end; padding-bottom: clamp(56px, 7vw, 96px); }
         .ft-cta { display: flex; flex-direction: column; gap: 20px; }
         .ft-cta-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
         .ft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 40px 0; border-top: 1px solid var(--line); }
         .ft-col { display: flex; flex-direction: column; gap: 18px; }
         .ft-col ul { display: flex; flex-direction: column; gap: 10px; }
-        .ft-col a { color: var(--text-2); font-size: 15.5px; transition: color .3s var(--ease); }
-        .ft-col a:hover { color: var(--text); }
+        .ft-col a { position: relative; color: var(--text-2); font-size: 15.5px; transition: color .3s var(--ease); }
+        .ft-col a:hover { color: #fff; }
         .ft-col li.muted { font-size: 15.5px; }
         .ft-mark {
-          display: flex; justify-content: center;
+          display: flex; justify-content: center; align-items: flex-end; gap: 1.2vw;
           font-family: var(--font-display); font-weight: 700;
-          font-size: 20vw; line-height: .78; letter-spacing: -0.05em;
-          margin-top: 24px; margin-bottom: -2.2vw;
-          user-select: none; white-space: nowrap;
+          font-size: 19vw; line-height: .8; letter-spacing: -0.065em;
+          margin-top: 32px; padding: 0 2vw 3.6vw 0;
+          user-select: none; white-space: nowrap; color: #fff;
         }
-        .ft-mark span {
-          background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 85%);
-          -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
+        .ft-mark i { width: 3.2vw; height: 3.2vw; background: var(--red); margin-bottom: 2.4vw; flex: none; }
         .ft-base {
           position: relative; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
           padding-block: 22px; border-top: 1px solid var(--line);

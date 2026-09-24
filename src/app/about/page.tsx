@@ -41,7 +41,7 @@ export default function About() {
               agency engagement.
             </p>
           </div>
-          <div className="ab-card glass" data-glow data-reveal="glass">
+          <div className="ab-card term" data-reveal="glass">
             <AsciiScene kind="model" label="operator online" />
           </div>
         </div>
@@ -123,16 +123,16 @@ export default function About() {
         .ab-story-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); max-width: 980px; }
 
         .ab-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-        .ab-fact { display: flex; flex-direction: column; gap: 10px; padding: 24px clamp(16px, 2vw, 28px); border-left: 1px solid var(--line); }
+        .ab-fact { display: flex; flex-direction: column; gap: 10px; padding: 24px clamp(16px, 2vw, 28px); border-left: 1px solid var(--line-2); border-top: 1px solid var(--ink); }
         .ab-fact:first-child { border-left: 0; padding-left: 0; }
-        .ab-fact-v { font-family: var(--font-display); font-weight: 600; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -.025em; line-height: 1.05; }
+        .ab-fact-v { font-family: var(--font-display); font-weight: 600; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -.045em; line-height: 1.05; }
 
         .ab-head { display: flex; flex-direction: column; gap: 20px; margin-bottom: clamp(36px, 5vw, 64px); }
         .ab-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
         .ab-p { display: flex; flex-direction: column; gap: 14px; padding: 28px; min-height: 250px; }
         .ab-p .h3 { margin-top: auto; }
 
-        .ab-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); border-radius: 36px; }
+        .ab-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); }
         .ab-cta > div { display: flex; flex-direction: column; gap: 12px; }
 
         @media (max-width: 1080px) {

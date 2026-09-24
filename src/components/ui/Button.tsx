@@ -11,7 +11,7 @@ export default function Button({
 }: {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "glass";
+  variant?: "primary" | "glass" | "light";
   size?: "md" | "sm";
   className?: string;
 }) {

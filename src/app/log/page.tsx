@@ -78,16 +78,16 @@ export default function Log() {
         .lg-hero-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; max-width: 1100px; }
         .lg-h1 { font-size: clamp(44px, 6.4vw, 104px); }
         .lg-list { display: flex; flex-direction: column; gap: 14px; max-width: 980px; }
-        .lg-entry { display: flex; flex-direction: column; gap: 18px; padding: clamp(24px, 3.4vw, 44px); border-radius: 32px; }
+        .lg-entry { display: flex; flex-direction: column; gap: 18px; padding: clamp(24px, 3.4vw, 44px); }
         .lg-entry-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-        .lg-lock { width: 8px; height: 8px; border-radius: 2px; background: var(--accent-3); }
+        .lg-lock { width: 8px; height: 8px; background: var(--red); }
         .lg-check { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; padding-top: 18px; border-top: 1px solid var(--line); }
         .lg-check li { display: flex; align-items: center; gap: 12px; color: var(--text-3); font-size: 15.5px; }
         .lg-check li.done { color: var(--text); }
-        .lg-box { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; font-size: 12px; box-shadow: inset 0 0 0 1px var(--line-2); color: #0a0a10; }
-        .lg-check li.done .lg-box { background: var(--grad); box-shadow: none; }
-        .lg-ghost { display: flex; justify-content: space-between; padding: 22px 28px; border-radius: 24px; border: 1px dashed var(--line-2); }
-        .lg-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); border-radius: 36px; }
+        .lg-box { display: grid; place-items: center; width: 20px; height: 20px; font-size: 12px; box-shadow: inset 0 0 0 1px var(--line-2); color: #fff; }
+        .lg-check li.done .lg-box { background: var(--ink); box-shadow: none; }
+        .lg-ghost { display: flex; justify-content: space-between; padding: 22px 28px; border: 1px dashed rgba(10,10,10,.3); background: rgba(255,255,255,.6); }
+        .lg-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); }
         .lg-cta > div { display: flex; flex-direction: column; gap: 12px; }
         @media (max-width: 720px) {
           .lg-check { grid-template-columns: 1fr; }

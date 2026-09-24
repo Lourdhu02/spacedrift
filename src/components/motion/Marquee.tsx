@@ -60,7 +60,7 @@ export default function Marquee({
         {run.map((t, i) => (
           <span key={i} className="mq-item">
             {t}
-            <span className="mq-sep">{variant === "display" ? "✳" : "·"}</span>
+            <span className="mq-sep">{variant === "display" ? "■" : "/"}</span>
           </span>
         ))}
       </div>
@@ -74,20 +74,20 @@ export default function Marquee({
         .mq-item { display: inline-flex; align-items: center; white-space: nowrap; }
         .mq-display .mq-item {
           font-family: var(--font-display); font-weight: 600;
-          font-size: clamp(44px, 7vw, 108px); letter-spacing: -0.03em; line-height: 1.1;
-          color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.26);
+          font-size: clamp(44px, 7vw, 108px); letter-spacing: -0.05em; line-height: 1.1;
+          color: transparent; -webkit-text-stroke: 1px rgba(10,10,10,.32);
           padding-right: 0.35em;
         }
         .mq-display .mq-item:nth-child(3n+1) { color: var(--text); -webkit-text-stroke: 0; }
         .mq-display .mq-sep {
-          font-size: 0.42em; margin-left: 0.35em; color: var(--accent-2);
+          font-size: 0.42em; margin-left: 0.35em; color: var(--red);
           -webkit-text-stroke: 0;
         }
         .mq-chips .mq-item {
           font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.02em;
           color: var(--text-2); padding: 0 10px;
         }
-        .mq-chips .mq-sep { margin-left: 20px; color: var(--text-3); }
+        .mq-chips .mq-sep { margin-left: 20px; color: var(--red); }
       `}</style>
     </div>
   );
