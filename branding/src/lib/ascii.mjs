@@ -37,7 +37,14 @@ export class Grid {
     return this.ch
       .map((row, y) => {
         let out = "", cur = null, buf = "";
-        const flush = () => { if (buf) out += cur === "n" ? buf : `<span class="t-${cur}">${buf}</span>`; buf = ""; };
+        const flush = () => {
+          if (buf) {
+            // solid runs of █ become one block (no glyph seams at 4K)
+            const b = buf.replace(/█+/g, (m) => `<span class="blk">${m}</span>`);
+            out += cur === "n" ? b : `<span class="t-${cur}">${b}</span>`;
+          }
+          buf = "";
+        };
         row.forEach((c, x) => {
           const t = c === " " ? cur ?? "n" : this.tone[y][x];
           if (t !== cur) { flush(); cur = t; }
@@ -81,24 +88,27 @@ const JSON_LINES = [
   '  "confidence": 0.982',
   "}",
 ];
-export function parse({ cols = 56, rows = 22, p = 0.52, t = 3.1 } = {}) {
+export function parse({ cols = 56, rows = 22, p = 0.52, t = 3.1, mini = false } = {}) {
   const g = new Grid(cols, rows);
+  const LINES = mini ? [JSON_LINES[0], JSON_LINES[2], JSON_LINES[5], JSON_LINES[7], JSON_LINES[8]] : JSON_LINES;
+  const RED_ROW = mini ? 3 : 7;
   const tick = Math.floor(t * 10);
-  const top = Math.max(1, Math.floor((rows - JSON_LINES.length) / 2) - 1);
+  const top = Math.max(mini ? 1 : 1, Math.floor((rows - LINES.length) / 2) - (mini ? 0 : 1));
   const left = Math.max(2, Math.floor((cols - 36) / 2));
   const density = Math.max(0, 0.34 - p * 0.45);
   for (let y = 0; y < rows; y++)
     for (let x = 0; x < cols; x++)
       if (hash(x, y, tick) < density) g.set(x, y, RAMP[1 + Math.floor(hash(y, x, tick) * 4)], "d");
-  JSON_LINES.forEach((line, row) => {
+  LINES.forEach((line, row) => {
     [...line].forEach((ch, i) => {
       if (ch === " ") { g.set(left + i, top + row, " ", "n"); return; }
       const lockAt = 0.06 + (i / 56) * 0.42 + row * 0.018;
       const locked = p >= lockAt;
-      const red = row === 7 && i > 16 && locked;
+      const red = row === RED_ROW && i > 16 && locked;
       g.set(left + i, top + row, locked ? ch : SCRAMBLE[Math.floor(hash(i, row, tick) * SCRAMBLE.length)], red ? "r" : locked ? "n" : "d");
     });
   });
+  if (mini) return g;
   const pct = Math.min(100, Math.round((p / 0.62) * 100));
   const bar = "█".repeat(Math.round(pct / 5)).padEnd(20, "░");
   g.put(left, rows - 2, `fields ${Math.min(7, Math.floor(pct / 14.3))}/7  `, "d");
@@ -153,7 +163,7 @@ const ROCKET = [
   "/_|____|_\\",
 ];
 const FLAMES = ["  ^^^^^^  ", "  *^*^*^  ", "   :::    ", "   ':'    ", "    .     "];
-export function ship({ cols = 56, rows = 22, t = 2.4, p = 0.72, bar = true } = {}) {
+export function ship({ cols = 56, rows = 22, t = 2.4, p = 0.72, bar = true, top } = {}) {
   const g = new Grid(cols, rows);
   for (let s = 0; s < Math.round(cols * rows * 0.06); s++) {
     const sx = Math.floor(hash(s, 1, 1) * cols);
@@ -162,11 +172,12 @@ export function ship({ cols = 56, rows = 22, t = 2.4, p = 0.72, bar = true } = {
     g.set(sx, sy, speed > 12 ? "|" : speed > 8 ? ":" : ".", "d");
   }
   const rx = Math.floor(cols / 2 - ROCKET[0].length / 2);
-  const ry = Math.max(1, Math.floor(rows * 0.14));
+  const ry = top ?? Math.max(1, Math.floor(rows * 0.14));
   for (let y = ry - 1; y < ry + ROCKET.length + 5; y++) for (let x = rx - 1; x < rx + 11; x++) g.set(x, y, " ", "n");
   ROCKET.forEach((line, i) => g.put(rx, ry + i, line.replace(/ /g, "\u0000"), "n"));
   const tick = Math.floor(t * 12);
-  for (let f = 0; f < 4; f++) {
+  const nf = Math.max(0, Math.min(4, (bar ? rows - 3 : rows) - (ry + ROCKET.length)));
+  for (let f = 0; f < nf; f++) {
     const row = FLAMES[Math.min(FLAMES.length - 1, f + (hash(f, tick, 4) > 0.5 ? 1 : 0))];
     g.put(rx, ry + ROCKET.length + f, row.replace(/ /g, "\u0000"), "r");
   }
@@ -205,95 +216,98 @@ export function research({ cols = 56, rows = 22 } = {}) {
 }
 
 /* ── RAG: query → retrieve → grounded answer ───────────────── */
-export function rag({ cols = 56, rows = 22 } = {}) {
+/* ── RAG: query → retrieve → grounded answer (needs rows ≥ 17) ── */
+export function rag({ cols = 56, rows = 17 } = {}) {
   const g = new Grid(cols, rows);
-  g.put(2, 1, "> ask", "r");
-  g.put(8, 1, '"what is our refund window?"', "n");
-  g.put(2, 3, "retrieve  top_k=3", "d");
+  g.put(2, 0, "> ask", "r");
+  g.put(8, 0, '"what is our refund window?"', "n");
+  g.put(2, 2, "retrieve  top_k=3", "d");
   const chunks = [
     ["0.91", "policy.pdf      p.3", "r"],
     ["0.84", "faq.md          #12", "n"],
     ["0.77", "terms_v4.pdf    p.9", "n"],
   ];
   chunks.forEach(([s, name, t], i) => {
-    const y = 5 + i * 3;
+    const y = 3 + i * 3;
     g.box(2, y, cols - 4, 3, t === "r" ? "r" : "d");
     g.put(4, y + 1, `[${i + 1}]`, t === "r" ? "r" : "d");
     g.put(9, y + 1, name, "n");
     g.put(cols - 14, y + 1, `sim ${s}`, t === "r" ? "r" : "d");
   });
-  g.put(2, 15, "answer", "d");
-  g.put(2, 16, "Refunds within 14 days of delivery,", "n");
-  g.put(2, 17, "for unused items in original packing", "n");
-  g.put(39, 17, "[1]", "r");
-  g.put(2, 19, "grounded · cited · evaluated", "d");
+  const a = Math.min(rows - 5, 13);
+  g.put(2, a, "answer", "d");
+  g.put(2, a + 1, "Refunds within 14 days of delivery,", "n");
+  g.put(2, a + 2, "for unused items in original packing", "n");
+  g.put(39, a + 2, "[1]", "r");
+  g.put(2, rows - 1, "grounded · cited · evaluated", "d");
   return g;
 }
 
-/* ── WEB: a page wireframe, built from blocks ──────────────── */
-export function web({ cols = 56, rows = 22 } = {}) {
+/* ── WEB: a page wireframe, built from blocks (rows ≥ 16) ─── */
+export function web({ cols = 56, rows = 17 } = {}) {
   const g = new Grid(cols, rows);
   g.box(1, 0, cols - 2, rows, "d", true);
   g.put(1, 2, "├" + "─".repeat(cols - 4) + "┤", "d");
   g.put(3, 1, "▓ ▒ ░", "d");
   g.put(10, 1, "https://your-site.in", "n");
-  g.put(3, 4, "▀▀▀▀▀▀▀▀", "n");
-  g.put(cols - 24, 4, "work  about  contact", "d");
-  g.put(3, 7, "██████████████████████", "n");
-  g.put(3, 8, "██████████████", "n");
-  g.put(17, 8, "████████", "r");
-  g.put(3, 10, "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒", "d");
-  g.put(3, 11, "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒", "d");
-  g.put(3, 13, "[ start a project → ]", "r");
+  g.put(3, 3, "▀▀▀▀▀▀▀▀", "n");
+  g.put(cols - 24, 3, "work  about  contact", "d");
+  g.put(3, 5, "██████████████████████", "n");
+  g.put(3, 6, "██████████████", "n");
+  g.put(17, 6, "████████", "r");
+  g.put(3, 8, "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒", "d");
+  g.put(3, 9, "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒", "d");
+  g.put(3, 11, "[ start a project → ]", "r");
   const cw = Math.floor((cols - 8) / 3);
-  for (let i = 0; i < 3; i++) {
-    g.box(3 + i * (cw + 1), 15, cw, 5, "d", true);
-    g.put(5 + i * (cw + 1), 16, "░".repeat(cw - 4), "d");
-    g.put(5 + i * (cw + 1), 17, "░".repeat(cw - 7), "d");
-  }
+  const cy = rows - 5;
+  if (cy >= 12)
+    for (let i = 0; i < 3; i++) {
+      g.box(3 + i * (cw + 1), cy, cw, 4, "d", true);
+      g.put(5 + i * (cw + 1), cy + 1, "░".repeat(cw - 4), "d");
+      g.put(5 + i * (cw + 1), cy + 2, "░".repeat(cw - 7), "d");
+    }
   return g;
 }
 
-/* ── MOBILE: a phone reading a receipt on-device ───────────── */
-export function mobile({ cols = 56, rows = 22 } = {}) {
+/* ── MOBILE: a phone reading a receipt on-device (rows ≥ 16) ── */
+export function mobile({ cols = 56, rows = 17 } = {}) {
   const g = new Grid(cols, rows);
   const pw = 22, px = 4;
   g.box(px, 0, pw, rows, "n", true);
   g.put(px + 2, 1, "9:41", "d");
   g.put(px + pw - 6, 1, "▌▌▌", "d");
   g.put(px + Math.floor(pw / 2) - 2, rows - 2, "────", "d");
-  // camera view with a detection box
-  for (let y = 3; y < 12; y++)
+  for (let y = 3; y < 9; y++)
     for (let x = px + 2; x < px + pw - 2; x++) g.set(x, y, RAMP[1 + Math.floor(hash(x, y, 3) * 3)], "d");
-  g.box(px + 4, 4, pw - 8, 6, "r");
-  g.put(px + 5, 4, " rcpt ", "r");
-  g.put(px + 2, 13, "total  ₹ 1,240", "n");
-  g.put(px + 2, 14, "date   14 Sep", "n");
-  g.put(px + 2, 16, "[ save → ]", "r");
-  // right side: build targets
+  g.box(px + 4, 3, pw - 8, 6, "r");
+  g.put(px + 5, 3, " rcpt ", "r");
+  g.put(px + 2, 10, "total  ₹ 1,240", "n");
+  g.put(px + 2, 11, "date   14 Sep", "n");
+  g.put(px + 2, 13, "[ save → ]", "r");
   const rx = px + pw + 4;
-  g.put(rx, 2, "on-device ml", "r");
-  g.put(rx, 3, "offline · no upload", "d");
-  g.put(rx, 6, "build", "d");
-  g.put(rx, 7, "├ flutter  android", "n");
-  g.put(rx, 8, "├ flutter  ios", "n");
-  g.put(rx, 9, "├ kotlin   android", "n");
-  g.put(rx, 10, "└ swift    ios", "n");
-  g.put(rx, 13, "release", "d");
-  g.put(rx, 14, "play store  ▲", "n");
-  g.put(rx, 15, "app store   ▲", "n");
-  g.put(rx, 17, "your accounts", "r");
+  g.put(rx, 1, "on-device ml", "r");
+  g.put(rx, 2, "offline · no upload", "d");
+  g.put(rx, 4, "build", "d");
+  g.put(rx, 5, "├ flutter  android", "n");
+  g.put(rx, 6, "├ flutter  ios", "n");
+  g.put(rx, 7, "├ kotlin   android", "n");
+  g.put(rx, 8, "└ swift    ios", "n");
+  g.put(rx, 10, "release", "d");
+  g.put(rx, 11, "play store  ▲", "n");
+  g.put(rx, 12, "app store   ▲", "n");
+  g.put(rx, 14, "your accounts", "r");
   return g;
 }
 
 /* ── ANNOTATE: several labelled boxes over raw pixels ──────── */
-export function annotate({ cols = 56, rows = 22 } = {}) {
+export function annotate({ cols = 56, rows = 17 } = {}) {
+  const r = rows / 17;
   return noise({
     cols, rows, t: 5.1,
     boxes: [
-      { x: 5, y: 3, w: 20, h: 9, label: "car 0.95" },
-      { x: 31, y: 5, w: 18, h: 7, label: "sign 0.98" },
-      { x: 12, y: 14, w: 30, h: 6, label: "text 0.94" },
+      { x: 4, y: Math.round(1 * r), w: 21, h: Math.round(7 * r), label: "car 0.95" },
+      { x: 30, y: Math.round(3 * r), w: 20, h: Math.round(6 * r), label: "sign 0.98" },
+      { x: 10, y: Math.round(10 * r), w: 32, h: Math.max(4, Math.round(5 * r)), label: "text 0.94" },
     ],
   });
 }

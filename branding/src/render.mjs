@@ -29,7 +29,7 @@ for (const g of only) {
   files.push(...(r.files || []));
   if (r.after) post.push(r.after);
 }
-for (const j of jobs) j.out = path.join(ROOT, j.out);
+for (const j of jobs) j.out = path.resolve(ROOT, j.out);
 
 for (const f of files) {
   const out = path.join(ROOT, f.out);
@@ -49,11 +49,14 @@ const results = await renderAll(jobs.filter((j) => !j.late), {
   },
 });
 
+const late = jobs.filter((j) => j.late);
+if (late.length) results.push(...(await renderAll(late, { concurrency: 2 })));
+
 // Jobs that depend on other outputs (contact sheet, ICO packing, ...)
 for (const fn of post) {
   const extra = await fn({ root: ROOT, results });
   if (extra?.jobs?.length) {
-    for (const j of extra.jobs) j.out = path.join(ROOT, j.out);
+    for (const j of extra.jobs) j.out = path.resolve(ROOT, j.out);
     results.push(...(await renderAll(extra.jobs, { concurrency: 2 })));
   }
   if (extra?.finalize) await extra.finalize();

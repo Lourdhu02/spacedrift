@@ -52,6 +52,7 @@ svg{display:block}
 .hair{position:absolute;background:currentColor}
 pre.ascii{font-family:"${MONO}";font-weight:400;white-space:pre;line-height:1.12;letter-spacing:0}
 .t-d{opacity:.4}.t-r{color:var(--red)}
+.blk{display:inline-block;height:0.98em;vertical-align:-0.16em;background:currentColor;-webkit-text-fill-color:transparent}
 .term{position:absolute;background:var(--ink);color:#fff}
 .term .bar{display:flex;align-items:center;justify-content:space-between}
 .term .dots{display:inline-flex}

@@ -149,7 +149,7 @@ function servicePost(sv, idx) {
   const { W, H } = POST;
   const dark = idx % 2 === 1;
   const fg = dark ? WHITE : INK;
-  const g = SCENES[sv.scene]({ cols: 56, rows: 14 });
+  const g = SCENES[sv.scene]({ cols: 56, rows: 17 });
   const tw = W - 2 * M;
   const th = termHeight({ w: tw, grid: g, pad: 24, barSize: 17 });
   const hlLines = [...sv.lines, `*${sv.accent}*`].join("<br>");
@@ -160,7 +160,7 @@ function servicePost(sv, idx) {
     const ty = 160;
     const ly = ty + th + 56;
     body =
-      field({ x: 0, y: 0, w: W, h: H, size: 14, seed: 10 + idx, clear: [[40, ty - 20, W - 60, H - ty - 120, 60]] }) +
+      field({ x: 0, y: 0, w: W, h: H, size: 14, seed: 10 + idx, clear: [[40, ty - 20, W - 60, H - ty - 40, 60]] }) +
       chrome({ W, H, tl: "spacedrift.in", tr: `Service · ${sv.n} / 06`, bl: "", br: "" }) +
       term({ x: M, y: ty, w: tw, grid: g, label: sv.cap, pad: 24, barSize: 17, stamp: { d: 14, color: RED } }) +
       label({ x: M, y: ly, size: 20, color: RED, html: `${sv.n} · ${sv.title}` }) +
@@ -174,7 +174,7 @@ function servicePost(sv, idx) {
       chrome({ W, H, tl: "spacedrift.in", tr: `Service · ${sv.n} / 06`, dark: true }) +
       label({ x: M, y: 168, size: 20, color: RED, html: `${sv.n} · ${sv.title}` }) +
       headline({ x: M - 4, y: 206, w: 940, size: hs, color: WHITE, html: hlLines }) +
-      text({ x: M, y: 206 + hs * 0.94 * nLines + 34, w: 800, cls: "b", style: `font-size:30px;color:${whiteA(0.72)}`, html: sv.short }) +
+      (206 + hs * 0.94 * nLines + 34 + 90 < ty - 24 ? text({ x: M, y: 206 + hs * 0.94 * nLines + 34, w: 800, cls: "b", style: `font-size:30px;color:${whiteA(0.72)}`, html: sv.short }) : "") +
       term({ x: M, y: ty, w: tw, grid: g, label: sv.cap, pad: 24, barSize: 17, style: `box-shadow:inset 0 0 0 1px ${whiteA(0.2)}` }) +
       chips({ x: M, y: H - 96, items: sv.tags, size: 18, color: whiteA(0.75), line: whiteA(0.22) }) +
       label({ x: M, y: H - 84, right: true, size: 20, color: whiteA(0.62), html: "Fixed scope · Fixed price" });
@@ -212,7 +212,7 @@ function storyProcess() {
     s += hline({ x: M, y, w: W - 2 * M, color: k ? whiteA(0.16) : WHITE, weight: k ? 1 : 2 });
     s += label({ x: M, y: y + 34, size: 22, color: k === 3 ? RED : whiteA(0.62), html: `Station ${st.n} · ${st.when}` });
     s += text({ x: M - 4, y: y + 76, cls: "h", style: "font-size:120px;color:#fff;letter-spacing:-0.05em", html: st.name + (k < 3 ? `<span style="color:${RED}"> →</span>` : `<span style="color:${RED}">.</span>`) });
-    s += label({ x: M, y: y + 34, right: true, size: 22, color: whiteA(0.62), html: st.out.split(" ").slice(0, 4).join(" ") });
+    s += label({ x: M, y: y + 214, size: 22, color: whiteA(0.62), html: `→ ${st.out}` });
   });
   const body =
     field({ x: 0, y: 0, w: W, h: H, size: 18, tone: "white", seed: 13.4, fade: [0, 0, 0, 1], clear: [[M, 440, 920, 1100, 80]] }) +
@@ -252,7 +252,7 @@ function storyAsk() {
   const tick = (x, y, dx, dy) => `<i class="abs" style="display:block;left:${x}px;top:${y}px;width:${dx}px;height:${dy}px;background:${INK}"></i>`;
   const L = 36, T = 3;
   const body =
-    field({ x: 0, y: 0, w: W, h: H, size: 18, seed: 14.8, focal: [[900, 1200, 260]], clear: [[M, 330, 920, 600, 80], [zone.x + 20, zone.y + 20, zone.w - 40, zone.h - 40, 30]] }) +
+    field({ x: 0, y: 0, w: W, h: H, size: 18, seed: 14.8, clear: [[M, 330, 920, 600, 80], [zone.x + 20, zone.y + 20, zone.w - 40, zone.h - 40, 30]] }) +
     storyChrome(false) +
     text({ x: M, y: SAFE_T + 8, html: wordmarkInline(40, "light", { signature: true }) }) +
     label({ x: M, y: SAFE_T + 14, right: true, size: 22, html: "Ask the engineer" }) +
