@@ -11,6 +11,7 @@ const paths = [
   "/services/rag-mvp",
   "/services/data-annotation",
   "/services/web-development",
+  "/services/mobile-apps",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

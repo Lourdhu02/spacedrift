@@ -1,4 +1,4 @@
-export type SceneKind = "noise" | "parse" | "model" | "ship" | "cycle";
+export type SceneKind = "noise" | "parse" | "model" | "ship" | "mobile" | "cycle";
 
 export type Service = {
   slug: string;
@@ -196,6 +196,42 @@ export const SERVICES: Service[] = [
       { title: "Ship & handoff", body: "Deployed to your account, DNS handled, and 30 days of support after launch." },
     ],
     cta: { title: "Need a site that's actually fast?", body: "Share the brief, the deadline, and the content you have. You get a fixed scope and price within 24 hours." },
+  },
+  {
+    slug: "mobile-apps",
+    index: "06",
+    title: "Mobile Apps",
+    short: "Android and iOS apps in Flutter, Kotlin, and Swift, with on-device ML and the store release handled.",
+    tags: ["Flutter", "Kotlin", "Swift"],
+    scene: "mobile",
+    metaDescription:
+      "Android and iOS app development in Flutter, Kotlin, and Swift, with on-device ML, offline-first data, and the Play Store and App Store release handled. Fixed scope, from Bengaluru.",
+    hero: {
+      lines: ["Android and iOS apps"],
+      accent: "that feel native.",
+      lede: "Flutter when one codebase should cover both stores. Kotlin and Swift when the app needs to go deep into the platform. Either way: on-device ML where it helps, offline-first data, and a clean store release under your accounts.",
+    },
+    offers: [
+      { title: "Cross-platform with Flutter", body: "One Dart codebase for Android and iOS, with platform channels where native APIs are needed and smooth 60fps UI on mid-range phones." },
+      { title: "Native Android in Kotlin", body: "Jetpack Compose, coroutines, and Material 3 for apps that live close to the hardware: camera, sensors, background work." },
+      { title: "Native iOS in Swift", body: "SwiftUI and Swift concurrency, following Apple's Human Interface Guidelines so the app feels at home on iPhone." },
+      { title: "On-device ML", body: "OCR, classification, and embeddings that run offline with LiteRT, Core ML, or ML Kit, with latency measured on real devices." },
+      { title: "Backend & offline sync", body: "Firebase, Supabase, or your own API, with local-first storage and sync that survives a patchy network." },
+      { title: "Store release & handoff", body: "Signing, CI builds, privacy labels, store listings, and review submission, all published under your own developer accounts." },
+    ],
+    targets: [
+      { value: 60, unit: "fps", label: "Frame-rate target on mid-range Android" },
+      { value: 100, unit: "%", label: "Published under your own store accounts" },
+      { value: 30, unit: "d", label: "Support after store release" },
+    ],
+    stack: ["Flutter", "Dart", "Kotlin", "Jetpack Compose", "Swift", "SwiftUI", "Firebase", "Supabase", "LiteRT", "Core ML", "ML Kit", "Fastlane", "GitHub Actions"],
+    process: [
+      { title: "Scope & flows", body: "Screens, user flows, target platforms, and which features need native APIs, including the Flutter-or-native call, agreed before code." },
+      { title: "A build on your phone", body: "A working build via TestFlight or Play internal testing in the first week, not just a design file." },
+      { title: "Build & test on real devices", body: "Features against scope, tested on low- and high-end devices, with crash reporting wired in from day one." },
+      { title: "Release & handoff", body: "Store listings, signing, review submission, and 30 days of support after launch." },
+    ],
+    cta: { title: "Have an app to ship?", body: "Tell us the platforms, the core flows, and the deadline. You get a fixed scope and price within 24 hours." },
   },
 ];
 
