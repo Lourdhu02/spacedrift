@@ -21,7 +21,7 @@ export function launchManifesto(W, H) {
   const hy = bottom - 70 - hlH;
   const box = { x: 580, y: 230, w: 300, h: Math.min(320, Math.max(200, hy - 230 - 170)) };
   const body =
-    field({ x: 0, y: 0, w: W, h: H, size: 14, focal: [[box.x + box.w / 2, box.y + box.h / 2, 420]], hot: [[box.x, box.y, box.w, box.h]], redAt: 2, clear: [[M, hy - 60, 900, hlH + 60, 120]], seed: 3.3 }) +
+    field({ x: 0, y: 0, w: W, h: H, size: 14, focal: [[box.x + box.w / 2, box.y + box.h / 2, 420]], hot: [[box.x, box.y, box.w, box.h]], redAt: 2, clear: [[M, hy - 60, 900, hlH + 60, 120], [M, H - 112, W - 2 * M, 112, 40]], seed: 3.3 }) +
     chrome({ W, H, tl: "spacedrift.in", tr: "Launch · 01 / 03", bl: "ML &amp; AI studio", br: "Bengaluru, India", mark: true }) +
     bbox({ x: box.x, y: box.y, w: box.w, h: box.h, label: "signal 0.97", size: 18, weight: 2 }) +
     label({ x: M, y: hy - 52, size: 20, color: RED, html: "Station 01 · Noise → Station 04 · Ship" }) +

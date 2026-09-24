@@ -113,10 +113,10 @@ function storySlot(t) {
     s += label({ x: M, y: 1540, size: 22, html: `Output → ${st.out}` });
   } else {
     const k = ease(seg(t, 4 * D, 4 * D + 0.5));
-    s += `<div class="abs" style="left:${M}px;top:${760 + 40 * (1 - k)}px;opacity:${k}">${lockupInline("signature", "light", { width: W - 2 * M })}</div>`;
-    s += headline({ x: M - 4, y: 520, w: 920, size: 96, html: "Noise in.<br>*Systems out.*", style: `opacity:${k}` });
-    s += label({ x: M, y: 1040, size: 24, html: `Fixed scope · Fixed price · One engineer`, style: `opacity:${k}` });
-    s += label({ x: M, y: 1090, size: 24, color: RED, html: CONTACT.email, style: `opacity:${k}` });
+    s += `<div class="abs" style="left:${M}px;top:${830 + 40 * (1 - k)}px;opacity:${k}">${lockupInline("signature", "light", { width: W - 2 * M })}</div>`;
+    s += headline({ x: M - 4, y: 460, w: 920, size: 100, html: "We turn noise<br>into ML systems<br>*that ship.*", style: `opacity:${k}` });
+    s += label({ x: M, y: 1110, size: 24, html: `Fixed scope · Fixed price · One engineer`, style: `opacity:${k}` });
+    s += label({ x: M, y: 1160, size: 24, color: RED, html: CONTACT.email, style: `opacity:${k}` });
   }
   return s;
 }

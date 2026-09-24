@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Brand-kit generator scripts, not part of the site.
+    "branding/**",
   ]),
 ]);
 

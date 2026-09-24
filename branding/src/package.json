@@ -6,7 +6,9 @@
   "description": "Generator for the spacedrift.in brand and social-media asset kit.",
   "scripts": {
     "render": "NODE_PATH=$(npm root -g) PLAYWRIGHT_BROWSERS_PATH=${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers} node render.mjs",
-    "motion": "NODE_PATH=$(npm root -g) PLAYWRIGHT_BROWSERS_PATH=${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers} node motion.mjs"
+    "motion": "NODE_PATH=$(npm root -g) PLAYWRIGHT_BROWSERS_PATH=${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers} node motion.mjs",
+    "check": "node check.mjs",
+    "all": "npm run render && npm run motion && npm run check"
   },
   "dependencies": {
     "fontkit": "^2.0.4",
