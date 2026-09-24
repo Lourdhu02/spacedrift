@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     template: "%s — spacedrift",
   },
   description:
-    "Boutique ML & AI studio in Bengaluru. Fixed-scope research ops, document AI, RAG MVPs, data annotation, and web development, taken from raw input to a working handoff.",
-  keywords: ["spacedrift", "machine learning", "document AI", "OCR", "RAG", "data annotation", "web development", "Bengaluru"],
+    "Boutique ML & AI studio in Bengaluru. Fixed-scope research ops, document AI, RAG MVPs, data annotation, web development, and Android & iOS apps in Flutter and Kotlin, taken from raw input to a working handoff.",
+  keywords: ["spacedrift", "machine learning", "document AI", "OCR", "RAG", "data annotation", "web development", "Flutter", "Kotlin", "Android", "iOS", "app development", "Bengaluru"],
   metadataBase: new URL("https://spacedrift.in"),
   openGraph: {
     title: "spacedrift — we turn noise into ML systems that ship",

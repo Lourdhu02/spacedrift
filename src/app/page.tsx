@@ -34,6 +34,9 @@ const STATIONS: { n: string; name: string; kind: SceneKind; title: string; body:
   },
 ];
 
+// Asymmetric bento rhythm: 4+2 / 2+4 / 3+3 on the 6-column grid.
+const SPANS = [4, 2, 2, 4, 3, 3];
+
 const STATS = [
   { v: 24, u: "h", label: "First reply to every inquiry" },
   { v: 3, u: "wk", label: "Typical AI MVP build" },
@@ -55,7 +58,7 @@ export default function Home() {
               We turn noise into ML systems <span className="grad-text">that ship.</span>
             </h1>
             <p className="lede" data-reveal>
-              Research ops, document AI, RAG MVPs, data annotation, and web builds, taken from raw
+              Research ops, document AI, RAG MVPs, data annotation, web and mobile apps, taken from raw
               input to a working handoff. Fixed scope, fixed price, and one engineer accountable end to end.
             </p>
             <div className="hero-actions" data-reveal>
@@ -72,14 +75,14 @@ export default function Home() {
         <div className="container hero-foot" data-reveal>
           <span className="label">Scroll</span>
           <span className="hero-line" aria-hidden />
-          <span className="label">Five services · fixed price · you own everything</span>
+          <span className="label">Six services · fixed price · you own everything</span>
           <span className="hero-clock"><LocalTime /></span>
         </div>
       </section>
 
       {/* ── MARQUEE ──────────────────────────────────────────── */}
       <section className="section-tight mq-sec" aria-label="Capabilities">
-        <Marquee items={["Document AI", "RAG systems", "Research ops", "Data annotation", "Agentic workflows", "Web builds", "Evaluation"]} />
+        <Marquee items={["Document AI", "RAG systems", "Research ops", "Data annotation", "Flutter & Kotlin apps", "Agentic workflows", "Web builds", "On-device ML"]} />
       </section>
 
       {/* ── MANIFESTO ────────────────────────────────────────── */}
@@ -148,7 +151,7 @@ export default function Home() {
           <div className="sec-head sec-head-split">
             <div>
               <p className="label label-accent" data-reveal>Services</p>
-              <h2 className="display-2" data-split>Five things we do well.</h2>
+              <h2 className="display-2" data-split>Six things we do well.</h2>
             </div>
             <p className="lede" data-reveal>
               We only take work where the output can be defined, built, tested, and handed over.
@@ -161,7 +164,7 @@ export default function Home() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className={`svc glass ${i < 2 ? "svc-wide" : ""}`}
+                className={`svc glass svc-s${SPANS[i % SPANS.length]}`}
                 data-glow
                 data-reveal="glass"
               >
@@ -270,8 +273,10 @@ export default function Home() {
 
         /* services bento */
         .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
-        .svc { grid-column: span 2; display: flex; flex-direction: column; gap: 28px; min-height: 340px; padding: 28px; }
-        .svc-wide { grid-column: span 3; }
+        .svc { display: flex; flex-direction: column; gap: 28px; min-height: 340px; padding: 28px; }
+        .svc-s2 { grid-column: span 2; }
+        .svc-s3 { grid-column: span 3; }
+        .svc-s4 { grid-column: span 4; }
         .svc-top { display: flex; justify-content: space-between; align-items: center; }
         .svc-arrow { display: grid; place-items: center; width: 44px; height: 44px; box-shadow: inset 0 0 0 1px var(--line-2); transition: background-color .4s var(--ease), color .4s var(--ease), box-shadow .4s var(--ease); }
         .svc-arrow svg { transition: transform .6s var(--ease); }
@@ -301,7 +306,7 @@ export default function Home() {
           .hero-grid { grid-template-columns: 1fr; }
           .hero-card { max-width: 640px; }
           .stack-card { grid-template-columns: 1fr; min-height: 0; position: relative; top: auto; }
-          .svc, .svc-wide { grid-column: span 3; }
+          .svc.svc-s2, .svc.svc-s3, .svc.svc-s4 { grid-column: span 3; }
           .sec-head-split { grid-template-columns: 1fr; }
           .contact { grid-template-columns: 1fr; }
           .contact-copy { position: static; }
@@ -309,7 +314,7 @@ export default function Home() {
         @media (max-width: 760px) {
           .hero { min-height: 0; }
           .bento { grid-template-columns: 1fr; }
-          .svc, .svc-wide { grid-column: span 1; min-height: 280px; }
+          .svc.svc-s2, .svc.svc-s3, .svc.svc-s4 { grid-column: span 1; min-height: 280px; }
           .stats { grid-template-columns: 1fr 1fr; row-gap: 12px; }
           .stat { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
           .stack { gap: 16px; }

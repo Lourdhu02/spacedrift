@@ -10,6 +10,7 @@ const CAPTIONS: Record<Kind, string> = {
   parse: "extract → structured json",
   model: "model.fit() · epoch 12",
   ship: "deploy → production",
+  mobile: "flutter · kotlin · swift",
 };
 
 const COLS = 56;
@@ -159,7 +160,68 @@ function ship(t: number) {
   return join(g);
 }
 
-const RENDER: Record<Kind, (t: number) => string> = { noise, parse, model, ship };
+/* ── MOBILE: a phone feed scrolling while builds ship to both stores ── */
+const PW = 26; // phone width incl. frame
+const PX = 3;  // phone x offset
+// Only glyphs Geist Mono ships, so every column stays aligned.
+const FEED = [
+  ["▓▓▓▓ invoice scan", "░░░░░░░░░ 0.98"],
+  ["▓▓▓ ask the docs", "░░░░░ 3 sources"],
+  ["▓▓▓▓▓ label queue", "░░░░ 128 left"],
+  ["▓▓ offline sync", "░░░░░░░ synced"],
+];
+const fit = (text: string, w: number) => text.slice(0, w).padEnd(w);
+function mobile(t: number) {
+  const g = blank();
+  const inner = PW - 2;
+  put(g, PX, 0, "┌" + "─".repeat(inner) + "┐");
+  put(g, PX, ROWS - 1, "└" + "─".repeat(inner) + "┘");
+  for (let y = 1; y < ROWS - 1; y++) { g[y][PX] = "│"; g[y][PX + PW - 1] = "│"; }
+  put(g, PX + 1, 1, fit(" 9:41", inner - 8) + "5G ▓▓▓ ");
+  put(g, PX + 1, 2, "─".repeat(inner));
+
+  // scrolling feed of cards between rows 3..ROWS-5
+  const top = 3, bottom = ROWS - 5, cardH = 4;
+  const off = Math.floor(t * 2.5) % cardH;
+  const first = Math.floor(t * 2.5 / cardH);
+  for (let k = 0; k < 6; k++) {
+    const y0 = top + k * cardH - off;
+    const item = FEED[(first + k) % FEED.length];
+    const rows = ["┌" + "─".repeat(inner - 4) + "┐", "│ " + fit(item[0], inner - 6) + " │", "│ " + fit(item[1], inner - 6) + " │", "└" + "─".repeat(inner - 4) + "┘"];
+    rows.forEach((r, i) => {
+      const y = y0 + i;
+      if (y >= top && y <= bottom) put(g, PX + 2, y, r);
+    });
+  }
+  put(g, PX + 1, ROWS - 4, "─".repeat(inner));
+  const tab = Math.floor(t / 1.6) % 4;
+  put(g, PX + 1, ROWS - 3, fit("   " + [0, 1, 2, 3].map((i) => (i === tab ? "▓▓" : "░░")).join("   "), inner));
+  put(g, PX + 1, ROWS - 2, fit(" ".repeat(8) + "─".repeat(inner - 16), inner));
+
+  // build log on the right
+  const LX = PX + PW + 3;
+  const p = (t % 7) / 7;
+  const lines: [number, string][] = [
+    [0.0, "$ flutter build"],
+    [0.12, " > android  apk ✓"],
+    [0.24, " > ios      ipa ✓"],
+    [0.36, ""],
+    [0.4, "frame   16.6 ms"],
+    [0.46, "fps     60"],
+    [0.52, "jank    0.0 %"],
+    [0.58, ""],
+    [0.62, "release > stores"],
+  ];
+  lines.forEach(([at, text], i) => { if (p >= at) put(g, LX, 3 + i, text); });
+  if (p >= 0.62) {
+    const q = Math.min(1, (p - 0.62) / 0.3);
+    put(g, LX, 13, "█".repeat(Math.round(q * 14)).padEnd(14, "░") + " " + String(Math.round(q * 100)).padStart(3) + "%");
+  }
+  if (p >= 0.94) put(g, LX, 15, "live: play + app store");
+  return join(g);
+}
+
+const RENDER: Record<Kind, (t: number) => string> = { noise, parse, model, ship, mobile };
 
 export default function AsciiScene({
   kind,

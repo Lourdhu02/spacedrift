@@ -16,7 +16,7 @@ export default function ServicePage({ s }: { s: Service }) {
           <div className="sp-hero-copy">
             <div className="sp-crumbs" data-reveal>
               <Link href="/#services" className="chip">Services</Link>
-              <span className="chip">{s.index} / 05</span>
+              <span className="chip">{s.index} / {String(SERVICES.length).padStart(2, "0")}</span>
             </div>
             <h1 className="display-1 sp-h1" data-split="now">
               {s.hero.lines.join(" ")} <span className="grad-text">{s.hero.accent}</span>
