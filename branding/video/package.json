@@ -1,0 +1,19 @@
+{
+  "name": "spacedrift-launch-video",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "60/15/6s launch film for spacedrift.in, rendered frame-by-frame at 60fps.",
+  "scripts": {
+    "render": "node src/render.mjs",
+    "stills": "node src/render.mjs --stills",
+    "all": "node src/render.mjs --all"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.80",
+    "geist": "^1.7.2"
+  },
+  "optionalDependencies": {
+    "@ffmpeg-installer/linux-x64": "^4.1.0"
+  }
+}
