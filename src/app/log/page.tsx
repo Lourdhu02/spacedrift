@@ -1,134 +1,99 @@
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
-import StationHeader from "@/components/ui/StationHeader";
-import DecodeText from "@/components/ui/DecodeText";
-import AsciiRule from "@/components/ui/AsciiRule";
-import StampCta from "@/components/ui/StampCta";
+import Button from "@/components/ui/Button";
+import { CONTACT_EMAIL } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Studio Log",
-  description:
-    "Working notes from spacedrift.in — sealed engagement writeups, published as they clear client review.",
+  title: "Log",
+  description: "Engagement write-ups from spacedrift, published once each client has signed off on what can be shared.",
 };
 
-export default function LogPage() {
+const CHECKLIST = [
+  { done: true, text: "Problem statement" },
+  { done: true, text: "Approach & architecture" },
+  { done: false, text: "Measured outcome, under review" },
+  { done: false, text: "Client sign-off" },
+];
+
+export default function Log() {
   return (
     <>
-      <StationHeader station="LOG" path="/ log ~ studio-log" />
-
-      <section className="section-pad log-hero">
-        <div className="wrap log-hero-inner">
-          <p className="eyebrow signal">STUDIO LOG</p>
-          <h1 data-reveal>
-            <DecodeText>Working notes.</DecodeText>
-            <br />
-            <span className="ink-mute">Published as they clear review.</span>
+      <section className="lg-hero">
+        <div className="container lg-hero-inner">
+          <span className="chip" data-reveal>Studio log</span>
+          <h1 className="display-1 lg-h1" data-split="now">
+            Working notes, <span className="grad-text">published when cleared.</span>
           </h1>
-          <p className="log-lede" data-reveal>
-            Entries land here when the engagement is complete, the client has cleared
-            what can be shared, and the numbers have been checked twice. Everything
-            below has an entry status. Empty status is not on this page.
+          <p className="lede" data-reveal>
+            Write-ups land here once an engagement is finished, the client has approved what can be shared,
+            and the numbers have been checked twice.
           </p>
-          <AsciiRule label="LOG BEGINS" />
         </div>
-        <style>{`
-          .log-hero { padding-top: calc(var(--nav-h) + 64px); }
-          .log-hero-inner { display: flex; flex-direction: column; gap: 24px; max-width: 900px; }
-          .log-lede { font-size: 16px; color: var(--ink-2); max-width: 640px; }
-          .ink-mute { color: var(--ink-3); }
-        `}</style>
       </section>
 
-      <section className="section-pad hair">
-        <div className="wrap">
-          <article className="card recessed brackets log-entry" data-reveal>
-            <header className="log-entry-head">
-              <p className="mono log-num">LOG 001</p>
-              <p className="mono log-status">STATUS · SEALED UNTIL Q1</p>
-            </header>
-
-            <h2>
-              First engagement writeup <span className="ink-mute">— in review</span>
-            </h2>
-            <p className="log-body">
-              The first published entry is being written. Once the client has signed off
-              on what can be shared, this card will resolve into a full engagement
-              writeup: problem, approach, decisions we didn&apos;t take, measured outcome,
-              and what would be different next time.
+      <section className="section-tight">
+        <div className="container lg-list">
+          <article className="lg-entry glass" data-glow data-reveal="glass">
+            <div className="lg-entry-top">
+              <span className="label label-accent">Log 001</span>
+              <span className="chip"><span className="lg-lock" aria-hidden /> Sealed until Q1</span>
+            </div>
+            <h2 className="display-3">First engagement write-up</h2>
+            <p className="body">
+              Problem, approach, the options we didn&apos;t take, the measured outcome, and what we&apos;d do
+              differently. It publishes once the client signs off.
             </p>
-
-            <ul className="log-manifest mono">
-              <li>[·] problem statement <span className="ink-mute">— drafted</span></li>
-              <li>[·] approach diagram <span className="ink-mute">— drafted</span></li>
-              <li>[·] measured outcome <span className="ink-mute">— under review</span></li>
-              <li>[ ] client sign-off <span className="ink-mute">— pending</span></li>
-              <li>[ ] publication <span className="ink-mute">— Q1</span></li>
+            <ul className="lg-check">
+              {CHECKLIST.map((c) => (
+                <li key={c.text} className={c.done ? "done" : ""}>
+                  <span className="lg-box" aria-hidden>{c.done ? "✓" : ""}</span>
+                  {c.text}
+                </li>
+              ))}
             </ul>
-
-            <footer className="log-entry-foot">
-              <span className="mono log-meta">T + PENDING</span>
-              <span className="mono log-meta">CATEGORY · MULTIPLE</span>
-              <span className="mono log-meta">VISIBILITY · REDACTED</span>
-            </footer>
           </article>
 
-          <article className="log-teaser" data-reveal>
-            <p className="mono">
-              [ ] LOG 002 — reserved.
-              &nbsp;&nbsp;
-              [ ] LOG 003 — reserved.
-              &nbsp;&nbsp;
-              [ ] LOG 004 — reserved.
-            </p>
-          </article>
+          {["002", "003"].map((n) => (
+            <div key={n} className="lg-ghost" data-reveal>
+              <span className="label">Log {n}</span>
+              <span className="label">Reserved</span>
+            </div>
+          ))}
         </div>
-
-        <style>{`
-          .log-entry { display: flex; flex-direction: column; gap: 18px; padding: 32px 30px; }
-          .log-entry-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-          .log-num { color: var(--signal); font-weight: 700; letter-spacing: 0.16em; }
-          .log-status { color: var(--ink-3); font-size: 11px; letter-spacing: 0.18em; }
-          .log-entry h2 { font-size: clamp(22px, 3vw, 32px); }
-          .log-body { font-size: 15px; color: var(--ink-2); max-width: 640px; }
-          .log-manifest {
-            list-style: none; display: flex; flex-direction: column; gap: 8px;
-            padding: 16px 18px; border: 1px dashed var(--rule-strong);
-            background: var(--paper); font-size: 13px;
-            color: var(--ink);
-          }
-          .log-entry-foot {
-            display: flex; flex-wrap: wrap; gap: 16px;
-            border-top: 1px solid var(--rule); padding-top: 16px;
-            font-size: 10.5px; letter-spacing: 0.16em; color: var(--ink-4);
-          }
-          .log-teaser {
-            margin-top: 24px; padding: 20px 22px;
-            border: 1px dashed var(--rule-strong);
-            font-size: 12px; color: var(--ink-4); letter-spacing: 0.14em;
-          }
-        `}</style>
       </section>
 
-      <section className="section-pad hair">
-        <div className="wrap log-cta">
-          <p className="eyebrow signal">TRANSMIT</p>
-          <h2 data-reveal>Want to be in the next entry?</h2>
-          <p data-reveal>
-            Reach out. If we take on your project, and the outcome is worth documenting
-            (and you sign off), it lands here.
-          </p>
-          <div className="log-cta-actions" data-reveal>
-            <StampCta href="mailto:spacedrift.contact@gmail.com" variant="signal">
-              TRANSMIT NOW <ArrowUpRight size={14} strokeWidth={2} />
-            </StampCta>
+      <section className="section-tight">
+        <div className="container">
+          <div className="lg-cta glass" data-glow data-reveal="glass">
+            <div>
+              <h2 className="display-3">Want to be the next entry?</h2>
+              <p className="body">If we build it together and you&apos;re happy to share, it lands here.</p>
+            </div>
+            <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
           </div>
         </div>
-        <style>{`
-          .log-cta { display: flex; flex-direction: column; gap: 18px; max-width: 720px; }
-          .log-cta h2 { font-size: clamp(28px, 4vw, 48px); }
-          .log-cta-actions { margin-top: 8px; }
-        `}</style>
       </section>
+
+      <style>{`
+        .lg-hero { padding: calc(var(--nav-space) + clamp(56px, 8vw, 110px)) 0 clamp(32px, 5vw, 64px); }
+        .lg-hero-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; max-width: 1100px; }
+        .lg-h1 { font-size: clamp(44px, 6.4vw, 104px); }
+        .lg-list { display: flex; flex-direction: column; gap: 14px; max-width: 980px; }
+        .lg-entry { display: flex; flex-direction: column; gap: 18px; padding: clamp(24px, 3.4vw, 44px); border-radius: 32px; }
+        .lg-entry-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .lg-lock { width: 8px; height: 8px; border-radius: 2px; background: var(--accent-3); }
+        .lg-check { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+        .lg-check li { display: flex; align-items: center; gap: 12px; color: var(--text-3); font-size: 15.5px; }
+        .lg-check li.done { color: var(--text); }
+        .lg-box { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; font-size: 12px; box-shadow: inset 0 0 0 1px var(--line-2); color: #0a0a10; }
+        .lg-check li.done .lg-box { background: var(--grad); box-shadow: none; }
+        .lg-ghost { display: flex; justify-content: space-between; padding: 22px 28px; border-radius: 24px; border: 1px dashed var(--line-2); }
+        .lg-cta { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: clamp(28px, 4vw, 56px); border-radius: 36px; }
+        .lg-cta > div { display: flex; flex-direction: column; gap: 12px; }
+        @media (max-width: 720px) {
+          .lg-check { grid-template-columns: 1fr; }
+          .lg-cta { flex-direction: column; align-items: flex-start; }
+        }
+      `}</style>
     </>
   );
 }

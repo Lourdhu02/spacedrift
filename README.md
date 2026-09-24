@@ -9,11 +9,12 @@ background rendered on canvas.
 
 ## Stack
 
-- Next.js 16 (App Router, React 19)
-- TypeScript, Tailwind v4 tokens
-- `next/font` — Inter + JetBrains Mono
-- Custom canvas ASCII field, no third-party motion library
-- No smooth-scroll library (native scroll only, `prefers-reduced-motion` respected)
+- Next.js 16 (App Router, React 19), TypeScript, Tailwind v4
+- `next/font` — Geist (UI), Geist Mono (labels, ASCII), Bricolage Grotesque (display)
+- Lenis smooth scroll driven by the GSAP ticker; GSAP + ScrollTrigger + SplitText for motion
+- Liquid-glass surfaces (`.glass`): backdrop blur, refracted rim, pointer-tracked specular
+- Canvas ASCII field behind the glass; per-station ASCII scenes (noise, parse, torus, lift-off)
+- Everything respects `prefers-reduced-motion` and renders without JavaScript
 
 ## Local development
 
@@ -29,21 +30,19 @@ npm run lint
 ```
 src/
   app/
-    layout.tsx        root layout — fonts, metadata, viewport, JSON-LD
-    globals.css       design system (paper-terminal palette, primitives)
-    page.tsx          home: full Noise → Parse → Model → Ship arc
-    about/            operator's log
-    log/              studio log (coming-soon shell)
-    services/*/       each service is one station enlarged
-    robots.ts, sitemap.ts
+    layout.tsx        fonts, metadata, backdrop, nav, footer, smooth scroll
+    template.tsx      page-transition curtain + per-page motion
+    globals.css       tokens, type scale, glass, buttons
+    page.tsx          home: hero, manifesto, four stations, services, contact
+    about/, log/, services/*/
   components/
-    background/       AsciiField canvas
-    layout/           Navbar, Footer
-    services/         ServiceStation template + ServiceCard
-    system/           RevealBoot (IO-driven reveal)
-    ui/               shared primitives (StationHeader, DecodeText, AsciiBar, …)
-public/
-  favicon-512.png, logo.svg, __forms.html (Netlify)
+    ascii/            AsciiScene (live ASCII animations)
+    background/       Backdrop (aurora + ASCII field + grain)
+    layout/           Nav, Footer
+    motion/           SmoothScroll, PageMotion, PointerFX, Marquee
+    services/         ServicePage template
+    ui/               Button, ContactForm
+  lib/services.ts     all service content in one place
 ```
 
 ## Contact
