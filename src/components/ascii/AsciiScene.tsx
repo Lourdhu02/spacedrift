@@ -257,20 +257,21 @@ export default function AsciiScene({
       )}
       <style>{`
         .scene { display: flex; flex-direction: column; gap: 14px; }
-        .scene-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .scene-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
         .scene-dots { display: inline-flex; gap: 6px; }
-        .scene-dots i { width: 10px; height: 10px; border-radius: 99px; background: rgba(255,255,255,.14); }
-        .scene-tabs { display: inline-flex; gap: 2px; padding: 3px; border-radius: 99px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px var(--line); }
+        .scene-dots i { width: 9px; height: 9px; background: var(--line); }
+        .scene-dots i:first-child { background: var(--red); }
+        .scene-tabs { display: inline-flex; box-shadow: inset 0 0 0 1px var(--line); }
         .scene-tabs button {
           font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
-          padding: 6px 10px; border-radius: 99px; color: var(--text-3);
+          padding: 7px 10px; color: var(--text-3);
           transition: color .3s var(--ease), background-color .3s var(--ease);
         }
         .scene-tabs button:hover { color: var(--text); }
-        .scene-tabs button.on { color: #0a0a10; background: #fff; }
-        .scene-foot { display: flex; justify-content: space-between; gap: 12px; }
+        .scene-tabs button.on { color: #fff; background: var(--red); }
+        .scene-foot { display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
         .scene-live { display: inline-flex; align-items: center; gap: 8px; }
-        @media (max-width: 420px) { .scene-tabs button { padding: 6px 7px; font-size: 10px; } }
+        @media (max-width: 420px) { .scene-tabs button { padding: 7px 7px; font-size: 10px; } }
       `}</style>
     </div>
   );

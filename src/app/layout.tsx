@@ -1,21 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Backdrop from "@/components/background/Backdrop";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import PointerFX from "@/components/motion/PointerFX";
+import ScrollProgress from "@/components/motion/ScrollProgress";
 import { SERVICES } from "@/lib/services";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-bricolage",
-  display: "swap",
-  axes: ["opsz"],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -40,8 +35,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#06060a",
-  colorScheme: "dark",
+  themeColor: "#ffffff",
+  colorScheme: "light",
 };
 
 const jsonLd = {
@@ -62,13 +57,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable} ${bricolage.variable}`}
+      className={`${geist.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: boot }} />
         <Backdrop />
         <SmoothScroll />
+        <ScrollProgress />
         <PointerFX />
         <Nav />
         <main>{children}</main>
