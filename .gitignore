@@ -2,3 +2,8 @@
 *.log
 node_modules/
 dist/
+
+# Next.js
+.next/
+next-env.d.ts
+*.tsbuildinfo
