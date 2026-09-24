@@ -1,111 +1,79 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
+import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
-import AsciiField from "@/components/background/AsciiField";
-import RevealBoot from "@/components/system/RevealBoot";
+import Backdrop from "@/components/background/Backdrop";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import PointerFX from "@/components/motion/PointerFX";
+import { SERVICES } from "@/lib/services";
 
-const inter = Inter({
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  variable: "--font-bricolage",
   display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jetbrains",
-  display: "swap",
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "spacedrift.in — ML & AI services studio, Bengaluru",
-    template: "%s — spacedrift.in",
+    default: "spacedrift — ML & AI studio, Bengaluru",
+    template: "%s — spacedrift",
   },
   description:
-    "Boutique ML and AI services studio in Bengaluru. Fixed-scope research ops, document AI, RAG MVPs, data annotation, and web development. Noise → Parse → Model → Ship.",
-  keywords: [
-    "spacedrift",
-    "machine learning",
-    "artificial intelligence",
-    "document AI",
-    "OCR",
-    "RAG",
-    "data annotation",
-    "web development",
-    "Bengaluru",
-    "ML engineer",
-  ],
+    "Boutique ML & AI studio in Bengaluru. Fixed-scope research ops, document AI, RAG MVPs, data annotation, and web development, taken from raw input to a working handoff.",
+  keywords: ["spacedrift", "machine learning", "document AI", "OCR", "RAG", "data annotation", "web development", "Bengaluru"],
   metadataBase: new URL("https://spacedrift.in"),
   openGraph: {
-    title: "spacedrift.in — Noise → Parse → Model → Ship",
-    description:
-      "Boutique ML and AI services studio in Bengaluru. Fixed scope, fixed price, direct engineering ownership.",
+    title: "spacedrift — we turn noise into ML systems that ship",
+    description: "Fixed scope, fixed price, one engineer accountable end to end.",
     url: "https://spacedrift.in",
-    siteName: "spacedrift.in",
+    siteName: "spacedrift",
     locale: "en_IN",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "spacedrift.in",
-    description: "ML & AI services studio, Bengaluru.",
-  },
-  icons: {
-    icon: "/favicon-512.png",
-    apple: "/favicon-512.png",
-  },
+  twitter: { card: "summary_large_image", title: "spacedrift", description: "ML & AI studio, Bengaluru." },
+  icons: { icon: "/favicon-512.png", apple: "/favicon-512.png" },
   authors: [{ name: "Lourdu Raju" }],
-  creator: "Lourdu Raju",
-  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f1ea",
-  colorScheme: "light",
-  width: "device-width",
-  initialScale: 1,
+  themeColor: "#06060a",
+  colorScheme: "dark",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "spacedrift.in",
+  name: "spacedrift",
   url: "https://spacedrift.in",
   email: "spacedrift.contact@gmail.com",
   founder: { "@type": "Person", name: "Lourdu Raju", jobTitle: "Machine Learning Engineer" },
   address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
-  description:
-    "Boutique ML & AI services studio delivering fixed-scope research ops, document AI, RAG MVPs, data annotation, and web development.",
-  sameAs: [],
-  makesOffer: [
-    "Research Ops for Academia",
-    "Document AI & OCR",
-    "RAG & AI MVPs",
-    "Data Annotation",
-    "Web Development",
-  ].map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s } })),
+  makesOffer: SERVICES.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.title } })),
 };
+
+// Hides animated content until GSAP takes over; bails after 4s if JS never boots.
+const boot = `(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js');setTimeout(function(){if(!d.classList.contains('motion-ready'))d.classList.remove('js')},4000)})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${geist.variable} ${geistMono.variable} ${bricolage.variable}`}
+      suppressHydrationWarning
     >
       <body>
-        <RevealBoot />
-        <AsciiField />
-        <Navbar />
+        <script dangerouslySetInnerHTML={{ __html: boot }} />
+        <Backdrop />
+        <SmoothScroll />
+        <PointerFX />
+        <Nav />
         <main>{children}</main>
         <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
   );

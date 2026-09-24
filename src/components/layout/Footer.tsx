@@ -1,124 +1,103 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import Button from "@/components/ui/Button";
+import HideOnHome from "@/components/layout/HideOnHome";
+import { CONTACT_EMAIL, SERVICES } from "@/lib/services";
 
-/**
- * Footer — the closing station-log page. Server component.
- */
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="ft">
-      <div className="wrap ft-band">
-        <div className="ft-marks" aria-hidden>
-          <span>END OF TRANSMISSION</span>
-          <span className="ft-marks-glyph">
-            {"─".repeat(280)}
-          </span>
-          <span>▚</span>
+      <div className="container">
+        <HideOnHome>
+          <div className="ft-top">
+            <div className="ft-cta">
+              <p className="label label-accent">Next station</p>
+              <h2 className="display-2">
+                Got a problem <span className="grad-text">worth shipping?</span>
+              </h2>
+            </div>
+            <div className="ft-cta-actions">
+              <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
+              <p className="small">Reply within 24 hours. Fixed scope and price if it fits.</p>
+            </div>
+          </div>
+        </HideOnHome>
+
+        <div className="ft-grid">
+          <div className="ft-col">
+            <p className="label">Services</p>
+            <ul>
+              {SERVICES.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/services/${s.slug}`}>{s.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="ft-col">
+            <p className="label">Studio</p>
+            <ul>
+              <li><Link href="/about">About</Link></li>
+              <li><Link href="/#process">Process</Link></li>
+              <li><Link href="/log">Log</Link></li>
+            </ul>
+          </div>
+          <div className="ft-col">
+            <p className="label">Contact</p>
+            <ul>
+              <li><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
+              <li className="muted">Bengaluru, India</li>
+              <li className="muted">MSME · est. 2024</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div className="wrap ft-main">
-        <div className="ft-brand">
-          <Link href="/" className="ft-logo mono">▚ spacedrift.in</Link>
-          <p className="ft-tag">
-            Boutique ML &amp; AI services studio. Fixed scope, fixed price, direct
-            engineering ownership. Operated out of Bengaluru, India.
-          </p>
-          <p className="ft-arc mono">NOISE → PARSE → MODEL → SHIP</p>
-        </div>
-
-        <div className="ft-col">
-          <p className="ft-col-title mono">STATIONS</p>
-          <ul>
-            <li><Link href="/services/research-ops">Research Ops</Link></li>
-            <li><Link href="/services/document-ai">Document AI</Link></li>
-            <li><Link href="/services/rag-mvp">RAG &amp; AI MVPs</Link></li>
-            <li><Link href="/services/data-annotation">Data Annotation</Link></li>
-            <li><Link href="/services/web-development">Web Development</Link></li>
-          </ul>
-        </div>
-
-        <div className="ft-col">
-          <p className="ft-col-title mono">STUDIO</p>
-          <ul>
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/log">Log</Link></li>
-            <li><a href="mailto:spacedrift.contact@gmail.com">Contact</a></li>
-          </ul>
-        </div>
-
-        <div className="ft-col">
-          <p className="ft-col-title mono">TRANSMIT</p>
-          <ul>
-            <li>
-              <a href="mailto:spacedrift.contact@gmail.com" className="ft-mail">
-                spacedrift.contact@gmail.com <ArrowUpRight size={12} />
-              </a>
-            </li>
-            <li className="ft-meta">Response · within 24h</li>
-            <li className="ft-meta">Location · Bengaluru, IN</li>
-          </ul>
-        </div>
+      <div className="ft-mark" aria-hidden>
+        <span>spacedrift</span>
       </div>
 
-      <div className="wrap ft-base">
-        <span>© {year} spacedrift.in · MSME India</span>
-        <span className="mono">REV 2.0.0 · BUILT ON PAPER</span>
+      <div className="container ft-base">
+        <span>© {year} spacedrift.in</span>
+        <span>Noise → Parse → Model → Ship</span>
       </div>
 
       <style>{`
-        .ft {
-          position: relative; z-index: 1;
-          background: var(--paper);
-          border-top: 1px solid var(--rule);
-          margin-top: 40px;
+        .ft { position: relative; z-index: 1; padding-top: clamp(80px, 11vw, 150px); overflow: hidden; }
+        .ft::before {
+          content: ""; position: absolute; left: var(--pad); right: var(--pad); top: 0; height: 1px;
+          background: linear-gradient(90deg, transparent, var(--line-2), transparent);
         }
-        .ft-band { padding: 20px 0 0; overflow: hidden; }
-        .ft-marks {
-          display: flex; align-items: center; gap: 14px;
-          font-family: var(--font-mono); font-size: 10.5px;
-          letter-spacing: 0.2em; text-transform: uppercase;
-          color: var(--ink-4);
+        .ft-top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: end; padding-bottom: clamp(56px, 7vw, 96px); }
+        .ft-cta { display: flex; flex-direction: column; gap: 20px; }
+        .ft-cta-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+        .ft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 40px 0; border-top: 1px solid var(--line); }
+        .ft-col { display: flex; flex-direction: column; gap: 18px; }
+        .ft-col ul { display: flex; flex-direction: column; gap: 10px; }
+        .ft-col a { color: var(--text-2); font-size: 15.5px; transition: color .3s var(--ease); }
+        .ft-col a:hover { color: var(--text); }
+        .ft-col li.muted { font-size: 15.5px; }
+        .ft-mark {
+          display: flex; justify-content: center;
+          font-family: var(--font-display); font-weight: 700;
+          font-size: 20vw; line-height: .78; letter-spacing: -0.05em;
+          margin-top: 24px; margin-bottom: -2.2vw;
+          user-select: none; white-space: nowrap;
         }
-        .ft-marks-glyph {
-          flex: 1; overflow: hidden; white-space: nowrap;
-          color: var(--ink-4); letter-spacing: 0;
+        .ft-mark span {
+          background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 85%);
+          -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-        .ft-main {
-          display: grid; grid-template-columns: 2.3fr 1fr 1fr 1.4fr;
-          gap: 48px; padding: 60px 0 40px;
-        }
-        .ft-logo { font-size: 14px; color: var(--ink); }
-        .ft-tag { font-size: 14px; color: var(--ink-3); max-width: 360px; margin-top: 14px; }
-        .ft-arc {
-          margin-top: 22px; font-size: 11px; letter-spacing: 0.24em;
-          color: var(--signal); font-weight: 600;
-        }
-        .ft-col-title {
-          font-size: 10.5px; letter-spacing: 0.18em; color: var(--ink-4);
-          margin-bottom: 18px;
-        }
-        .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .ft-col a { font-size: 13px; color: var(--ink-2); }
-        .ft-col a:hover { color: var(--ink); }
-        .ft-mail { display: inline-flex; align-items: center; gap: 6px; }
-        .ft-meta { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); font-family: var(--font-mono); }
         .ft-base {
-          display: flex; justify-content: space-between; align-items: center;
-          padding: 20px 0; border-top: 1px solid var(--rule);
-          font-family: var(--font-mono); font-size: 11px;
-          letter-spacing: 0.1em; color: var(--ink-3);
+          position: relative; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+          padding-block: 22px; border-top: 1px solid var(--line);
+          font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; color: var(--text-3);
         }
-        @media (max-width: 900px) {
-          .ft-main { grid-template-columns: 1fr 1fr; gap: 32px; }
-          .ft-brand { grid-column: span 2; }
+        @media (max-width: 860px) {
+          .ft-top { grid-template-columns: 1fr; }
+          .ft-grid { grid-template-columns: 1fr 1fr; }
         }
-        @media (max-width: 560px) {
-          .ft-main { grid-template-columns: 1fr; }
-          .ft-brand { grid-column: span 1; }
-          .ft-base { flex-direction: column; gap: 8px; align-items: flex-start; }
-        }
+        @media (max-width: 520px) { .ft-grid { grid-template-columns: 1fr; } }
       `}</style>
     </footer>
   );

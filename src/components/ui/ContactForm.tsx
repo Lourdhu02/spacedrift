@@ -1,114 +1,84 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/services";
 
-/**
- * ContactForm — the site's single form. Posts to Netlify's
- * `__forms.html` convention. Shows real submission state; never
- * silently claims success.
- */
 export default function ContactForm() {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (state === "sending") return;
+    const form = e.currentTarget;
+    if (!form.reportValidity()) return;
     setState("sending");
-    setErrorMsg("");
-
     try {
-      const formData = new FormData(e.currentTarget);
-      const params = new URLSearchParams();
-      formData.forEach((value, key) => params.append(key, value.toString()));
-
+      const body = new URLSearchParams();
+      new FormData(form).forEach((v, k) => body.append(k, v.toString()));
       const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString(),
+        body: body.toString(),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
       setState("ok");
-      e.currentTarget.reset();
-    } catch (err) {
+    } catch {
       setState("error");
-      setErrorMsg(err instanceof Error ? err.message : "Unknown failure.");
     }
   };
 
   return (
-    <form className="ctx-form" name="contact" onSubmit={onSubmit} noValidate>
+    <form className="cf" name="contact" onSubmit={onSubmit}>
       <input type="hidden" name="form-name" value="contact" />
-
-      <div className="ctx-row">
-        <label className="ctx-field">
-          <span className="mono ctx-label">01 · IDENTITY</span>
-          <input type="text" name="name" placeholder="your name" required autoComplete="name" />
+      <div className="cf-row">
+        <label className="field">
+          <span className="label">Name</span>
+          <input className="input" name="name" placeholder="Ada Lovelace" required autoComplete="name" />
         </label>
-        <label className="ctx-field">
-          <span className="mono ctx-label">02 · CHANNEL</span>
-          <input type="email" name="email" placeholder="you@domain.com" required autoComplete="email" />
+        <label className="field">
+          <span className="label">Email</span>
+          <input className="input" type="email" name="email" placeholder="you@company.com" required autoComplete="email" />
         </label>
       </div>
-
-      <label className="ctx-field">
-        <span className="mono ctx-label">03 · PAYLOAD</span>
-        <textarea name="message" placeholder="describe the project — data, deadline, constraints" rows={4} required />
+      <label className="field">
+        <span className="label">What are you building?</span>
+        <textarea className="input" name="message" rows={5} required placeholder="The problem, the data you have, and when you need it." />
       </label>
 
-      <div className="ctx-actions">
-        <button
-          type="submit"
-          className={`stamp ${state === "sending" ? "is-sending" : ""}`}
-          disabled={state === "sending" || state === "ok"}
-        >
-          <span className="mono">
-            {state === "sending"
-              ? "TRANSMITTING…"
-              : state === "ok"
-                ? "TRANSMISSION RECEIVED"
-                : "TRANSMIT"}
+      <div className="cf-actions">
+        <button type="submit" className="btn btn-primary" disabled={state === "sending" || state === "ok"} data-magnetic>
+          <span className="btn-label">
+            {state === "sending" ? "Sending…" : state === "ok" ? "Sent. Talk soon." : "Send message"}
           </span>
-          {state !== "ok" && <ArrowUpRight size={14} strokeWidth={2} />}
+          <span className="btn-ico" aria-hidden>
+            {state === "ok" ? <Check size={18} strokeWidth={2} /> : <ArrowUpRight size={18} strokeWidth={2} />}
+          </span>
         </button>
-        <a href="mailto:spacedrift.contact@gmail.com" className="stamp-ghost">
-          <span className="mono">OR EMAIL DIRECT</span>
-          <ArrowUpRight size={14} strokeWidth={2} />
-        </a>
+        <p className="small" role="status" aria-live="polite">
+          {state === "error" ? (
+            <span className="cf-err">
+              That didn&apos;t go through. Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> instead.
+            </span>
+          ) : state === "ok" ? (
+            "Expect a reply within 24 hours."
+          ) : (
+            <>
+              or email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            </>
+          )}
+        </p>
       </div>
 
-      {state === "ok" && (
-        <p className="ctx-msg ctx-msg-ok mono">
-          ▚ ACK — expect a reply within 24h at the channel above.
-        </p>
-      )}
-      {state === "error" && (
-        <p className="ctx-msg ctx-msg-err mono">
-          × Transmission failed ({errorMsg || "unknown"}). Email spacedrift.contact@gmail.com directly.
-        </p>
-      )}
-
       <style>{`
-        .ctx-form { display: flex; flex-direction: column; gap: 20px; max-width: 640px; }
-        .ctx-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .ctx-field { display: flex; flex-direction: column; gap: 6px; }
-        .ctx-label {
-          font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
-          color: var(--ink-4);
-        }
-        .ctx-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 8px; }
-        .stamp:disabled { cursor: default; opacity: 0.85; }
-        .is-sending { background: var(--paper-3); color: var(--ink); border-color: var(--ink-3); }
-        .ctx-msg {
-          font-size: 12px; letter-spacing: 0.1em;
-          padding: 12px 14px; border: 1px solid;
-        }
-        .ctx-msg-ok  { color: var(--ink); border-color: var(--ink); background: var(--paper-2); }
-        .ctx-msg-err { color: var(--signal); border-color: var(--signal); background: var(--signal-wash); }
-        @media (max-width: 560px) {
-          .ctx-row { grid-template-columns: 1fr; }
-        }
+        .cf { display: flex; flex-direction: column; gap: 18px; }
+        .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .cf-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 6px; }
+        .cf-actions a { color: var(--text); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+        .cf-err { color: #ffb4a8; }
+        .cf .btn:disabled { cursor: default; }
+        @media (max-width: 560px) { .cf-row { grid-template-columns: 1fr; } }
       `}</style>
     </form>
   );
