@@ -1,0 +1,23 @@
+1
+00:00:01,000 --> 00:00:02,000
+Most AI projects die in the noise.
+
+2
+00:00:02,000 --> 00:00:02,400
+Noise.
+
+3
+00:00:02,400 --> 00:00:02,800
+Parse.
+
+4
+00:00:02,800 --> 00:00:03,200
+Model.
+
+5
+00:00:03,200 --> 00:00:03,600
+Ship.
+
+6
+00:00:03,600 --> 00:00:06,000
+spacedrift — now booking. Book a scoping call: spacedrift.contact@gmail.com · spacedrift.in
