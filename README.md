@@ -1,7 +1,12 @@
-# spacedrift.in
+# Spacedrift · Machine Learning & AI Services
 
-Marketing site for spacedrift.in — a boutique ML & AI services studio in Bengaluru,
-operated as an MSME by Lourdu Raju (Machine Learning Engineer).
+The website for **[spacedrift.in](https://spacedrift.in)**, a Bengaluru-based ML and AI services studio founded by **[Lourdu Raju](https://github.com/Lourdhu02)**, Machine Learning Engineer.
+
+Spacedrift works on computer vision, OCR, data annotation and applied research, from understanding the input data to integrating models into useful software workflows.
+
+[Visit the website](https://spacedrift.in) · [Project enquiries](mailto:lourdu@spacedrift.in) · [Company projects](https://github.com/spacedrift-in)
+
+## Design direction
 
 The site is a four-station story arc: **Noise → Parse → Model → Ship**. Each
 service page is one station enlarged; every section carries a live ASCII
@@ -48,4 +53,6 @@ src/
 
 ## Contact
 
-spacedrift.contact@gmail.com — response within 24 hours.
+For project enquiries, email **[lourdu@spacedrift.in](mailto:lourdu@spacedrift.in)** with your current workflow, desired outcome, constraints and timeline.
+
+**Founder:** Lourdu Raju · **Location:** Bengaluru, India.
