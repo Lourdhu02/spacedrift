@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import HideOnHome from "@/components/layout/HideOnHome";
-import { CONTACT_EMAIL, SERVICES } from "@/lib/services";
+import { CONTACT_CHANNELS, CONTACT_EMAIL, SERVICES } from "@/lib/services";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -45,8 +45,21 @@ export default function Footer() {
           <div className="ft-col">
             <p className="label">Contact</p>
             <ul>
-              <li><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
-              <li className="muted">Bengaluru, India</li>
+              {CONTACT_CHANNELS.map((c) =>
+                "href" in c ? (
+                  <li key={c.kind}>
+                    <a
+                      href={c.href}
+                      target={c.kind === "email" ? undefined : "_blank"}
+                      rel={c.kind === "email" ? undefined : "noreferrer"}
+                    >
+                      {c.label}
+                    </a>
+                  </li>
+                ) : (
+                  <li key={c.kind} className="muted">{c.label}</li>
+                ),
+              )}
               <li className="muted">MSME · est. 2024</li>
             </ul>
           </div>

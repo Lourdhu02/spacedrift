@@ -173,7 +173,7 @@ function srt(cut) {
       cues.push([s, s + d, d >= 4 ? `Station ${S.n} · ${S.name}. ${S.title} You get: ${S.out}.` : `${S.name}.`]);
     } else if (scene === "services") cues.push([s, s + d, "Six things we do well: Research Ops, Document AI & OCR, RAG & AI MVPs, Data Annotation, Web Development, Mobile Apps."]);
     else if (scene === "proof") cues.push([s, s + d, "24h first reply. ~3-week AI MVP. 30 days of support. 100% of the code is yours."]);
-    else if (scene === "endcard") cues.push([s, s + d, "spacedrift — now booking. Book a scoping call: spacedrift.contact@gmail.com · spacedrift.in"]);
+    else if (scene === "endcard") cues.push([s, s + d, "spacedrift — now booking. Book a scoping call: contact@spacedrift.in · spacedrift.in"]);
   }
   const ts = (x) => {
     const ms = Math.round(x * 1000);

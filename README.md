@@ -48,4 +48,4 @@ src/
 
 ## Contact
 
-spacedrift.contact@gmail.com — response within 24 hours.
+contact@spacedrift.in — response within 24 hours.

@@ -10,7 +10,7 @@ export const inkA = (a) => `rgba(10,10,10,${a})`;
 export const whiteA = (a) => `rgba(255,255,255,${a})`;
 
 export const CONTACT = {
-  email: "spacedrift.contact@gmail.com",
+  email: "contact@spacedrift.in",
   site: "spacedrift.in",
   city: "Bengaluru, India",
   reply: "Reply within 24h",

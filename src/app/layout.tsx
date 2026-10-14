@@ -52,9 +52,13 @@ const jsonLd = {
   "@type": "Organization",
   name: "spacedrift",
   url: "https://spacedrift.in",
-  email: "spacedrift.contact@gmail.com",
+  email: "contact@spacedrift.in",
   founder: { "@type": "Person", name: "Lourdu Raju", jobTitle: "Machine Learning Engineer" },
-  address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
+  address: { "@type": "PostalAddress", addressLocality: "Bangalore", addressRegion: "KA", addressCountry: "IN" },
+  sameAs: [
+    "https://www.linkedin.com/company/spacedrift.in/",
+    "https://www.instagram.com/spacedrift.in/",
+  ],
   makesOffer: SERVICES.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.title } })),
 };
 

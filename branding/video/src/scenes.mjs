@@ -689,7 +689,7 @@ export const endcard = {
       yy += ls * 1.5;
       setFont(ctx, (L.portrait ? 34 : 30) * u, { mono: true, weight: 500, track: 0 });
       ctx.fillStyle = RED;
-      ctx.fillText("spacedrift.contact@gmail.com", L.safe.left, yy);
+      ctx.fillText("contact@spacedrift.in", L.safe.left, yy);
       yy += 56 * u;
       ctx.fillStyle = WHITE;
       ctx.fillText("spacedrift.in", L.safe.left, yy);
