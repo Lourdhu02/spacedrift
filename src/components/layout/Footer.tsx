@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import HideOnHome from "@/components/layout/HideOnHome";
-import { CONTACT_CHANNELS, CONTACT_EMAIL, SERVICES } from "@/lib/services";
+import { CONTACT_CHANNELS, CONTACT_EMAIL_HREF, SERVICES } from "@/lib/services";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -17,7 +17,7 @@ export default function Footer() {
               </h2>
             </div>
             <div className="ft-cta-actions">
-              <Button href={`mailto:${CONTACT_EMAIL}`} variant="light">Start a project</Button>
+              <Button href={CONTACT_EMAIL_HREF} variant="light">Start a project</Button>
               <p className="small">Reply within 24 hours. Fixed scope and price if it fits.</p>
             </div>
           </div>

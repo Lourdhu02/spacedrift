@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import Button from "@/components/ui/Button";
 import AsciiScene from "@/components/ascii/AsciiScene";
 import Marquee from "@/components/motion/Marquee";
-import { CONTACT_EMAIL, SERVICES, type Service } from "@/lib/services";
+import { CONTACT_EMAIL_HREF, SERVICES, type Service } from "@/lib/services";
 
 export default function ServicePage({ s }: { s: Service }) {
   const i = SERVICES.findIndex((x) => x.slug === s.slug);
@@ -23,7 +23,7 @@ export default function ServicePage({ s }: { s: Service }) {
             </h1>
             <p className="lede" data-reveal>{s.hero.lede}</p>
             <div className="sp-actions" data-reveal>
-              <Button href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(s.title)}`}>Start this project</Button>
+              <Button href={`${CONTACT_EMAIL_HREF}?subject=${encodeURIComponent(s.title)}`}>Start this project</Button>
               <Button href="#deliverables" variant="glass">What you get</Button>
             </div>
           </div>
@@ -103,7 +103,7 @@ export default function ServicePage({ s }: { s: Service }) {
               <h2 className="display-3">{s.cta.title}</h2>
               <p className="body">{s.cta.body}</p>
             </div>
-            <Button href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(s.title)}`}>Start this project</Button>
+            <Button href={`${CONTACT_EMAIL_HREF}?subject=${encodeURIComponent(s.title)}`}>Start this project</Button>
           </div>
 
           <Link href={`/services/${next.slug}`} className="sp-next" data-reveal>

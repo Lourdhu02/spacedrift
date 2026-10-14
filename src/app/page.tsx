@@ -5,7 +5,7 @@ import AsciiScene from "@/components/ascii/AsciiScene";
 import Marquee from "@/components/motion/Marquee";
 import ContactForm from "@/components/ui/ContactForm";
 import LocalTime from "@/components/ui/LocalTime";
-import { CONTACT_CHANNELS, CONTACT_EMAIL, SERVICES, type SceneKind } from "@/lib/services";
+import { CONTACT_CHANNELS, CONTACT_EMAIL_HREF, SERVICES, type SceneKind } from "@/lib/services";
 
 const STATIONS: { n: string; name: string; kind: SceneKind; title: string; body: string; out: string; when: string }[] = [
   {
@@ -62,7 +62,7 @@ export default function Home() {
               input to a working handoff. Fixed scope, fixed price, and one engineer accountable end to end.
             </p>
             <div className="hero-actions" data-reveal>
-              <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
+              <Button href={CONTACT_EMAIL_HREF}>Start a project</Button>
               <Button href="/#process" variant="glass">See how we work</Button>
             </div>
           </div>

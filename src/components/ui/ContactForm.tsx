@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
-import { CONTACT_EMAIL } from "@/lib/services";
+import { CONTACT_EMAIL, CONTACT_EMAIL_HREF } from "@/lib/services";
 
 export default function ContactForm() {
   const [state, setState] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -59,13 +59,13 @@ export default function ContactForm() {
         <p className="small" role="status" aria-live="polite">
           {state === "error" ? (
             <span className="cf-err">
-              That didn&apos;t go through. Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> instead.
+              That didn&apos;t go through. Email <a href={CONTACT_EMAIL_HREF}>{CONTACT_EMAIL}</a> instead.
             </span>
           ) : state === "ok" ? (
             "Expect a reply within 24 hours."
           ) : (
             <>
-              or email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              or email <a href={CONTACT_EMAIL_HREF}>{CONTACT_EMAIL}</a>
             </>
           )}
         </p>
