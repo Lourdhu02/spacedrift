@@ -144,6 +144,7 @@ npm run check        # verifies PNG dimensions, file size (<4 MB) and that every
 
 **Content rules:** only published facts appear anywhere in the kit:
 - 24h reply, ~3-week AI MVP, 30-day support, 100% code and IP handed over.
-- `spacedrift.contact@gmail.com`, spacedrift.in, Bengaluru, India.
+- `contact@spacedrift.in`, spacedrift.in, Bangalore, KA, India.
+- LinkedIn: company/spacedrift.in. Instagram: spacedrift.in.
 
 The kit uses no social handles, client names, testimonials or awards. The invoice in the Parse scene is a redacted sample.

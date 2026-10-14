@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Button from "@/components/ui/Button";
 import AsciiScene from "@/components/ascii/AsciiScene";
-import { CONTACT_EMAIL } from "@/lib/services";
+import { CONTACT_EMAIL_HREF } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "About",
@@ -106,7 +106,7 @@ export default function About() {
               <h2 className="display-3">Let&apos;s work together.</h2>
               <p className="body">Tell us what you&apos;re building. You&apos;ll get a reply within 24 hours.</p>
             </div>
-            <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
+            <Button href={CONTACT_EMAIL_HREF}>Start a project</Button>
           </div>
         </div>
       </section>

@@ -241,4 +241,12 @@ export const getService = (slug: string) => {
   return s;
 };
 
-export const CONTACT_EMAIL = "spacedrift.contact@gmail.com";
+export const CONTACT_EMAIL = "contact@spacedrift.in";
+export const CONTACT_EMAIL_HREF = "mailto:lourdu@spacedrift.in";
+
+export const CONTACT_CHANNELS = [
+  { kind: "location", label: "India, Bangalore, KA" },
+  { kind: "linkedin", label: "company/spacedrift.in", href: "https://www.linkedin.com/company/spacedrift.in/" },
+  { kind: "instagram", label: "spacedrift.in", href: "https://www.instagram.com/spacedrift.in/" },
+  { kind: "email", label: CONTACT_EMAIL, href: CONTACT_EMAIL_HREF },
+] as const;

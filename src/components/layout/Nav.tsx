@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { CONTACT_EMAIL, SERVICES } from "@/lib/services";
+import { CONTACT_EMAIL, CONTACT_EMAIL_HREF, SERVICES } from "@/lib/services";
 
 const LINKS = [
   { href: "/#process", label: "Process" },
@@ -71,7 +71,7 @@ export default function Nav() {
           </nav>
 
           <div className="nav-cta">
-            <Button href={`mailto:${CONTACT_EMAIL}`} size="sm">
+            <Button href={CONTACT_EMAIL_HREF} size="sm">
               Start a project
             </Button>
           </div>
@@ -110,7 +110,7 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-          <a className="mnav-mail" href={`mailto:${CONTACT_EMAIL}`} tabIndex={open ? 0 : -1}>
+          <a className="mnav-mail" href={CONTACT_EMAIL_HREF} tabIndex={open ? 0 : -1}>
             {CONTACT_EMAIL}
           </a>
         </div>

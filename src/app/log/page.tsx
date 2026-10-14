@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Button from "@/components/ui/Button";
-import { CONTACT_EMAIL } from "@/lib/services";
+import { CONTACT_EMAIL_HREF } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Log",
@@ -68,7 +68,7 @@ export default function Log() {
               <h2 className="display-3">Want to be the next entry?</h2>
               <p className="body">If we build it together and you&apos;re happy to share, it lands here.</p>
             </div>
-            <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
+            <Button href={CONTACT_EMAIL_HREF}>Start a project</Button>
           </div>
         </div>
       </section>

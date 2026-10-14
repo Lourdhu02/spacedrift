@@ -5,7 +5,7 @@ import AsciiScene from "@/components/ascii/AsciiScene";
 import Marquee from "@/components/motion/Marquee";
 import ContactForm from "@/components/ui/ContactForm";
 import LocalTime from "@/components/ui/LocalTime";
-import { CONTACT_EMAIL, SERVICES, type SceneKind } from "@/lib/services";
+import { CONTACT_CHANNELS, CONTACT_EMAIL_HREF, SERVICES, type SceneKind } from "@/lib/services";
 
 const STATIONS: { n: string; name: string; kind: SceneKind; title: string; body: string; out: string; when: string }[] = [
   {
@@ -62,7 +62,7 @@ export default function Home() {
               input to a working handoff. Fixed scope, fixed price, and one engineer accountable end to end.
             </p>
             <div className="hero-actions" data-reveal>
-              <Button href={`mailto:${CONTACT_EMAIL}`}>Start a project</Button>
+              <Button href={CONTACT_EMAIL_HREF}>Start a project</Button>
               <Button href="/#process" variant="glass">See how we work</Button>
             </div>
           </div>
@@ -222,6 +222,24 @@ export default function Home() {
               <li>A rough deadline</li>
               <li>Constraints: budget range, hosting, compliance</li>
             </ul>
+            <ul className="contact-channels" data-reveal>
+              {CONTACT_CHANNELS.map((c) => (
+                <li key={c.kind}>
+                  <span className="cc-kind">{c.kind}</span>
+                  {"href" in c ? (
+                    <a
+                      href={c.href}
+                      target={c.kind === "email" ? undefined : "_blank"}
+                      rel={c.kind === "email" ? undefined : "noreferrer"}
+                    >
+                      {c.label}
+                    </a>
+                  ) : (
+                    <span>{c.label}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="contact-card glass" data-glow data-reveal="glass">
             <ContactForm />
@@ -300,6 +318,11 @@ export default function Home() {
         .contact-list { display: flex; flex-direction: column; gap: 12px; color: var(--text-2); }
         .contact-list li { display: flex; gap: 12px; align-items: baseline; }
         .contact-list li::before { content: "→"; font-family: var(--font-mono); color: var(--accent); }
+        .contact-channels { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15.5px; }
+        .contact-channels li { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: baseline; }
+        .cc-kind { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+        .contact-channels a { color: var(--text); transition: color .25s var(--ease); }
+        .contact-channels a:hover { color: var(--accent); }
         .contact-card { padding: clamp(22px, 3vw, 40px); }
 
         @media (max-width: 1080px) {

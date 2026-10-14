@@ -53,6 +53,9 @@ src/
 
 ## Contact
 
-For project enquiries, email **[lourdu@spacedrift.in](mailto:lourdu@spacedrift.in)** with your current workflow, desired outcome, constraints and timeline.
+For project enquiries, email **[contact@spacedrift.in](mailto:lourdu@spacedrift.in)** with your current workflow, desired outcome, constraints and timeline. Reply within 24 hours.
 
-**Founder:** Lourdu Raju · **Location:** Bengaluru, India.
+- **Founder:** Lourdu Raju
+- **Location:** India, Bangalore, KA
+- **LinkedIn:** [company/spacedrift.in](https://www.linkedin.com/company/spacedrift.in/)
+- **Instagram:** [spacedrift.in](https://www.instagram.com/spacedrift.in/)

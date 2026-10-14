@@ -44,4 +44,4 @@ Six things we do well: Research Ops, Document AI & OCR, RAG & AI MVPs, Data Anno
 
 12
 00:00:54,000 --> 00:01:00,000
-spacedrift — now booking. Book a scoping call: spacedrift.contact@gmail.com · spacedrift.in
+spacedrift — now booking. Book a scoping call: contact@spacedrift.in · spacedrift.in

@@ -20,4 +20,4 @@ Ship.
 
 6
 00:00:03,600 --> 00:00:06,000
-spacedrift — now booking. Book a scoping call: spacedrift.contact@gmail.com · spacedrift.in
+spacedrift — now booking. Book a scoping call: contact@spacedrift.in · spacedrift.in
